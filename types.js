@@ -1,2 +1,2 @@
 // REDUX ACTION TYPES
-export const UPDATE_PER_DAY = "UPDATE_PER_DAY";
+export const ADD_THRILL = "ADD_THRILL";

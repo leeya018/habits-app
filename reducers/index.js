@@ -1,9 +1,9 @@
 import { combineReducers } from "redux";
-import settingsReducer from "./settings";
+import mathReducer from "./math";
 
 // COMBINED REDUCERS
 const reducers = {
-  settings: settingsReducer,
+  math: mathReducer,
 };
 
 export default combineReducers(reducers);

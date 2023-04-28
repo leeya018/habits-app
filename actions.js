@@ -1,8 +1,15 @@
+import { createThrill, randLeft } from "@/util";
 import * as types from "./types";
 
-export const updateSettings = (payload) => {
+export const addThrill = () => {
+  const thrill = createThrill();
+  const randL = randLeft();
+  console.log(randL);
+
+  const thrillItem = { thrill, result: eval(thrill), left: randL };
+
   return {
-    type: types.UPDATE_PER_DAY,
-    payload,
+    type: types.ADD_THRILL,
+    payload: thrillItem,
   };
 };
