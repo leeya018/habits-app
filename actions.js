@@ -13,3 +13,9 @@ export const addThrill = () => {
     payload: thrillItem,
   };
 };
+
+export const addLevel = () => {
+  return {
+    type: types.ADD_LEVEL,
+  };
+};
