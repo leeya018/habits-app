@@ -3,10 +3,12 @@ import * as types from "./types";
 
 export const addThrill = () => {
   const thrill = createThrill();
-  const randL = randLeft();
-  console.log(randL);
 
-  const thrillItem = { thrill, result: eval(thrill), left: randL };
+  const thrillItem = {
+    thrill,
+    result: Math.floor(Math.abs(eval(thrill))),
+    position: { top: 0, left: randLeft() },
+  };
 
   return {
     type: types.ADD_THRILL,
@@ -18,4 +20,34 @@ export const addLevel = () => {
   return {
     type: types.ADD_LEVEL,
   };
+};
+export const addPoints = (payload = 1) => {
+  return {
+    type: types.ADD_POINTS,
+    payload,
+  };
+};
+export const removeThrill = (payload = 11) => {
+  return {
+    type: types.REMOVE_THRILL,
+    payload,
+  };
+};
+export const updateResult = (payload = "") => {
+  return {
+    type: types.UPDATE_RESULT,
+    payload,
+  };
+};
+export const updatePositions = () => (dispatch, getState) => {
+  const { thrills, progress } = getState().math;
+  const payload = thrills.map((thrill) => {
+    let dupPosition = thrill.position;
+    dupPosition.top += progress;
+    return { ...thrill, position: dupPosition };
+  });
+  dispatch({
+    type: types.UPDATE_POSITIONS,
+    payload,
+  });
 };

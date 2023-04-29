@@ -1,38 +1,19 @@
 import { useEffect, useState } from "react";
 import { sleep, randLeft } from "@/util";
+import { useSelector } from "react-redux";
 const width = "160px";
 
-export default function Thrill({ thrill, level }) {
-  const [position, setPosition] = useState({ top: 0, left: thrill.Left });
-  // const [stop, setStop] = useState(false);
+export default function Thrill({ thrill }) {
+  const { level, timeInter, progress } = useSelector((state) => state.math);
 
-  useEffect(() => {
-    move();
-  }, []);
-
-  const timeInter = 300;
-  const lim = 1000;
-  const progress = 50;
-
-  const move = async () => {
-    let i = position.top;
-    while (i < lim) {
-      console.log({ stop });
-      setPosition((prev) => {
-        console.log(prev.top, lim);
-        i += progress;
-        return { ...prev, top: prev.top + progress };
-      });
-      await sleep(timeInter);
-    }
-  };
+  useEffect(() => {}, []);
 
   return (
     <div
       className="absolute border-2 border-blue-500 w-40 h-20"
       style={{
-        top: position.top,
-        left: "50vw",
+        top: thrill.position.top,
+        left: thrill.position.left,
       }}
     >
       {thrill.thrill} = {thrill.result}

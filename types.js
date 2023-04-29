@@ -1,3 +1,7 @@
 // REDUX ACTION TYPES
 export const ADD_THRILL = "ADD_THRILL";
 export const ADD_LEVEL = "ADD_LEVEL";
+export const ADD_POINTS = "ADD_POINTS";
+export const REMOVE_THRILL = "REMOVE_THRILL";
+export const UPDATE_RESULT = "UPDATE_RESULT";
+export const UPDATE_POSITIONS = "UPDATE_POSITIONS";
