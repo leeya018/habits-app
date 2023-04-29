@@ -40,14 +40,28 @@ export const updateResult = (payload = "") => {
   };
 };
 export const updatePositions = () => (dispatch, getState) => {
-  const { thrills, progress } = getState().math;
-  const payload = thrills.map((thrill) => {
+  const { thrills, progress, level } = getState().math;
+  const newThrills = thrills.map((thrill) => {
     let dupPosition = thrill.position;
     dupPosition.top += progress;
+    if (dupPosition.top + progress >= level) {
+      // alert("done");
+      dispatch({
+        type: types.UPDATE_STOP,
+        payload: true,
+      });
+    }
     return { ...thrill, position: dupPosition };
   });
   dispatch({
     type: types.UPDATE_POSITIONS,
-    payload,
+    payload: newThrills,
   });
+};
+
+export const updateStop = (payload) => {
+  return {
+    type: types.UPDATE_STOP,
+    payload,
+  };
 };

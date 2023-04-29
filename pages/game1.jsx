@@ -6,23 +6,34 @@ import { updatePositions, addLevel, addPoints, addThrill } from "actions";
 import Input from "components/Input";
 
 export default function game1({}) {
-  const { thrills, points, timeInter } = useSelector((state) => state.math);
+  const { thrills, points, timerInterAddThrill, timerInterProgress, stop } =
+    useSelector((state) => state.math);
   const dispatch = useDispatch();
+
+  let intervalId;
+  let intervalId2;
+
   useEffect(() => {
-    let intervalId = setInterval(() => {
+    intervalId = setInterval(() => {
       dispatch(addThrill());
-    }, 3000);
+    }, timerInterAddThrill);
+    if (stop === true) {
+      clearInterval(intervalId);
+    }
 
     return () => clearInterval(intervalId);
-  }, []);
+  }, [stop]);
 
   useEffect(() => {
-    let intervalId2 = setInterval(() => {
+    intervalId2 = setInterval(() => {
       dispatch(updatePositions());
-    }, timeInter);
+    }, timerInterProgress);
 
+    if (stop === true) {
+      clearInterval(intervalId2);
+    }
     return () => clearInterval(intervalId2);
-  }, []);
+  }, [stop]);
 
   console.log(thrills);
 

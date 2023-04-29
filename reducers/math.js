@@ -5,9 +5,11 @@ const mathInitial = {
   thrills: [],
   level: 700,
   points: 0,
-  timeInter: 500,
+  timerInterAddThrill: 3000,
+  timerInterProgress: 500,
   progress: 20,
   result: "",
+  stop: false,
 };
 
 const mathReducer = (state = mathInitial, { type, payload }) => {
@@ -28,6 +30,8 @@ const mathReducer = (state = mathInitial, { type, payload }) => {
       return { ...state, result: payload };
     case types.UPDATE_POSITIONS:
       return { ...state, thrills: payload };
+    case types.UPDATE_STOP:
+      return { ...state, stop: payload };
     default:
       return state;
   }
