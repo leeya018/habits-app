@@ -59,14 +59,25 @@ export const updatePositions = () => (dispatch, getState) => {
   });
 };
 
-export const updateStop = (payload) => {
-  return {
+export const updateStop = (payload) => (dispatch, getState) => {
+  dispatch({
     type: types.UPDATE_STOP,
     payload,
-  };
+  });
 };
 export const clearThrills = () => {
   return {
     type: types.CLEAR_THRILLS,
+  };
+};
+export const updateGameOver = (payload) => {
+  return {
+    type: types.UPDAET_GAME_OVER,
+    payload,
+  };
+};
+export const resetLevl = () => {
+  return {
+    type: types.RESET_LEVEL,
   };
 };

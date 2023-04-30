@@ -7,3 +7,5 @@ export const UPDATE_RESULT = "UPDATE_RESULT";
 export const UPDATE_POSITIONS = "UPDATE_POSITIONS";
 export const UPDATE_STOP = "UPDATE_STOP";
 export const CLEAR_THRILLS = "CLEAR_THRILLS";
+export const UPDAET_GAME_OVER = "UPDAET_GAME_OVER";
+export const RESET_LEVEL = "RESET_LEVEL";

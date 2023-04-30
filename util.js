@@ -15,3 +15,5 @@ export const sleep = async (time) =>
   );
 
 export const randLeft = () => Math.random() * 95 + "vw";
+
+export const minLevel = 600;
