@@ -6,3 +6,4 @@ export const REMOVE_THRILL = "REMOVE_THRILL";
 export const UPDATE_RESULT = "UPDATE_RESULT";
 export const UPDATE_POSITIONS = "UPDATE_POSITIONS";
 export const UPDATE_STOP = "UPDATE_STOP";
+export const CLEAR_THRILLS = "CLEAR_THRILLS";

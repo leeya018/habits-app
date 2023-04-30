@@ -2,7 +2,13 @@ import SeaLevel from "components/SeaLevel";
 import { useSelector, useDispatch } from "react-redux";
 import Thrill from "components/Thrill";
 import { useEffect, useState } from "react";
-import { updatePositions, addLevel, addPoints, addThrill } from "actions";
+import {
+  updatePositions,
+  addLevel,
+  addPoints,
+  addThrill,
+  clearThrills,
+} from "actions";
 import Input from "components/Input";
 
 export default function game1({}) {
@@ -29,6 +35,7 @@ export default function game1({}) {
 
     if (stop === true) {
       clearInterval(intervalId);
+      dispatch(clearThrills());
     }
     return intervalId;
   };

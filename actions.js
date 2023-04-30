@@ -65,3 +65,8 @@ export const updateStop = (payload) => {
     payload,
   };
 };
+export const clearThrills = () => {
+  return {
+    type: types.CLEAR_THRILLS,
+  };
+};

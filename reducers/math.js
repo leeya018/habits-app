@@ -32,6 +32,8 @@ const mathReducer = (state = mathInitial, { type, payload }) => {
       return { ...state, thrills: payload };
     case types.UPDATE_STOP:
       return { ...state, stop: payload };
+    case types.CLEAR_THRILLS:
+      return { ...state, thrills: [] };
     default:
       return state;
   }
