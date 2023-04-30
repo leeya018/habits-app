@@ -16,7 +16,7 @@ export default function Thrill({ thrill }) {
         left: thrill.position.left,
       }}
     >
-      {thrill.thrill} = {thrill.result}
+      {thrill.thrill} ={/* {thrill.thrill} = {thrill.result} */}
     </div>
   );
 }

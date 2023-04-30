@@ -9,7 +9,7 @@ const mathInitial = {
   points: 0,
   timerInterAddThrill: 3000,
   timerInterProgress: 500,
-  progress: 100,
+  progress: 30,
   result: "",
   stop: false,
   gameOver: false,
@@ -32,7 +32,7 @@ const mathReducer = (state = mathInitial, { type, payload }) => {
       const newThrills = state.thrills.filter(
         (thrill) => Number(thrill.result) !== Number(payload)
       );
-      return { ...state, thrills: newThrills };
+      return { ...state, thrills: newThrills, points: state.points + 1 };
     case types.UPDATE_RESULT:
       return { ...state, result: payload };
     case types.UPDATE_POSITIONS:
