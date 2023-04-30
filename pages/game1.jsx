@@ -10,31 +10,28 @@ export default function game1({}) {
     useSelector((state) => state.math);
   const dispatch = useDispatch();
 
-  let intervalId;
-  let intervalId2;
+  let intervalThrillId;
+  let intervalIdProgressId;
 
   useEffect(() => {
-    intervalId = setInterval(() => {
-      dispatch(addThrill());
-    }, timerInterAddThrill);
+    intervalThrillId = rotation(addThrill, timerInterAddThrill);
+    intervalIdProgressId = rotation(updatePositions, timerInterProgress);
+    return () => {
+      clearInterval(intervalThrillId);
+      clearInterval(intervalIdProgressId);
+    };
+  }, [stop]);
+
+  const rotation = (callback, timeInter) => {
+    const intervalId = setInterval(() => {
+      dispatch(callback());
+    }, timeInter);
+
     if (stop === true) {
       clearInterval(intervalId);
     }
-
-    return () => clearInterval(intervalId);
-  }, [stop]);
-
-  useEffect(() => {
-    intervalId2 = setInterval(() => {
-      dispatch(updatePositions());
-    }, timerInterProgress);
-
-    if (stop === true) {
-      clearInterval(intervalId2);
-    }
-    return () => clearInterval(intervalId2);
-  }, [stop]);
-
+    return intervalId;
+  };
   console.log(thrills);
 
   return (
