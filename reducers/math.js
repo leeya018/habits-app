@@ -9,7 +9,7 @@ const mathInitial = {
   points: 0,
   timerInterAddThrill: 3000,
   timerInterProgress: 500,
-  progress: 30,
+  progress: 20,
   result: "",
   stop: false,
   gameOver: false,

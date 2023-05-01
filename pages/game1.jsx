@@ -1,5 +1,6 @@
 import SeaLevel from "components/SeaLevel";
 import { useSelector, useDispatch } from "react-redux";
+import mexican from "@/images/mexican.jpg";
 import { minLevel } from "@/util";
 import Thrill from "components/Thrill";
 import { useEffect, useState } from "react";
@@ -95,6 +96,11 @@ export default function game1({}) {
           {/* <div>thrills num : {thrills.length} </div> */}
         </div>
         <div className="relative w-[70%] h-[100vh] border-4 border-black">
+          <img
+            src={mexican.src}
+            alt=""
+            className="absolute inset-0 w-full h-full object-cover opacity-75"
+          />
           {thrills.map((thrill, key) => (
             <Thrill key={key} thrill={thrill} />
           ))}
