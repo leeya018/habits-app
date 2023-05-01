@@ -20,7 +20,7 @@ const mathReducer = (state = mathInitial, { type, payload }) => {
     case types.ADD_THRILL:
       return { ...state, thrills: [...state.thrills, payload] };
     case types.ADD_LEVEL:
-      let gameOver = false;
+      let gameOver = state.gameOver;
       if (state.level - levelUp === startLevel - 150) {
         gameOver = true;
       }
@@ -45,6 +45,9 @@ const mathReducer = (state = mathInitial, { type, payload }) => {
       return { ...state, gameOver: payload };
     case types.RESET_LEVEL:
       return { ...state, level: startLevel };
+    case types.RESET_GAME:
+      console.log(payload);
+      return { ...payload };
     default:
       return state;
   }

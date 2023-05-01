@@ -81,3 +81,22 @@ export const resetLevl = () => {
     type: types.RESET_LEVEL,
   };
 };
+export const resetGame = () => {
+  const startLevel = 700;
+
+  const payload = {
+    thrills: [],
+    level: startLevel,
+    points: 0,
+    timerInterAddThrill: 3000,
+    timerInterProgress: 500,
+    progress: 30,
+    result: "",
+    stop: false,
+    gameOver: false,
+  };
+  return {
+    type: types.RESET_GAME,
+    payload,
+  };
+};

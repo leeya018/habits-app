@@ -8,11 +8,13 @@ import {
   addLevel,
   addPoints,
   addThrill,
+  resetGame,
   clearThrills,
   updateStop,
   resetLevl,
 } from "actions";
 import Input from "components/Input";
+import Modal from "components/Modal";
 
 export default function game1({}) {
   const {
@@ -72,6 +74,15 @@ export default function game1({}) {
 
   return (
     <div>
+      {/* <button onClick={() => dispatch(resetGame())}>onclci distpatch</button> */}
+      {gameOver && (
+        <Modal
+          title={"Game Over"}
+          text={`you got ${points} points`}
+          textButton={`restart game`}
+          onClick={() => dispatch(resetGame())}
+        />
+      )}
       <h1>game</h1>
       <div>stop : {String(stop)}</div>
       <div>gameOver : {String(gameOver)}</div>
