@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 export default function Input({}) {
   //   const [result, setResult] = useState("");
-  const { thrills, result } = useSelector((state) => state.math);
+  const { thrills, result, gameOver } = useSelector((state) => state.math);
   const inputRef = useRef();
   const dispatch = useDispatch();
 
@@ -16,6 +16,11 @@ export default function Input({}) {
     return () => window.removeEventListener("keydown", handlePress);
   }, [result]); // important the dependancy array here because of the closuer e
 
+  useEffect(() => {
+    if (!gameOver) {
+      inputRef.current.focus();
+    }
+  }, [gameOver]);
   console.log({ result });
 
   const handlePress = (e) => {

@@ -74,29 +74,35 @@ export default function game1({}) {
 
   return (
     <div>
-      {/* <button onClick={() => dispatch(resetGame())}>onclci distpatch</button> */}
-      {gameOver && (
+      {/* {gameOver && (
         <Modal
           title={"Game Over"}
           text={`you got ${points} points`}
           textButton={`restart game`}
           onClick={() => dispatch(resetGame())}
         />
-      )}
-      <h1>game</h1>
-      <div>stop : {String(stop)}</div>
-      <div>gameOver : {String(gameOver)}</div>
-      <div>level : {level}</div>
-      <div>points total : {points}</div>
-      <button onClick={() => dispatch(addPoints())}>add level</button>
-      {/* <button onClick={() => dispatch(addLevel())}>add level</button> */}
-      <div>thrills num : {thrills.length} </div>
-      {thrills.map((thrill, key) => (
-        <Thrill key={key} thrill={thrill} />
-      ))}
+      )} */}
+      {/* gameContainer */}
+      <div className="flex justify-center">
+        <div className="absolute left-0 text-2xl">
+          <h1 className="font-bold underline">Math Game</h1>
+          <div>level : {level}</div>
+          <div>points total : {points}</div>
+          {/* <div>stop : {String(stop)}</div> */}
+          {/* <div>gameOver : {String(gameOver)}</div> */}
+          {/* <button onClick={() => dispatch(addPoints())}>add level</button> */}
+          {/* <button onClick={() => dispatch(addLevel())}>add level</button> */}
+          {/* <div>thrills num : {thrills.length} </div> */}
+        </div>
+        <div className="relative w-[70%] h-[100vh] border-4 border-black">
+          {thrills.map((thrill, key) => (
+            <Thrill key={key} thrill={thrill} />
+          ))}
 
-      <SeaLevel />
-      <Input />
+          <SeaLevel />
+          <Input />
+        </div>
+      </div>
     </div>
   );
 }

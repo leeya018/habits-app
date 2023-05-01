@@ -10,7 +10,7 @@ export default function Thrill({ thrill }) {
 
   return (
     <div
-      className="absolute border-2 border-blue-500 w-40 h-20"
+      className="absolute border-2 text-center border-blue-500 px-2 py-3 font-bold "
       style={{
         top: thrill.position.top,
         left: thrill.position.left,

@@ -1,4 +1,13 @@
+import { useEffect } from "react";
+import { useRef } from "react";
+
 function Modal({ title, text, textButton = "", onClick = () => {} }) {
+  const buttonRef = useRef();
+  useEffect(() => {
+    setTimeout(() => {
+      buttonRef.current?.focus();
+    }, 100);
+  }, []);
   return (
     <div
       className="absolute w-full h-full bg-black
@@ -14,6 +23,7 @@ function Modal({ title, text, textButton = "", onClick = () => {} }) {
           <div className="pt-1 border-2 self-center text-center">{text}</div>
           <div className="flex justify-center">
             <button
+              ref={buttonRef}
               className="rounded-md border-2
             border-white bg-blue-500 text-white hover:bg-blue-400
             p-2  absolute bottom-3 "

@@ -3,5 +3,5 @@
 @tailwind utilities;
 
 div {
-  @apply border-2;
+  /* @apply border-2; */
 }

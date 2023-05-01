@@ -6,10 +6,8 @@ export default function SeaLevel({}) {
 
   return (
     <div
-      className="absolute w-full border-2 bg-red-500  h-48 "
+      className="absolute w-[100%] bg-blue-400 bottom-0"
       style={{ top: level + "px" }}
-    >
-      SeaLevel
-    </div>
+    ></div>
   );
 }
