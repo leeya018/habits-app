@@ -2,6 +2,7 @@ import { useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Button from "./Button";
 import { addDidAmount, deleteHabit } from "actions";
+import Title from "./Title";
 
 export default function Habit({ habit, showHandle = true }) {
   const {
@@ -33,7 +34,7 @@ export default function Habit({ habit, showHandle = true }) {
         <div>createdAt : {createdAt}</div>
         <div>mainGoal : {mainGoal}</div>
         <div>
-          <h1>amountCompletePerDay </h1>
+          <Title>amountCompletePerDay </Title>
           <ul>
             {Object.keys(amountCompletePerDay).map((key) => (
               <li key={key}>

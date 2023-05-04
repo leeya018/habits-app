@@ -19,3 +19,4 @@ export const EDIT_HABIT = "EDIT_HABIT";
 export const REMOVE_HABIT = "REMOVE_HABIT";
 export const UPDATE_ERROR = "UPDATE_ERROR";
 export const ADD_DID_AMOUNT = "ADD_DID_AMOUNT";
+export const ADD_CATEGORY = "ADD_CATEGORY";

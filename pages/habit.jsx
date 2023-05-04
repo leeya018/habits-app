@@ -1,4 +1,5 @@
 import Button from "components/habits/Button";
+import Title from "components/habits/Title";
 import { useRouter } from "next/router";
 
 export default function Habit({}) {
@@ -6,7 +7,7 @@ export default function Habit({}) {
   return (
     <div className="flex justify-center">
       <div className="flex flex-col">
-        <h1>HABITS</h1>
+        <Title>HABITS</Title>
         <div>choose your habits : </div>
         <Button onClick={() => router.push("/addhabit")}>add a habit</Button>
       </div>

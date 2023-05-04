@@ -10,7 +10,7 @@
 //   return (
 //     <div className="flex justify-center">
 //     <div className="flex flex-col">
-//       <h1>{title}</h1>
+//       <Title>{title}</Title>
 //       <input
 //         type="text"
 //         name="name"

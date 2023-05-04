@@ -70,7 +70,6 @@ export default function game1({}) {
 
   useEffect(() => {
     if (gameOver) {
-      //   alert("game over ");
       clearInterval(intervalThrillId);
       clearInterval(intervalIdProgressId);
       dispatch(clearThrills());

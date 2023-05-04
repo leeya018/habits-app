@@ -1,6 +1,7 @@
 import * as types from "../types";
 
 const habitInitial = {
+  categories: ["money", "women", "career"],
   habits: [
     {
       name: "123",
@@ -37,6 +38,8 @@ const mathReducer = (state = habitInitial, { type, payload }) => {
 
     case types.UPDATE_ERROR:
       return { ...state, error: payload };
+    case types.ADD_CATEGORY:
+      return { ...state, categories: [...state.categories, payload] };
     case types.ADD_DID_AMOUNT:
       newHabits = state.habits.map((habit) => {
         if (habit.id === payload) {

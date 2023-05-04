@@ -1,5 +1,6 @@
 import { addHabit } from "actions";
 import Button from "components/habits/Button";
+import Title from "components/habits/Title";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -35,7 +36,7 @@ export default function Handle({ id }) {
   return (
     <div className="flex justify-center">
       <div className="flex flex-col">
-        <h1>NEW HABIT</h1>
+        <Title>NEW HABIT</Title>
         <input
           type="text"
           name="name"

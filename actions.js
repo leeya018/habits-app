@@ -45,7 +45,6 @@ export const updatePositions = () => (dispatch, getState) => {
     let dupPosition = thrill.position;
     dupPosition.top += progress;
     if (dupPosition.top + progress >= level) {
-      // alert("done");
       dispatch({
         type: types.UPDATE_STOP,
         payload: true,
@@ -144,5 +143,11 @@ export const addDidAmount = (id) => {
   return {
     type: types.ADD_DID_AMOUNT,
     payload: id,
+  };
+};
+export const addCategory = (name) => {
+  return {
+    type: types.ADD_CATEGORY,
+    payload: name,
   };
 };
