@@ -8,11 +8,13 @@ const mathInitial = {
   level: startLevel,
   points: 0,
   timerInterAddThrill: 3000,
-  timerInterProgress: 500,
-  progress: 20,
+  timerInterProgress: 1000,
+  speedLevel: 1,
+  progress: 10,
   result: "",
   stop: false,
   gameOver: false,
+  speedLevel: 1,
 };
 
 const mathReducer = (state = mathInitial, { type, payload }) => {
@@ -45,6 +47,8 @@ const mathReducer = (state = mathInitial, { type, payload }) => {
       return { ...state, gameOver: payload };
     case types.RESET_LEVEL:
       return { ...state, level: startLevel };
+    case types.INCREASE_SPEED_LEVEL:
+      return { ...state, speedLevel: state.speedLevel + 1 };
     case types.RESET_GAME:
       console.log(payload);
       return { ...payload };

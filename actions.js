@@ -81,6 +81,19 @@ export const resetLevl = () => {
     type: types.RESET_LEVEL,
   };
 };
+export const increaseSpeedLevel = () => (dispatch, getState) => {
+  const { speedLevel } = getState().math;
+  const lim = 10;
+  if (speedLevel > lim) {
+    dispatch({
+      type: "",
+    });
+  } else {
+    dispatch({
+      type: types.INCREASE_SPEED_LEVEL,
+    });
+  }
+};
 export const resetGame = () => {
   const startLevel = 700;
 
@@ -97,6 +110,33 @@ export const resetGame = () => {
   };
   return {
     type: types.RESET_GAME,
+    payload,
+  };
+};
+
+// ===========================
+
+export const addHabit = (payload) => {
+  return {
+    type: types.ADD_HABIT,
+    payload,
+  };
+};
+export const removeHabit = (payload) => {
+  return {
+    type: types.REMOVE_HABIT,
+    payload,
+  };
+};
+export const editHabit = (payload) => {
+  return {
+    type: types.EDIT_HABIT,
+    payload,
+  };
+};
+export const updateError = (payload) => {
+  return {
+    type: types.UPDATE_ERROR,
     payload,
   };
 };

@@ -8,13 +8,13 @@ export default function SeaLevel({}) {
   return (
     <>
       <div
-        className="absolute w-[100%] bg-blue-400 bottom-0"
+        className="absolute w-[100%]  bottom-0"
         style={{ top: level + "px" }}
       >
         <div className="flex ">
           <video
             src="./sea.mp4"
-            className="absolute inset-0 w-full h-full object-cover"
+            className="absolute opacity-50 inset-0 w-full h-full object-cover"
             autoPlay
             loop
             muted

@@ -13,14 +13,17 @@ import {
   clearThrills,
   updateStop,
   resetLevl,
+  intervalTimerProccess,
+  increaseSpeedLevel,
 } from "actions";
-import Input from "components/Input";
+import Input from "components/math/Input";
 import Modal from "components/Modal";
 
 export default function game1({}) {
   const {
     thrills,
     points,
+    speedLevel,
     gameOver,
     timerInterAddThrill,
     timerInterProgress,
@@ -31,14 +34,24 @@ export default function game1({}) {
 
   let intervalThrillId;
   let intervalIdProgressId;
+  let intervalIdSpeedLevel;
+
+  useEffect(() => {
+    clearInterval(intervalIdProgressId);
+    setTimeout(() => {
+      intervalIdProgressId = rotation(updatePositions, timerInterProgress);
+    }, 1000);
+  }, [speedLevel]);
 
   useEffect(() => {
     console.log("back to teht gaem ");
     intervalThrillId = rotation(addThrill, timerInterAddThrill);
     intervalIdProgressId = rotation(updatePositions, timerInterProgress);
+    intervalIdSpeedLevel = rotation(increaseSpeedLevel, 5000);
     if (stop === true) {
       clearInterval(intervalThrillId);
       clearInterval(intervalIdProgressId);
+      clearInterval(intervalIdSpeedLevel);
       dispatch(clearThrills());
       dispatch(addLevel());
       if (level > minLevel) {
@@ -51,6 +64,7 @@ export default function game1({}) {
     return () => {
       clearInterval(intervalThrillId);
       clearInterval(intervalIdProgressId);
+      clearInterval(intervalIdSpeedLevel);
     };
   }, [stop]);
 
@@ -75,20 +89,22 @@ export default function game1({}) {
 
   return (
     <div>
-      {/* {gameOver && (
+      {gameOver && (
         <Modal
           title={"Game Over"}
           text={`you got ${points} points`}
           textButton={`restart game`}
           onClick={() => dispatch(resetGame())}
         />
-      )} */}
+      )}
       {/* gameContainer */}
       <div className="flex justify-center">
         <div className="absolute left-0 text-2xl">
           <h1 className="font-bold underline">Math Game</h1>
           <div>level : {level}</div>
           <div>points total : {points}</div>
+          <div>speedLevel : {speedLevel}</div>
+          <div>timerInterProgress : {timerInterProgress}</div>
           {/* <div>stop : {String(stop)}</div> */}
           {/* <div>gameOver : {String(gameOver)}</div> */}
           {/* <button onClick={() => dispatch(addPoints())}>add level</button> */}
