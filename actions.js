@@ -122,7 +122,7 @@ export const addHabit = (payload) => {
     payload,
   };
 };
-export const removeHabit = (payload) => {
+export const deleteHabit = (payload) => {
   return {
     type: types.REMOVE_HABIT,
     payload,
@@ -138,5 +138,11 @@ export const updateError = (payload) => {
   return {
     type: types.UPDATE_ERROR,
     payload,
+  };
+};
+export const addDidAmount = (id) => {
+  return {
+    type: types.ADD_DID_AMOUNT,
+    payload: id,
   };
 };

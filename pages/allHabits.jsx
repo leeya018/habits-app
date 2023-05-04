@@ -1,3 +1,5 @@
+import Button from "components/habits/Button";
+import Habit from "components/habits/Habit";
 import { useRouter } from "next/router";
 import { useSelector } from "react-redux";
 
@@ -7,6 +9,7 @@ export default function AllHabits({}) {
   return (
     <div className="flex justify-center">
       <div className="flex flex-col">
+        {habits.length === 0 && <div>{"habit list is empty"}</div>}
         <ul>
           {habits.map((habit) => (
             <li>
@@ -14,7 +17,9 @@ export default function AllHabits({}) {
             </li>
           ))}
         </ul>
-        <button onClick={() => router.push("/addhabit")}>add a habit</button>
+        <Button onClick={() => router.push("/addhabit")}>
+          go to add habit
+        </Button>
       </div>
     </div>
   );

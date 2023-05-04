@@ -1,4 +1,5 @@
 import { addHabit } from "actions";
+import Button from "components/habits/Button";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -60,7 +61,7 @@ export default function Handle({ id }) {
           onChange={(e) => updateHabit(e.target)}
         />
       </div>
-      <button onClick={updateHabitHandle}>update habit</button>
+      <Button onClick={updateHabitHandle}>update habit</Button>
     </div>
   );
 }

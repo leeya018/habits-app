@@ -1,20 +1,17 @@
 import * as types from "../types";
-import { minLevel } from "@/util";
-const levelUp = 50;
-const startLevel = 700;
 
-// const habitsItem = {
-//   id:""
-//   name: ""
-//   description: ""
-//   amount: ""
-//   percentComple: ""
-//   createdAt: ""
-//   mainGoal: ""
-
-// }
 const habitInitial = {
-  habits: [],
+  habits: [
+    {
+      name: "123",
+      description: "213",
+      amount: "323",
+      mainGoal: "232",
+      id: "f6ae5557-4e85-4d68-8682-ed08b7a1ea7f",
+      createdAt: new Date().toDateString(),
+      amountCompletePerDay: {},
+    },
+  ],
   error: "",
 };
 
@@ -34,12 +31,25 @@ const mathReducer = (state = habitInitial, { type, payload }) => {
       );
       return { ...state, habits: newHabits };
 
-    case types.DELET_HABIT:
+    case types.REMOVE_HABIT:
       newHabits = state.habits.filter((habit) => habit.id !== payload);
       return { ...state, habits: newHabits };
 
     case types.UPDATE_ERROR:
       return { ...state, error: payload };
+    case types.ADD_DID_AMOUNT:
+      newHabits = state.habits.map((habit) => {
+        if (habit.id === payload) {
+          let dupHabit = { ...habit };
+          const value = dupHabit.amountCompletePerDay[habit.createdAt];
+          dupHabit.amountCompletePerDay[habit.createdAt] =
+            value === undefined ? 0 : value + 1;
+          return dupHabit;
+        } else {
+          return habit;
+        }
+      });
+      return { ...state, habits: newHabits };
 
     default:
       return state;

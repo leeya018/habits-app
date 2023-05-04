@@ -1,14 +1,28 @@
-import { useDispatch } from "react-redux";
+import { useRef } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import Button from "./Button";
+import { addDidAmount, deleteHabit } from "actions";
 
 export default function Habit({ habit, showHandle = true }) {
-  const { id, name, description, amount, createdAt, mainGoal } = habit;
-  const buttonRef = useRef();
+  const {
+    id,
+    name,
+    description,
+    amount,
+    amountCompletePerDay,
+    createdAt,
+    mainGoal,
+  } = habit;
   const dispatch = useDispatch();
+  const { habits } = useSelector((state) => state.habits);
 
   const removeHabit = () => {
     dispatch(deleteHabit(id));
   };
-  const addAmountForDid = () => {};
+  console.log(habits, createdAt);
+  const addAmountForDid = () => {
+    dispatch(addDidAmount(id));
+  };
   return (
     <div className="flex justify-center">
       <div className="flex flex-col">
@@ -18,10 +32,21 @@ export default function Habit({ habit, showHandle = true }) {
         <div>amount : {amount}</div>
         <div>createdAt : {createdAt}</div>
         <div>mainGoal : {mainGoal}</div>
-        <button onClick={removeHabit}>delete</button>
+        <div>
+          <h1>amountCompletePerDay </h1>
+          <ul>
+            {Object.keys(amountCompletePerDay).map((key) => (
+              <li key={key}>
+                <div>{`${key} => ${amountCompletePerDay[key]}`}</div>
+              </li>
+            ))}
+          </ul>
+        </div>
+        <Button onClick={removeHabit}>delete</Button>
 
         {/* <button>-</button> */}
-        <button onClick={addAmountForDid}>+</button>
+
+        <Button onClick={addAmountForDid}>+</Button>
       </div>
     </div>
   );

@@ -1,4 +1,5 @@
 import { addHabit } from "actions";
+import Button from "components/habits/Button";
 import Input from "components/habits/Input";
 import { useRouter } from "next/router";
 import { useState } from "react";
@@ -21,11 +22,10 @@ export default function AddHabit({}) {
   };
 
   const addNewHabit = () => {
-    // let items = habit.keys().forEach(habit[key])
     const newHabit = {
       ...habit,
       id: uuidv4(),
-      createdAt: new Date(),
+      createdAt: new Date().toDateString(),
       amountCompletePerDay: {},
     };
     dispatch(addHabit(newHabit));
@@ -58,9 +58,10 @@ export default function AddHabit({}) {
           name="mainGoal"
           onChange={(e) => updateHabit(e.target)}
         />
-        <button onClick={addNewHabit}>add new habit</button>
+        <Button onClick={addNewHabit}>add new habit</Button>
         <div>{JSON.stringify(habits)}</div>
         <div>{JSON.stringify(habit)}</div>
+        <Button onClick={() => router.push("/allhabits")}>go to habits</Button>
       </div>
     </div>
   );
