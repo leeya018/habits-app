@@ -21,3 +21,4 @@ export const UPDATE_ERROR = "UPDATE_ERROR";
 export const ADD_DID_AMOUNT = "ADD_DID_AMOUNT";
 export const ADD_CATEGORY = "ADD_CATEGORY";
 export const GET_CATEGORIES = "GET_CATEGORIES";
+export const GET_HABITS = "GET_HABITS";

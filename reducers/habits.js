@@ -11,6 +11,7 @@ const habitInitial = {
       id: "f6ae5557-4e85-4d68-8682-ed08b7a1ea7f",
       createdAt: new Date().toDateString(),
       amountCompletePerDay: {},
+      category: "category1",
     },
   ],
   error: "",
@@ -57,6 +58,9 @@ const mathReducer = (state = habitInitial, { type, payload }) => {
 
     case types.GET_CATEGORIES:
       return { ...state, categories: payload };
+
+    case types.GET_HABITS:
+      return { ...state, habits: payload };
     default:
       return state;
   }

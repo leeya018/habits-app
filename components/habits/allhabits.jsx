@@ -1,11 +1,19 @@
+import { getHabitsByCategory } from "actions";
 import Button from "components/habits/Button";
 import Habit from "components/habits/Habit";
 import { useRouter } from "next/router";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 
-export default function AllHabits({}) {
+export default function AllHabits({ category }) {
   const router = useRouter();
   const { habits } = useSelector((state) => state.habits);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getHabitsByCategory(category));
+  }, []);
   return (
     <div className="flex justify-center">
       <div className="flex flex-col">
@@ -17,9 +25,6 @@ export default function AllHabits({}) {
             </li>
           ))}
         </ul>
-        <Button onClick={() => router.push("/addhabit")}>
-          go to add habit
-        </Button>
       </div>
     </div>
   );

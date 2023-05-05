@@ -1,4 +1,4 @@
-import { addHabit, updateError } from "actions";
+import { addHabit, getHabitsByCategory, updateError } from "actions";
 import Button from "components/habits/Button";
 import Input from "components/habits/Input";
 import Title from "components/habits/Title";
@@ -7,6 +7,8 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { v4 as uuidv4 } from "uuid";
 import Error from "components/habits/Error";
+import { useEffect } from "react";
+import AllHabits from "components/habits/allhabits";
 
 export async function getServerSideProps(context) {
   const { category } = context.query;
@@ -44,10 +46,12 @@ export default function AddHabit({ category }) {
     if (checkValidation()) {
       const newHabit = {
         ...habit,
+        category,
         id: uuidv4(),
         createdAt: new Date().toDateString(),
         amountCompletePerDay: {},
       };
+      console.log({ newHabit });
       dispatch(addHabit(newHabit));
       setHabit({ name: "", description: "", amount: "", mainGoal: "" });
     } else {
@@ -69,6 +73,7 @@ export default function AddHabit({ category }) {
           onChange={(e) => updateHabit(e.target)}
         />
         <Input
+          type="number"
           name="amount"
           value={habit.amount}
           onChange={(e) => updateHabit(e.target)}
@@ -84,6 +89,7 @@ export default function AddHabit({ category }) {
         <Button onClick={() => router.push("/allhabits")}>go to habits</Button>
         <Error>{error}</Error>
       </div>
+      <AllHabits category={category} />
     </div>
   );
 }

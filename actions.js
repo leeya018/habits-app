@@ -189,3 +189,21 @@ export const getCategories = () => async (dispatch) => {
     });
   }
 };
+export const getHabitsByCategory = (category) => async (dispatch) => {
+  // alert(category);
+  const url = process.env.NEXT_PUBLIC_BASIC_URL + "/api/habits";
+  try {
+    const res = await axios.get(url, {
+      params: { category },
+    });
+    dispatch({
+      type: types.GET_HABITS,
+      payload: res.data,
+    });
+  } catch (error) {
+    dispatch({
+      type: types.UPDATE_ERROR,
+      payload: error.message,
+    });
+  }
+};
