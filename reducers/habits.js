@@ -18,6 +18,7 @@ const habitInitial = {
 
 let newHabits = null;
 const mathReducer = (state = habitInitial, { type, payload }) => {
+  console.log({ type });
   switch (type) {
     case types.ADD_HABIT:
       return { ...state, habits: [...state.habits, payload] };
@@ -54,6 +55,9 @@ const mathReducer = (state = habitInitial, { type, payload }) => {
       });
       return { ...state, habits: newHabits };
 
+    case types.GET_CATEGORIES:
+      console.log("=====================================");
+      return { ...state, categories: payload };
     default:
       return state;
   }

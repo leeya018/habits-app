@@ -6,6 +6,7 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { v4 as uuidv4 } from "uuid";
+import Error from "components/habits/Error";
 
 export async function getServerSideProps(context) {
   const { category } = context.query;
@@ -81,7 +82,7 @@ export default function AddHabit({ category }) {
         {/* <div>{JSON.stringify(habits)}</div> */}
         <div>{JSON.stringify(habit)}</div>
         <Button onClick={() => router.push("/allhabits")}>go to habits</Button>
-        <div className="bg-yellow-400 text-red-600 font-bold">{error}</div>
+        <Error>{error}</Error>
       </div>
     </div>
   );

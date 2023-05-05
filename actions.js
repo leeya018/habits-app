@@ -1,5 +1,6 @@
 import { createThrill, randLeft } from "@/util";
 import * as types from "./types";
+import axios from "axios";
 
 export const addThrill = () => {
   const thrill = createThrill();
@@ -145,9 +146,37 @@ export const addDidAmount = (id) => {
     payload: id,
   };
 };
-export const addCategory = (name) => {
-  return {
-    type: types.ADD_CATEGORY,
-    payload: name,
-  };
+export const addCategory = (name) => async (dispatch, getState) => {
+  const url = process.env.NEXT_PUBLIC_BASIC_URL + "/api/category/add";
+  try {
+    if (!name) {
+      throw new Error("category must be set");
+    }
+    const res = await axios.post(url, { name });
+    dispatch({
+      type: types.ADD_CATEGORY,
+      payload: name,
+    });
+  } catch (error) {
+    dispatch({
+      type: types.UPDATE_ERROR,
+      payload: error.message,
+    });
+  }
+};
+
+export const getCategories = () => async (dispatch) => {
+  const url = process.env.NEXT_PUBLIC_BASIC_URL + "/api/categories";
+  try {
+    const res = await axios.get(url);
+    dispatch({
+      type: types.GET_CATEGORIES,
+      payload: res.data,
+    });
+  } catch (error) {
+    dispatch({
+      type: types.UPDATE_ERROR,
+      payload: error.message,
+    });
+  }
 };
