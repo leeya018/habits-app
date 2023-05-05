@@ -28,7 +28,6 @@ export default function AddHabit({ category }) {
   console.log(category);
   const dispatch = useDispatch();
   const { habits, error } = useSelector((state) => state.habits);
-
   const updateHabit = ({ name, value }) => {
     dispatch(updateError());
 
@@ -47,12 +46,13 @@ export default function AddHabit({ category }) {
       const newHabit = {
         ...habit,
         category,
-        id: uuidv4(),
+        // id: uuidv4(),
         createdAt: new Date().toDateString(),
-        amountCompletePerDay: {},
+        amountCompletePerDay: "{}",
       };
       console.log({ newHabit });
       dispatch(addHabit(newHabit));
+      dispatch(getHabitsByCategory(category));
       setHabit({ name: "", description: "", amount: "", mainGoal: "" });
     } else {
       dispatch(updateError("one of the fields is not set"));

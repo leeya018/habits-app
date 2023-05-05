@@ -120,10 +120,10 @@ export const addHabit = (habit) => async (dispatch) => {
   const url = process.env.NEXT_PUBLIC_BASIC_URL + `/api/habit/add`;
   try {
     const res = await axios.post(url, { habit });
-    dispatch({
-      type: types.ADD_HABIT,
-      habit,
-    });
+    // dispatch({
+    //   type: types.ADD_HABIT,
+    //   habit,
+    // });
   } catch (error) {
     dispatch({
       type: types.UPDATE_ERROR,
@@ -191,7 +191,7 @@ export const getCategories = () => async (dispatch) => {
 };
 export const getHabitsByCategory = (category) => async (dispatch) => {
   // alert(category);
-  const url = process.env.NEXT_PUBLIC_BASIC_URL + "/api/habits";
+  const url = process.env.NEXT_PUBLIC_BASIC_URL + "/api/habit";
   try {
     const res = await axios.get(url, {
       params: { category },

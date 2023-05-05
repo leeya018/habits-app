@@ -3,16 +3,16 @@ import * as types from "../types";
 const habitInitial = {
   categories: [],
   habits: [
-    {
-      name: "123",
-      description: "213",
-      amount: "323",
-      mainGoal: "232",
-      id: "f6ae5557-4e85-4d68-8682-ed08b7a1ea7f",
-      createdAt: new Date().toDateString(),
-      amountCompletePerDay: {},
-      category: "category1",
-    },
+    // {
+    //   name: "123",
+    //   description: "213",
+    //   amount: "323",
+    //   mainGoal: "232",
+    //   id: "f6ae5557-4e85-4d68-8682-ed08b7a1ea7f",
+    //   createdAt: new Date().toDateString(),
+    //   amountCompletePerDay: {},
+    //   category: "category1",
+    // },
   ],
   error: "",
 };

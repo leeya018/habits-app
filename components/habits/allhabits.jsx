@@ -19,8 +19,8 @@ export default function AllHabits({ category }) {
       <div className="flex flex-col">
         {habits.length === 0 && <div>{"habit list is empty"}</div>}
         <ul>
-          {habits.map((habit) => (
-            <li>
+          {habits.map((habit, key) => (
+            <li key={key}>
               <Habit habit={habit} />
             </li>
           ))}

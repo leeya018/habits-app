@@ -6,7 +6,7 @@ import Title from "./Title";
 
 export default function Habit({ habit, showHandle = true }) {
   const {
-    id,
+    _id,
     name,
     description,
     amount,
@@ -16,18 +16,18 @@ export default function Habit({ habit, showHandle = true }) {
   } = habit;
   const dispatch = useDispatch();
   const { habits } = useSelector((state) => state.habits);
-
+  console.log(habit);
   const removeHabit = () => {
-    dispatch(deleteHabit(id));
+    dispatch(deleteHabit(_id));
   };
   console.log(habits, createdAt);
   const addAmountForDid = () => {
-    dispatch(addDidAmount(id));
+    dispatch(addDidAmount(_id));
   };
   return (
     <div className="flex justify-center">
       <div className="flex flex-col">
-        <div>id : {id}</div>
+        <div>id : {_id}</div>
         <div>name : {name}</div>
         <div>description : {description}</div>
         <div>amount : {amount}</div>
