@@ -116,12 +116,22 @@ export const resetGame = () => {
 
 // ===========================
 
-export const addHabit = (payload) => {
-  return {
-    type: types.ADD_HABIT,
-    payload,
-  };
+export const addHabit = (habit) => async (dispatch) => {
+  const url = process.env.NEXT_PUBLIC_BASIC_URL + `/api/habit/add`;
+  try {
+    const res = await axios.post(url, { habit });
+    dispatch({
+      type: types.ADD_HABIT,
+      habit,
+    });
+  } catch (error) {
+    dispatch({
+      type: types.UPDATE_ERROR,
+      payload: error.message,
+    });
+  }
 };
+
 export const deleteHabit = (payload) => {
   return {
     type: types.REMOVE_HABIT,
@@ -153,10 +163,9 @@ export const addCategory = (name) => async (dispatch, getState) => {
       throw new Error("category must be set");
     }
     const res = await axios.post(url, { name });
-    dispatch({
-      type: types.ADD_CATEGORY,
-      payload: name,
-    });
+    // dispatch({
+    //   type: types.ADD_CATEGORY,
+    // });
   } catch (error) {
     dispatch({
       type: types.UPDATE_ERROR,

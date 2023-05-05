@@ -16,39 +16,38 @@ import { useEffect } from "react";
 // }
 
 // getCategories
-export default function Category({}) {
+export default function Categories({}) {
   const [name, setName] = useState("");
   const { categories, error } = useSelector((state) => state.habits);
   const router = useRouter();
-
+  console.log(categories);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getCategories());
-  }, []);
+    if (!name) {
+      dispatch(getCategories());
+    }
+  }, [name]);
 
   const handleAdd = () => {
     dispatch(addCategory(name));
     setName("");
-
-    // setName("");
   };
   const handleCategoryClick = (name) => {
     router.push(`/addhabit/${name}`);
-    // setName("");
   };
   return (
     <div className="flex justify-center">
       <div className="flex flex-col">
         <Title>categories: </Title>
         <ul className="flex flex-col">
-          {categories.map((name) => (
+          {categories.map((category) => (
             <li
-              key={name}
-              onClick={() => handleCategoryClick(name)}
+              key={category.name}
+              onClick={() => handleCategoryClick(category.name)}
               className="font-bold p-2 border-2 bg-gray-300 hover:bg-gray-500"
             >
-              {name}
+              {category.name}
             </li>
           ))}
         </ul>
