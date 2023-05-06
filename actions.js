@@ -1,6 +1,7 @@
 import { createThrill, randLeft } from "@/util";
 import * as types from "./types";
 import axios from "axios";
+import { getTodayDate } from "@/util";
 
 export const addThrill = () => {
   const thrill = createThrill();
@@ -138,11 +139,28 @@ export const deleteHabit = (payload) => {
     payload,
   };
 };
-export const editHabit = (payload) => {
+export const updateChosenCategory = (categoryName) => {
   return {
-    type: types.EDIT_HABIT,
-    payload,
+    type: types.UPDATE_COSEN_CATEGORY,
+    payload: categoryName,
   };
+};
+export const editHabit = (habit) => async (dispatch, getState) => {
+  const url = process.env.NEXT_PUBLIC_BASIC_URL + `/api/habit/update`;
+  const res = await axios.post(url, habit);
+
+  try {
+    dispatch({
+      type: types.EDIT_HABIT,
+    });
+  } catch (error) {
+    dispatch({
+      type: types.UPDATE_ERROR,
+      payload: error.message,
+    });
+  }
+
+  return {};
 };
 export const updateError = (payload) => {
   return {
@@ -150,11 +168,35 @@ export const updateError = (payload) => {
     payload,
   };
 };
-export const addDidAmount = (id) => {
-  return {
-    type: types.ADD_DID_AMOUNT,
-    payload: id,
-  };
+export const addDidAmount = (habit) => async (dispatch) => {
+  const dupHabit = { ...habit };
+  const todayDate = getTodayDate();
+  if (!dupHabit.amountCompletePerDay) dupHabit.amountCompletePerDay = {};
+  console.log(dupHabit.amountCompletePerDay[todayDate]);
+  const value = dupHabit.amountCompletePerDay[todayDate];
+  if (value === undefined) dupHabit.amountCompletePerDay[todayDate] = 1;
+  else {
+    dupHabit.amountCompletePerDay[todayDate] += 1;
+  }
+  console.log({ dupHabit });
+  const urlUpdate = process.env.NEXT_PUBLIC_BASIC_URL + "/api/habit/update";
+  const urlGet = process.env.NEXT_PUBLIC_BASIC_URL + "/api/habit";
+  try {
+    const resPost = await axios.post(urlUpdate, dupHabit);
+    const resGet = await axios.get(urlGet, {
+      params: { category: habit.category },
+    });
+
+    dispatch({
+      type: types.GET_HABITS,
+      payload: resGet.data,
+    });
+  } catch (error) {
+    dispatch({
+      type: types.UPDATE_ERROR,
+      payload: error.message,
+    });
+  }
 };
 export const addCategory = (name) => async (dispatch, getState) => {
   const url = process.env.NEXT_PUBLIC_BASIC_URL + "/api/category/add";
@@ -190,7 +232,6 @@ export const getCategories = () => async (dispatch) => {
   }
 };
 export const getHabitsByCategory = (category) => async (dispatch) => {
-  // alert(category);
   const url = process.env.NEXT_PUBLIC_BASIC_URL + "/api/habit";
   try {
     const res = await axios.get(url, {

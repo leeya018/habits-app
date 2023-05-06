@@ -24,3 +24,9 @@ export const sleep = async (time) =>
 export const randLeft = () => Math.random() * 65 + "vw";
 
 export const minLevel = 600;
+
+//===============================HABITS ======================
+
+export const getTodayDate = () => {
+  return new Date().toISOString().split("T")[0];
+};

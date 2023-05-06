@@ -1,4 +1,9 @@
-import { addCategory, getCategories, updateError } from "actions";
+import {
+  addCategory,
+  getCategories,
+  updateChosenCategory,
+  updateError,
+} from "actions";
 import Button from "components/habits/Button";
 import Title from "components/habits/Title";
 import Input from "components/habits/Input";
@@ -34,6 +39,7 @@ export default function Categories({}) {
     setName("");
   };
   const handleCategoryClick = (name) => {
+    dispatch(updateChosenCategory(name));
     router.push(`/addhabit/${name}`);
   };
   return (

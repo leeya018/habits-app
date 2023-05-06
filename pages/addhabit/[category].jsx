@@ -1,4 +1,9 @@
-import { addHabit, getHabitsByCategory, updateError } from "actions";
+import {
+  addHabit,
+  getHabitsByCategory,
+  updateChosenCategory,
+  updateError,
+} from "actions";
 import Button from "components/habits/Button";
 import Input from "components/habits/Input";
 import Title from "components/habits/Title";
@@ -27,12 +32,18 @@ export default function AddHabit({ category }) {
   });
   console.log(category);
   const dispatch = useDispatch();
-  const { habits, error } = useSelector((state) => state.habits);
+  const { habits, error, chosenCategory } = useSelector(
+    (state) => state.habits
+  );
   const updateHabit = ({ name, value }) => {
     dispatch(updateError());
 
     setHabit((prev) => ({ ...prev, [name]: value }));
   };
+
+  useEffect(() => {
+    dispatch(updateChosenCategory(category));
+  }, [category]);
 
   const checkValidation = () => {
     let keysLeft = Object.keys(habit).filter((key) => habit[key] === "");
@@ -46,9 +57,8 @@ export default function AddHabit({ category }) {
       const newHabit = {
         ...habit,
         category,
-        // id: uuidv4(),
         createdAt: new Date().toDateString(),
-        amountCompletePerDay: "{}",
+        amountCompletePerDay: {},
       };
       console.log({ newHabit });
       dispatch(addHabit(newHabit));

@@ -14,6 +14,10 @@ export default function AllHabits({ category }) {
   useEffect(() => {
     dispatch(getHabitsByCategory(category));
   }, []);
+
+  console.log("===================HABITS=====");
+  // console.log(habits);
+
   return (
     <div className="flex justify-center">
       <div className="flex flex-col">

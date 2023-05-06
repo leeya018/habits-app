@@ -24,6 +24,7 @@ const HabitSchema = new mongoose.Schema({
   amountCompletePerDay: {
     type: Object,
     required: true,
+    default: {},
   },
   category: {
     type: String,

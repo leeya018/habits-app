@@ -15,10 +15,11 @@ const habitInitial = {
     // },
   ],
   error: "",
+  chosenCategory: "",
 };
 
 let newHabits = null;
-const mathReducer = (state = habitInitial, { type, payload }) => {
+const habitReducer = (state = habitInitial, { type, payload }) => {
   console.log({ type });
   switch (type) {
     case types.ADD_HABIT:
@@ -40,30 +41,31 @@ const mathReducer = (state = habitInitial, { type, payload }) => {
 
     case types.UPDATE_ERROR:
       return { ...state, error: payload };
-    // case types.ADD_CATEGORY:
-    //   return { ...state, categories: [...state.categories, payload] };
+    // case types.ADD_DID_AMOUNT:
+    //   newHabits = state.habits.map((habit) => {
+    //     if (habit.id === payload) {
+    //       let dupHabit = { ...habit };
+    //       const value = dupHabit.amountCompletePerDay[habit.createdAt];
+    //       dupHabit.amountCompletePerDay[habit.createdAt] =
+    //         value === undefined ? 0 : value + 1;
+    //       return dupHabit;
+    //     } else {
+    //       return habit;
+    //     }
+    //   });
+    //   return { ...state, habits: newHabits };
     case types.ADD_DID_AMOUNT:
-      newHabits = state.habits.map((habit) => {
-        if (habit.id === payload) {
-          let dupHabit = { ...habit };
-          const value = dupHabit.amountCompletePerDay[habit.createdAt];
-          dupHabit.amountCompletePerDay[habit.createdAt] =
-            value === undefined ? 0 : value + 1;
-          return dupHabit;
-        } else {
-          return habit;
-        }
-      });
       return { ...state, habits: newHabits };
-
     case types.GET_CATEGORIES:
       return { ...state, categories: payload };
 
     case types.GET_HABITS:
       return { ...state, habits: payload };
+    case types.UPDATE_COSEN_CATEGORY:
+      return { ...state, chosenCategory: payload };
     default:
       return state;
   }
 };
 
-export default mathReducer;
+export default habitReducer;
