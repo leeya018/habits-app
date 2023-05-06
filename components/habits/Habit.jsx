@@ -19,7 +19,7 @@ export default function Habit({ habit, showHandle = true }) {
   // console.log(habits);
   // console.log(habit);
   const removeHabit = () => {
-    dispatch(deleteHabit(_id));
+    dispatch(deleteHabit(_id, habit.category));
   };
   // console.log(habits, createdAt);
   const addAmountForDid = () => {

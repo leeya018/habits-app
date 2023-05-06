@@ -133,11 +133,27 @@ export const addHabit = (habit) => async (dispatch) => {
   }
 };
 
-export const deleteHabit = (payload) => {
-  return {
-    type: types.REMOVE_HABIT,
-    payload,
-  };
+export const deleteHabit = (id, category) => async (dispatch) => {
+  const urlDelete = process.env.NEXT_PUBLIC_BASIC_URL + "/api/habit/remove";
+  const urlGet = process.env.NEXT_PUBLIC_BASIC_URL + "/api/habit";
+
+  try {
+    const resDelete = await axios.delete(urlDelete, {
+      params: { id },
+    });
+    const resGet = await axios.get(urlGet, {
+      params: { category },
+    });
+    dispatch({
+      type: types.GET_HABITS,
+      payload: resGet.data,
+    });
+  } catch (error) {
+    dispatch({
+      type: types.UPDATE_ERROR,
+      payload: error.message,
+    });
+  }
 };
 export const updateChosenCategory = (categoryName) => {
   return {
