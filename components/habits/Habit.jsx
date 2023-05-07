@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Button from "./Button";
 import { addDidAmount, deleteHabit, editHabit } from "actions";
 import Title from "./Title";
+import { useRouter } from "next/router";
 
 export default function Habit({ habit, showHandle = true }) {
   const {
@@ -15,6 +16,7 @@ export default function Habit({ habit, showHandle = true }) {
     mainGoal,
   } = habit;
   const dispatch = useDispatch();
+  const router = useRouter();
   const { habits } = useSelector((state) => state.habits);
   // console.log(habits);
   // console.log(habit);
@@ -22,9 +24,9 @@ export default function Habit({ habit, showHandle = true }) {
     dispatch(deleteHabit(_id, habit.category));
   };
   // console.log(habits, createdAt);
-  const addAmountForDid = () => {
+  const addAmountForDid = (amount) => {
     console.log({ habit });
-    dispatch(addDidAmount(habit));
+    dispatch(addDidAmount(habit, amount));
   };
   return (
     <div className="flex justify-center">
@@ -49,7 +51,11 @@ export default function Habit({ habit, showHandle = true }) {
 
         {/* <button>-</button> */}
 
-        <Button onClick={addAmountForDid}>+</Button>
+        <Button onClick={() => addAmountForDid(-1)}>-</Button>
+        <Button onClick={() => addAmountForDid(1)}>+</Button>
+        <Button onClick={() => router.push(`/edithabit/${habit._id}`)}>
+          edit
+        </Button>
       </div>
     </div>
   );

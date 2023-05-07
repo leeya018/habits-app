@@ -1,38 +1,66 @@
-// import { useDispatch } from "react-redux";
+import {
+  addHabit,
+  getHabitsByCategory,
+  updateChosenCategory,
+  updateError,
+} from "actions";
+import Button from "components/habits/Button";
+import Input from "components/habits/Input";
+import Title from "components/habits/Title";
+import { useRouter } from "next/router";
+import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { v4 as uuidv4 } from "uuid";
+import Error from "components/habits/Error";
+import { useEffect } from "react";
 
-// export default function HabitHandle({ habit, onClick, title, buttonTitle }) {
-//   const { id, name, description, amount, createdAt, mainGoal } = habit;
-//   const dispatch = useDispatch();
+export default function HabitHandle({
+  category,
+  onClick,
+  updateHabit,
+  habit,
+  title,
+}) {
+  const router = useRouter();
 
-//   const removeHabit = () => {
-//     dispatch(deleteHabit(id));
-//   };
-//   return (
-//     <div className="flex justify-center">
-//     <div className="flex flex-col">
-//       <Title>{title}</Title>
-//       <input
-//         type="text"
-//         name="name"
-//         onChange={(e) => updateHabit(e.target)}
-//       />
-//       <input
-//         type="text"
-//         name="description"
-//         onChange={(e) => updateHabit(e.target)}
-//       />
-//       <input
-//         type="text"
-//         name="amount"
-//         onChange={(e) => updateHabit(e.target)}
-//       />
-//       <input
-//         type="text"
-//         name="mainGoal"
-//         onChange={(e) => updateHabit(e.target)}
-//       />
-//     </div>
-//     <button onClick={addNewHabit}>add new habit</button>
-//   </div>
-//   );
-// }
+  console.log(category);
+  const { habits, error, chosenCategory } = useSelector(
+    (state) => state.habits
+  );
+
+  return (
+    <div className="flex justify-center">
+      <div className="flex flex-col">
+        <Title>
+          ${title} for : {category}
+        </Title>
+        <Input
+          name="name"
+          value={habit.name}
+          onChange={(e) => updateHabit(e.target)}
+        />
+        <Input
+          name="description"
+          value={habit.description}
+          onChange={(e) => updateHabit(e.target)}
+        />
+        <Input
+          type="number"
+          name="amount"
+          value={habit.amount}
+          onChange={(e) => updateHabit(e.target)}
+        />
+        <Input
+          value={habit.mainGoal}
+          name="mainGoal"
+          onChange={(e) => updateHabit(e.target)}
+        />
+        <Button onClick={onClick}>{title}</Button>
+        {/* <div>{JSON.stringify(habits)}</div> */}
+        <div>{JSON.stringify(habit)}</div>
+        <Button onClick={() => router.push("/allhabits")}>go to habits</Button>
+        <Error>{error}</Error>
+      </div>
+    </div>
+  );
+}

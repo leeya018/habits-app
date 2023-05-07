@@ -184,7 +184,7 @@ export const updateError = (payload) => {
     payload,
   };
 };
-export const addDidAmount = (habit) => async (dispatch) => {
+export const addDidAmount = (habit, amount) => async (dispatch) => {
   const dupHabit = { ...habit };
   const todayDate = getTodayDate();
   if (!dupHabit.amountCompletePerDay) dupHabit.amountCompletePerDay = {};
@@ -192,7 +192,7 @@ export const addDidAmount = (habit) => async (dispatch) => {
   const value = dupHabit.amountCompletePerDay[todayDate];
   if (value === undefined) dupHabit.amountCompletePerDay[todayDate] = 1;
   else {
-    dupHabit.amountCompletePerDay[todayDate] += 1;
+    dupHabit.amountCompletePerDay[todayDate] += amount;
   }
   console.log({ dupHabit });
   const urlUpdate = process.env.NEXT_PUBLIC_BASIC_URL + "/api/habit/update";

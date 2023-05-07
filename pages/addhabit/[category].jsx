@@ -14,6 +14,7 @@ import { v4 as uuidv4 } from "uuid";
 import Error from "components/habits/Error";
 import { useEffect } from "react";
 import AllHabits from "components/habits/allhabits";
+import HabitHandle from "components/habits/HabitHandle";
 
 export async function getServerSideProps(context) {
   const { category } = context.query;
@@ -23,6 +24,8 @@ export async function getServerSideProps(context) {
 }
 export default function AddHabit({ category }) {
   const router = useRouter();
+  const dispatch = useDispatch();
+
   const [habit, setHabit] = useState({
     name: "",
     description: "",
@@ -30,28 +33,17 @@ export default function AddHabit({ category }) {
     mainGoal: "",
     category,
   });
-  console.log(category);
-  const dispatch = useDispatch();
-  const { habits, error, chosenCategory } = useSelector(
-    (state) => state.habits
-  );
+
+  useEffect(() => {
+    dispatch(updateChosenCategory(category));
+  }, [category]);
+
   const updateHabit = ({ name, value }) => {
     dispatch(updateError());
 
     setHabit((prev) => ({ ...prev, [name]: value }));
   };
 
-  useEffect(() => {
-    dispatch(updateChosenCategory(category));
-  }, [category]);
-
-  const checkValidation = () => {
-    let keysLeft = Object.keys(habit).filter((key) => habit[key] === "");
-    console.log(keysLeft);
-    const isAllSet = keysLeft.length === 0;
-
-    return isAllSet;
-  };
   const addNewHabit = () => {
     if (checkValidation()) {
       const newHabit = {
@@ -68,37 +60,24 @@ export default function AddHabit({ category }) {
       dispatch(updateError("one of the fields is not set"));
     }
   };
+
+  const checkValidation = () => {
+    let keysLeft = Object.keys(habit).filter((key) => habit[key] === "");
+    console.log(keysLeft);
+    const isAllSet = keysLeft.length === 0;
+
+    return isAllSet;
+  };
+
   return (
-    <div className="flex justify-center">
-      <div className="flex flex-col">
-        <Title>NEW HABIT for : {category}</Title>
-        <Input
-          name="name"
-          value={habit.name}
-          onChange={(e) => updateHabit(e.target)}
-        />
-        <Input
-          name="description"
-          value={habit.description}
-          onChange={(e) => updateHabit(e.target)}
-        />
-        <Input
-          type="number"
-          name="amount"
-          value={habit.amount}
-          onChange={(e) => updateHabit(e.target)}
-        />
-        <Input
-          value={habit.mainGoal}
-          name="mainGoal"
-          onChange={(e) => updateHabit(e.target)}
-        />
-        <Button onClick={addNewHabit}>add new habit</Button>
-        {/* <div>{JSON.stringify(habits)}</div> */}
-        <div>{JSON.stringify(habit)}</div>
-        <Button onClick={() => router.push("/allhabits")}>go to habits</Button>
-        <Error>{error}</Error>
-      </div>
+    <div>
+      <HabitHandle
+        category={category}
+        onClick={addNewHabit}
+        updateHabit={updateHabit}
+        habit={habit}
+        title={"ADD HABIT"}
+      />
       <AllHabits category={category} />
     </div>
   );
