@@ -28,6 +28,21 @@ export default function AddHabit({ category }) {
 
   return (
     <div>
+      <Button
+        color="bg-gray-500"
+        onClick={() => {
+          router.back();
+        }}
+      >
+        go back
+      </Button>
+      <Button
+        onClick={() => {
+          router.push(`/addhabit/${category}`);
+        }}
+      >
+        add habit{" "}
+      </Button>
       <AllHabits category={category} />
     </div>
   );

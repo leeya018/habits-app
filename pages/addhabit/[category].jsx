@@ -71,6 +71,14 @@ export default function AddHabit({ category }) {
 
   return (
     <div>
+      <Button
+        color="bg-gray-500"
+        onClick={() => {
+          router.back();
+        }}
+      >
+        go back
+      </Button>
       <HabitHandle
         category={category}
         onClick={addNewHabit}

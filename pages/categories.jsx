@@ -38,19 +38,20 @@ export default function Categories({}) {
     dispatch(addCategory(name));
     setName("");
   };
-  const handleCategoryClick = (name) => {
-    dispatch(updateChosenCategory(name));
-    router.push(`/addhabit/${name}`);
-  };
+
   return (
     <div className="flex justify-center">
       <div className="flex flex-col">
         <Title>categories: </Title>
+
         <ul className="flex flex-col">
           {categories.map((category) => (
             <li
               key={category.name}
-              onClick={() => handleCategoryClick(category.name)}
+              onClick={() => {
+                dispatch(updateChosenCategory(category.name));
+                router.push(`/habits/${category.name}`);
+              }}
               className="font-bold p-2 border-2 bg-gray-300 hover:bg-gray-500"
             >
               {category.name}
