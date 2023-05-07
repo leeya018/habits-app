@@ -42,7 +42,13 @@ export default function Habit({ habit, showHandle = true }) {
           <ul>
             {Object.keys(amountCompletePerDay || {}).map((key) => (
               <li key={key}>
-                <div>{`${key} => ${amountCompletePerDay[key]}`}</div>
+                <div
+                  className={`${
+                    amount > amountCompletePerDay[key]
+                      ? "bg-red-400"
+                      : "bg-green-500"
+                  }`}
+                >{`${key} => ${amountCompletePerDay[key]}`}</div>
               </li>
             ))}
           </ul>
