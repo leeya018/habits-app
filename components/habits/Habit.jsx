@@ -4,6 +4,7 @@ import Button from "./Button";
 import { addDidAmount, deleteHabit, editHabit } from "actions";
 import Title from "./Title";
 import { useRouter } from "next/router";
+import ItemCompleted from "./ItemCompleted";
 
 export default function Habit({ habit, showHandle = true }) {
   const {
@@ -29,8 +30,11 @@ export default function Habit({ habit, showHandle = true }) {
     dispatch(addDidAmount(habit, amount));
   };
   return (
-    <div className="flex justify-center">
-      <div className="flex flex-col">
+    <div
+      className="flex justify-center"
+      onClick={() => router.push(`/habit/${habit._id}`)}
+    >
+      <div className="flex flex-col border-2 border-black rounded-md">
         <div>id : {_id}</div>
         <div>name : {name}</div>
         <div>description : {description}</div>
@@ -42,13 +46,18 @@ export default function Habit({ habit, showHandle = true }) {
           <ul>
             {Object.keys(amountCompletePerDay || {}).map((key) => (
               <li key={key}>
-                <div
+                <ItemCompleted
+                  item={amountCompletePerDay[key]}
+                  date={key}
+                  destinationAmount={amount}
+                />
+                {/* <div
                   className={`${
                     amount > amountCompletePerDay[key]
                       ? "bg-red-400"
                       : "bg-green-500"
                   }`}
-                >{`${key} => ${amountCompletePerDay[key]}`}</div>
+                >{`${key} => ${amountCompletePerDay[key]}`}</div> */}
               </li>
             ))}
           </ul>

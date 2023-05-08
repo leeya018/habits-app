@@ -9,17 +9,6 @@ const geItem = (arr, id) => {
   return arr.filter((item) => item.id === id)[0];
 };
 
-// chekc how do I get the id from the props .
-
-const id = "from server";
-
-//  how to implemetn this.
-const getServerFromProps = () => {
-  const id = router.params.id;
-  return {
-    props: { id },
-  };
-};
 export default function Handle({ id }) {
   const router = useRouter();
   const { habits } = useSelector((state) => state.habits);
