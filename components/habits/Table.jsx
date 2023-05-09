@@ -2,7 +2,7 @@ import { useState } from "react";
 import Input from "./Input";
 import * as UTIL from "@/util";
 
-function Table({ items, updateTodaysHabit }) {
+function Table({ items, updateTodaysHabit, totalAmount }) {
   return (
     <table className="border-4 ">
       <thead>
@@ -10,6 +10,7 @@ function Table({ items, updateTodaysHabit }) {
           <th className="border-2 ">key</th>
           <th className="border-2 ">date</th>
           <th className="border-2 ">amount</th>
+          <th className="border-2 ">percent</th>
           <th className="border-2 ">improve</th>
           <th className="border-2 ">reserve</th>
           <th className="border-2 ">learn</th>
@@ -23,6 +24,7 @@ function Table({ items, updateTodaysHabit }) {
               key={index}
               index={index}
               item={item}
+              totalAmount={totalAmount}
               updateTodaysHabit={updateTodaysHabit}
             />
           );
@@ -32,7 +34,7 @@ function Table({ items, updateTodaysHabit }) {
   );
 }
 
-function TableRow({ index, item, updateTodaysHabit }) {
+function TableRow({ index, item, updateTodaysHabit, totalAmount }) {
   const [texts, setTexts] = useState({
     improve: item.improve,
     reserve: item.reserve,
@@ -42,12 +44,22 @@ function TableRow({ index, item, updateTodaysHabit }) {
   const handleChange = ({ name, value }) => {
     setTexts({ ...texts, [name]: value });
   };
+  console.log(totalAmount, item.amount);
   return (
-    <tr className="border-4 " key={index}>
+    <tr
+      className={`border-4 ${
+        totalAmount <= item.amount ? "bg-green-500" : "bg-white"
+      }`}
+      key={index}
+    >
       <td className="border-4 ">{index + 1}</td>
       <td className="border-4 ">{item.date}</td>
 
       <td className="border-4 "> {item.amount}</td>
+      <td className="border-4 ">
+        {" "}
+        {((item.amount / totalAmount) * 100).toFixed(0)}%
+      </td>
       <td className="border-4 ">
         <Input
           name="improve"

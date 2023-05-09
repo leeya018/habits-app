@@ -100,6 +100,7 @@ export default function Habit({ habitItem, showHandle = true }) {
                 <Title>traces </Title>
                 <ul className="flex flex-col">
                   <Table
+                    totalAmount={habit.amount}
                     items={[...habit.traces.reverse()] || []}
                     updateTodaysHabit={updateTodaysHabit}
                   />
