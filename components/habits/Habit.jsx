@@ -41,27 +41,7 @@ export default function Habit({ habit, showHandle = true }) {
         <div>amount : {amount}</div>
         <div>createdAt : {createdAt}</div>
         <div>mainGoal : {mainGoal}</div>
-        <div>
-          <Title>amountCompletePerDay </Title>
-          <ul>
-            {Object.keys(amountCompletePerDay || {}).map((key) => (
-              <li key={key}>
-                <ItemCompleted
-                  item={amountCompletePerDay[key]}
-                  date={key}
-                  destinationAmount={amount}
-                />
-                {/* <div
-                  className={`${
-                    amount > amountCompletePerDay[key]
-                      ? "bg-red-400"
-                      : "bg-green-500"
-                  }`}
-                >{`${key} => ${amountCompletePerDay[key]}`}</div> */}
-              </li>
-            ))}
-          </ul>
-        </div>
+
         <Button onClick={removeHabit}>delete</Button>
 
         {/* <button>-</button> */}

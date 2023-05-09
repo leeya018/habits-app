@@ -13,13 +13,6 @@ import { useRouter } from "next/router";
 import Error from "components/habits/Error";
 import { useEffect } from "react";
 
-// export default function getServerSideProps(){
-//     const res =
-//     return {
-//         props : {categories}
-//     }
-// }
-
 // getCategories
 export default function Categories({}) {
   const [name, setName] = useState("");

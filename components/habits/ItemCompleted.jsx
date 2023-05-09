@@ -5,6 +5,7 @@ import { addDidAmount, deleteHabit, editHabit } from "actions";
 import Title from "./Title";
 import { useRouter } from "next/router";
 import Input from "./Input";
+import { getTodayDate } from "util";
 
 export default function ItemCompleted({ item, date, destinationAmount }) {
   const dispatch = useDispatch();
@@ -21,29 +22,34 @@ export default function ItemCompleted({ item, date, destinationAmount }) {
   const updateItemComp = ({ name, value }) => {
     setItemComp((prev) => ({ ...prev, [name]: value }));
   };
-
+  const updateItem = () => {};
+  // console.log(getTodayDate(), date);
   return (
-    <div className="flex flex-col justify-between">
-      <div>date : {date}</div>
-      <div>amount : {destinationAmount}</div>
+    <div className="flex justify-between">
+      <div>{date}</div>
+      <div>destination : {destinationAmount}</div>
       <Input
+        disabled={getTodayDate() !== date}
         type="text"
         name="improve"
         value={itemComp.improve}
         onChange={(e) => updateItemComp(e.target)}
       />
       <Input
+        disabled={getTodayDate() !== date}
         type="text"
         name="reserve"
         value={itemComp.reserve}
         onChange={(e) => updateItemComp(e.target)}
       />
       <Input
+        disabled={getTodayDate() !== date}
         type="text"
         name="learn"
         value={itemComp.learn}
         onChange={(e) => updateItemComp(e.target)}
       />
+      <Button onClick={updateItem}>update</Button>
     </div>
   );
 }
