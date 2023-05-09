@@ -22,27 +22,27 @@ export default function ItemCompleted({ item, date, destinationAmount }) {
     setItemComp((prev) => ({ ...prev, [name]: value }));
   };
   const updateItem = () => {};
-  // console.log(UTIL.getTodayDate(), date);
+  // console.log(UTIL.getDateStr(), date);
   return (
     <div className="flex justify-between">
       <div>{date}</div>
       <div>destination : {destinationAmount}</div>
       <Input
-        disabled={UTIL.getTodayDate() !== date}
+        disabled={UTIL.dateAreEquals(date, new Date())}
         type="text"
         name="improve"
         value={itemComp.improve}
         onChange={(e) => updateItemComp(e.target)}
       />
       <Input
-        disabled={UTIL.getTodayDate() !== date}
+        disabled={UTIL.dateAreEquals(date, new Date())}
         type="text"
         name="reserve"
         value={itemComp.reserve}
         onChange={(e) => updateItemComp(e.target)}
       />
       <Input
-        disabled={UTIL.getTodayDate() !== date}
+        disabled={UTIL.dateAreEquals(date, new Date())}
         type="text"
         name="learn"
         value={itemComp.learn}

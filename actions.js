@@ -183,7 +183,7 @@ export const updateError = (payload) => {
 };
 const createNewTrace = (amountToAdd) => {
   return {
-    date: UTIL.getTodayDate(),
+    date: new Date(),
     amount: 1,
     improve: "",
     reserve: "",
@@ -198,7 +198,7 @@ export const addDidAmount = (habit, amountToAdd) => async (dispatch) => {
     dupHabit.traces.push(createNewTrace(amountToAdd));
   } else {
     const len = dupHabit.traces.length;
-    if (dupHabit.traces[len - 1].date === UTIL.getTodayDate()) {
+    if (UTIL.dateAreEquals(dupHabit.traces[len - 1].date, new Date())) {
       dupHabit.traces[len - 1].amount += amountToAdd;
     }
   }

@@ -24,7 +24,7 @@ export default function Habit({ habitItem, showHandle = true }) {
 
   const createNewTrace = (amountToAdd) => {
     return {
-      date: UTIL.getTodayDate(),
+      date: new Date(),
       amount: 1,
       improve: "",
       reserve: "",
@@ -39,7 +39,7 @@ export default function Habit({ habitItem, showHandle = true }) {
       dupHabit.traces.push(createNewTrace());
     } else {
       const len = dupHabit.traces.length;
-      if (dupHabit.traces[len - 1].date === UTIL.getTodayDate()) {
+      if (UTIL.dateAreEquals(dupHabit.traces[len - 1].date, new Date())) {
         const newAmount = dupHabit.traces[len - 1].amount + amountToAdd;
         if (newAmount >= 0) {
           dupHabit.traces[len - 1].amount = newAmount;
