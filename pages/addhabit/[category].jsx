@@ -46,6 +46,7 @@ export default function AddHabit({ category }) {
         category,
         createdAt: new Date().toDateString(),
         traces: [],
+        // traces: [{ date: new Date().toDateString() }],
       };
       console.log({ newHabit });
       dispatch(ACTION.addHabit(newHabit));

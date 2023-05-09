@@ -37,13 +37,21 @@ export default function Habit({ habit, showHandle = true }) {
         </div>
 
         {router.pathname.includes("/habit/") ? (
-          <div className="flex justify-center">
-            <Button width={"w-full"} onClick={() => addAmountForDid(-1)}>
-              -
-            </Button>
-            <Button width={"w-full"} onClick={() => addAmountForDid(1)}>
-              +
-            </Button>
+          <div>
+            <div className="flex justify-center">
+              <Button width={"w-full"} onClick={() => addAmountForDid(-1)}>
+                -
+              </Button>
+              <Button width={"w-full"} onClick={() => addAmountForDid(1)}>
+                +
+              </Button>
+            </div>
+            <div>
+              <Title>traces </Title>
+              <ul className="flex flex-col">
+                <TableComponent items={habit.traces || []} />
+              </ul>
+            </div>
           </div>
         ) : (
           <>
@@ -55,5 +63,33 @@ export default function Habit({ habit, showHandle = true }) {
         )}
       </div>
     </div>
+  );
+}
+function TableComponent({ items }) {
+  return (
+    <table className="border-4 ">
+      <thead>
+        <tr>
+          <th className="border-2 ">date</th>
+          <th>amount</th>
+          <th>improve</th>
+          <th>reserve</th>
+          <th>learn</th>
+        </tr>
+      </thead>
+      <tbody>
+        {items.map((item, index) => (
+          <tr className="border-4 " key={index}>
+            <td className="border-4 ">{index + 1}</td>
+            <td className="border-4 ">{item.date}</td>
+            <td className="border-4 "> {item.destinationAmount}</td>
+            <td className="border-4 "> {item.amount}</td>
+            <td className="border-4 "> {item.improve}</td>
+            <td className="border-4 "> {item.reserve}</td>
+            <td className="border-4 "> {item.learn}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
   );
 }

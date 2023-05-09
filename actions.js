@@ -164,7 +164,7 @@ export const editHabit = (habit) => async (dispatch, getState) => {
 
   try {
     dispatch({
-      type: types.EDIT_HABIT,
+      type: types.EDIT_HABIT, //not doign a thing  - no therer e
     });
   } catch (error) {
     dispatch({
@@ -181,10 +181,9 @@ export const updateError = (payload) => {
     payload,
   };
 };
-const createNewTrace = () => {
+const createNewTrace = (amountToAdd) => {
   return {
     date: UTIL.getTodayDate(),
-    destinationAmount: 0,
     amount: 0,
     improve: "",
     reserve: "",
@@ -194,39 +193,23 @@ const createNewTrace = () => {
 
 export const addDidAmount = (habit, amountToAdd) => async (dispatch) => {
   const dupHabit = { ...habit };
-  dupHabit.goal = "lee";
   if (!dupHabit.traces) {
     dupHabit.traces = [];
-    dupHabit.traces.push(createNewTrace());
+  }
+  dupHabit.traces.push(createNewTrace(amountToAdd));
+  try {
+    const data = await API.editHabit(dupHabit);
+    dispatch(getHabitsByCategory(habit.category));
     console.log({ dupHabit });
-    // const lastTrace = dupHabit.slice(-1)[0];
-    // if (!lastTrace) dupHabit.traces = createNewTrace();
-    // console.log(dupHabit.traces[todayDate]);
-    // const value = dupHabit.traces[todayDate];
-    // if (value === undefined) dupHabit.traces[todayDate] = 1;
-    // else {
-    //   dupHabit.traces[todayDate] += amountToAdd;
-    // }
-    // console.log({ dupHabit });
-    const urlUpdate = process.env.NEXT_PUBLIC_BASIC_URL + "/api/habit/update";
-    const urlGet = process.env.NEXT_PUBLIC_BASIC_URL + "/api/habit";
-    try {
-      // const resPost = await axios.post(urlUpdate, dupHabit);
-      await API.editHabit(dupHabit);
-      const resGet = await axios.get(urlGet, {
-        params: { category: habit.category },
-      });
-
-      dispatch({
-        type: types.GET_HABITS,
-        payload: resGet.data,
-      });
-    } catch (error) {
-      dispatch({
-        type: types.UPDATE_ERROR,
-        payload: error.message,
-      });
-    }
+    dispatch({
+      type: types.UPDATE_HABIT,
+      payload: dupHabit,
+    });
+  } catch (error) {
+    dispatch({
+      type: types.UPDATE_ERROR,
+      payload: error.message,
+    });
   }
 };
 export const addCategory = (name) => async (dispatch, getState) => {
@@ -236,9 +219,6 @@ export const addCategory = (name) => async (dispatch, getState) => {
       throw new Error("category must be set");
     }
     const res = await axios.post(url, { name });
-    // dispatch({
-    //   type: types.ADD_CATEGORY,
-    // });
   } catch (error) {
     dispatch({
       type: types.UPDATE_ERROR,

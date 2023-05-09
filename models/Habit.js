@@ -27,7 +27,7 @@ const HabitSchema = new mongoose.Schema({
   },
   traces: {
     type: [Object],
-    required: true,
+    required: false,
     default: [],
   },
 });
