@@ -21,14 +21,14 @@ const HabitSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  amountCompletePerDay: {
-    type: Object,
-    required: true,
-    default: {},
-  },
   category: {
     type: String,
     required: true,
+  },
+  traces: {
+    type: [Object],
+    required: true,
+    default: [],
   },
 });
 

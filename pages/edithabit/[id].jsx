@@ -7,7 +7,7 @@ import axios from "axios";
 import HabitHandle from "components/habits/HabitHandle";
 import Input from "components/habits/Input";
 import Title from "components/habits/Title";
-import { editHabit, getHabit } from "lib/api";
+import { editHabitApi, getHabit } from "lib/api";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
@@ -38,7 +38,7 @@ export default function Edit({ habitItem }) {
 
   const editHabitHandle = async () => {
     if (checkValidation()) {
-      await editHabit(habit);
+      await editHabitApi(habit);
 
       dispatch(getHabitsByCategory(habit.category));
       router.push(`/habits/${habit.category}`);

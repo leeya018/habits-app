@@ -2,6 +2,7 @@ import { createThrill, randLeft } from "@/util";
 import * as types from "./types";
 import axios from "axios";
 import { getTodayDate } from "@/util";
+import { editHabitApi } from "lib/api";
 
 export const addThrill = () => {
   const thrill = createThrill();
@@ -184,34 +185,52 @@ export const updateError = (payload) => {
     payload,
   };
 };
-export const addDidAmount = (habit, amount) => async (dispatch) => {
-  const dupHabit = { ...habit };
-  const todayDate = getTodayDate();
-  if (!dupHabit.amountCompletePerDay) dupHabit.amountCompletePerDay = {};
-  console.log(dupHabit.amountCompletePerDay[todayDate]);
-  const value = dupHabit.amountCompletePerDay[todayDate];
-  if (value === undefined) dupHabit.amountCompletePerDay[todayDate] = 1;
-  else {
-    dupHabit.amountCompletePerDay[todayDate] += amount;
-  }
-  console.log({ dupHabit });
-  const urlUpdate = process.env.NEXT_PUBLIC_BASIC_URL + "/api/habit/update";
-  const urlGet = process.env.NEXT_PUBLIC_BASIC_URL + "/api/habit";
-  try {
-    const resPost = await axios.post(urlUpdate, dupHabit);
-    const resGet = await axios.get(urlGet, {
-      params: { category: habit.category },
-    });
+const createNewTrace = () => {
+  return {
+    date: getTodayDate(),
+    destinationAmount: 0,
+    amount: 0,
+    improve: "",
+    reserve: "",
+    learn: "",
+  };
+};
 
-    dispatch({
-      type: types.GET_HABITS,
-      payload: resGet.data,
-    });
-  } catch (error) {
-    dispatch({
-      type: types.UPDATE_ERROR,
-      payload: error.message,
-    });
+export const addDidAmount = (habit, amountToAdd) => async (dispatch) => {
+  const dupHabit = { ...habit };
+  dupHabit.goal = "lee";
+  if (!dupHabit.traces) {
+    dupHabit.traces = [];
+    dupHabit.traces.push(createNewTrace());
+    console.log({ dupHabit });
+    // const lastTrace = dupHabit.slice(-1)[0];
+    // if (!lastTrace) dupHabit.traces = createNewTrace();
+    // console.log(dupHabit.traces[todayDate]);
+    // const value = dupHabit.traces[todayDate];
+    // if (value === undefined) dupHabit.traces[todayDate] = 1;
+    // else {
+    //   dupHabit.traces[todayDate] += amountToAdd;
+    // }
+    // console.log({ dupHabit });
+    const urlUpdate = process.env.NEXT_PUBLIC_BASIC_URL + "/api/habit/update";
+    const urlGet = process.env.NEXT_PUBLIC_BASIC_URL + "/api/habit";
+    try {
+      // const resPost = await axios.post(urlUpdate, dupHabit);
+      await editHabitApi(dupHabit);
+      const resGet = await axios.get(urlGet, {
+        params: { category: habit.category },
+      });
+
+      dispatch({
+        type: types.GET_HABITS,
+        payload: resGet.data,
+      });
+    } catch (error) {
+      dispatch({
+        type: types.UPDATE_ERROR,
+        payload: error.message,
+      });
+    }
   }
 };
 export const addCategory = (name) => async (dispatch, getState) => {

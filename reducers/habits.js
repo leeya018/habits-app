@@ -10,7 +10,7 @@ const habitInitial = {
     //   mainGoal: "232",
     //   id: "f6ae5557-4e85-4d68-8682-ed08b7a1ea7f",
     //   createdAt: new Date().toDateString(),
-    //   amountCompletePerDay: {},
+    //   traces: {},
     //   category: "category1",
     // },
   ],
@@ -45,8 +45,8 @@ const habitReducer = (state = habitInitial, { type, payload }) => {
     //   newHabits = state.habits.map((habit) => {
     //     if (habit.id === payload) {
     //       let dupHabit = { ...habit };
-    //       const value = dupHabit.amountCompletePerDay[habit.createdAt];
-    //       dupHabit.amountCompletePerDay[habit.createdAt] =
+    //       const value = dupHabit.traces[habit.createdAt];
+    //       dupHabit.traces[habit.createdAt] =
     //         value === undefined ? 0 : value + 1;
     //       return dupHabit;
     //     } else {

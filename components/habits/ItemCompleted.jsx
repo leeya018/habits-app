@@ -50,6 +50,7 @@ export default function ItemCompleted({ item, date, destinationAmount }) {
         onChange={(e) => updateItemComp(e.target)}
       />
       <Button onClick={updateItem}>update</Button>
+      <TableComponent />
     </div>
   );
 }

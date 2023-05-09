@@ -50,7 +50,7 @@ export default function AddHabit({ category }) {
         ...habit,
         category,
         createdAt: new Date().toDateString(),
-        amountCompletePerDay: {},
+        traces: [],
       };
       console.log({ newHabit });
       dispatch(addHabit(newHabit));
