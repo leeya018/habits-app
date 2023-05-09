@@ -1,16 +1,16 @@
-import { createThrill, randLeft } from "@/util";
+import * as UTIL from "@/util";
 import * as types from "./types";
 import axios from "axios";
-import { getTodayDate } from "@/util";
+
 import * as API from "lib/api";
 
 export const addThrill = () => {
-  const thrill = createThrill();
+  const thrill = UTIL.createThrill();
 
   const thrillItem = {
     thrill,
     result: Math.floor(Math.abs(eval(thrill))),
-    position: { top: 0, left: randLeft() },
+    position: { top: 0, left: UTIL.randLeft() },
   };
 
   return {
@@ -67,6 +67,13 @@ export const updateStop = (payload) => (dispatch, getState) => {
     payload,
   });
 };
+export const getHabits = (category) => async (dispatch, getState) => {
+  const habits = await API.getHabits(category);
+  dispatch({
+    type: types.GET_HABITS,
+    payload: habits,
+  });
+};
 export const clearThrills = () => {
   return {
     type: types.CLEAR_THRILLS,
@@ -121,35 +128,24 @@ export const resetGame = () => {
 export const addHabit = (habit) => async (dispatch) => {
   const url = process.env.NEXT_PUBLIC_BASIC_URL + `/api/habit/add`;
   try {
-    const res = await axios.post(url, { habit });
-    // dispatch({
-    //   type: types.ADD_HABIT,
-    //   habit,
-    // });
+    const newHabit = await API.addHabit(habit);
+    dispatch(getHabitsByCategory(habit.category));
   } catch (error) {
+    console.log("addHabit error: ");
+    console.log(error);
     dispatch({
       type: types.UPDATE_ERROR,
-      payload: error.message,
+      payload: error.message + " ====> " + error.response?.data,
     });
   }
 };
 
 export const deleteHabit = (id, category) => async (dispatch) => {
-  const urlDelete = process.env.NEXT_PUBLIC_BASIC_URL + "/api/habit/remove";
-  const urlGet = process.env.NEXT_PUBLIC_BASIC_URL + "/api/habit";
-
   try {
-    const resDelete = await axios.delete(urlDelete, {
-      params: { id },
-    });
-    const resGet = await axios.get(urlGet, {
-      params: { category },
-    });
-    dispatch({
-      type: types.GET_HABITS,
-      payload: resGet.data,
-    });
+    const isDeleted = await API.deleteHabit(id);
+    dispatch(getHabits(category));
   } catch (error) {
+    console.log(error.message);
     dispatch({
       type: types.UPDATE_ERROR,
       payload: error.message,
@@ -163,8 +159,8 @@ export const updateChosenCategory = (categoryName) => {
   };
 };
 export const editHabit = (habit) => async (dispatch, getState) => {
-  const url = process.env.NEXT_PUBLIC_BASIC_URL + `/api/habit/update`;
-  const res = await axios.post(url, habit);
+  await API.editHabit(habit);
+  dispatch(getHabitsByCategory(habit.category));
 
   try {
     dispatch({
@@ -187,7 +183,7 @@ export const updateError = (payload) => {
 };
 const createNewTrace = () => {
   return {
-    date: getTodayDate(),
+    date: UTIL.getTodayDate(),
     destinationAmount: 0,
     amount: 0,
     improve: "",

@@ -1,5 +1,6 @@
 import * as Action from "actions";
 import axios from "axios";
+import Button from "components/habits/Button";
 import HabitHandle from "components/habits/HabitHandle";
 import Input from "components/habits/Input";
 import Title from "components/habits/Title";
@@ -35,7 +36,6 @@ export default function Edit({ habitItem }) {
   const editHabitHandle = async () => {
     if (checkValidation()) {
       dispatch(Action.editHabit(habit));
-      dispatch(Action.getHabitsByCategory(habit.category));
       router.push(`/habits/${habit.category}`);
     } else {
       dispatch(Action.updateError("one of the fields is not set"));
@@ -51,6 +51,14 @@ export default function Edit({ habitItem }) {
   };
   return (
     <div>
+      <Button
+        color="bg-gray-500"
+        onClick={() => {
+          router.back();
+        }}
+      >
+        go back
+      </Button>
       <HabitHandle
         category={habit.category}
         onClick={editHabitHandle}

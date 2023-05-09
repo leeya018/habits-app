@@ -38,6 +38,10 @@ export default function Categories({}) {
               key={category.name}
               onClick={() => {
                 dispatch(Action.updateChosenCategory(category.name));
+                // router.push({
+                //   pathname: "habits",
+                //   query: "category=" + category.name,
+                // });
                 router.push(`/habits/${category.name}`);
               }}
               className="font-bold p-2 border-2 bg-gray-300 hover:bg-gray-500"

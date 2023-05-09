@@ -29,16 +29,21 @@ export default function HabitItem({ habit }) {
   //   }));
   // };
   return (
-    <div className="flex justify-center">
-      <div className="flex flex-col">
-        <Title>HABIT</Title>
-        {/* <div>{JSON.stringify(habit)}</div> */}
-        <Habit habit={habit} />
-        <div>
-          <Title>traces </Title>
-          <ul className="flex flex-col">
-            {/* <TableComponent items={createItems()} /> */}
-          </ul>
+    <div>
+      <Button onClick={() => router.back()}>back </Button>
+      <Button onClick={() => router.push("/categories")}>categories </Button>
+
+      <div className="flex justify-center">
+        <div className="flex flex-col">
+          <Title>HABIT</Title>
+          {/* <div>{JSON.stringify(habit)}</div> */}
+          <Habit habit={habit} />
+          <div>
+            <Title>traces </Title>
+            <ul className="flex flex-col">
+              {/* <TableComponent items={createItems()} /> */}
+            </ul>
+          </div>
         </div>
       </div>
     </div>

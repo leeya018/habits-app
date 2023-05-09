@@ -4,7 +4,7 @@ import Button from "./Button";
 import Title from "./Title";
 import { useRouter } from "next/router";
 import Input from "./Input";
-import { getTodayDate } from "util";
+import * as UTIL from "@/util";
 
 export default function ItemCompleted({ item, date, destinationAmount }) {
   const dispatch = useDispatch();
@@ -22,27 +22,27 @@ export default function ItemCompleted({ item, date, destinationAmount }) {
     setItemComp((prev) => ({ ...prev, [name]: value }));
   };
   const updateItem = () => {};
-  // console.log(getTodayDate(), date);
+  // console.log(UTIL.getTodayDate(), date);
   return (
     <div className="flex justify-between">
       <div>{date}</div>
       <div>destination : {destinationAmount}</div>
       <Input
-        disabled={getTodayDate() !== date}
+        disabled={UTIL.getTodayDate() !== date}
         type="text"
         name="improve"
         value={itemComp.improve}
         onChange={(e) => updateItemComp(e.target)}
       />
       <Input
-        disabled={getTodayDate() !== date}
+        disabled={UTIL.getTodayDate() !== date}
         type="text"
         name="reserve"
         value={itemComp.reserve}
         onChange={(e) => updateItemComp(e.target)}
       />
       <Input
-        disabled={getTodayDate() !== date}
+        disabled={UTIL.getTodayDate() !== date}
         type="text"
         name="learn"
         value={itemComp.learn}

@@ -1,9 +1,4 @@
-import {
-  addHabit,
-  getHabitsByCategory,
-  updateChosenCategory,
-  updateError,
-} from "actions";
+import * as ACTION from "actions";
 import Button from "components/habits/Button";
 import Input from "components/habits/Input";
 import Title from "components/habits/Title";
@@ -35,11 +30,11 @@ export default function AddHabit({ category }) {
   });
 
   useEffect(() => {
-    dispatch(updateChosenCategory(category));
+    dispatch(ACTION.updateChosenCategory(category));
   }, [category]);
 
   const updateHabit = ({ name, value }) => {
-    dispatch(updateError());
+    dispatch(ACTION.updateError());
 
     setHabit((prev) => ({ ...prev, [name]: value }));
   };
@@ -53,11 +48,10 @@ export default function AddHabit({ category }) {
         traces: [],
       };
       console.log({ newHabit });
-      dispatch(addHabit(newHabit));
-      dispatch(getHabitsByCategory(category));
+      dispatch(ACTION.addHabit(newHabit));
       setHabit({ name: "", description: "", amount: "", mainGoal: "" });
     } else {
-      dispatch(updateError("one of the fields is not set"));
+      dispatch(ACTION.updateError("one of the fields is not set"));
     }
   };
 

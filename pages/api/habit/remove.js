@@ -7,6 +7,8 @@ handler.delete(async (req, res) => {
   const { id } = req.query;
   try {
     const doc = await DB.removeHabit(id);
+    console.log("removeHabit");
+    console.log(doc);
     if (doc === null) {
       throw new Error("no doc is found");
     }
