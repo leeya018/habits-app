@@ -35,12 +35,24 @@ export default function Habit({ habit, showHandle = true }) {
           <div>createdAt : {createdAt}</div>
           <div>mainGoal : {mainGoal}</div>
         </div>
-        <Button onClick={removeHabit}>delete</Button>
-        <Button onClick={() => addAmountForDid(-1)}>-</Button>
-        <Button onClick={() => addAmountForDid(1)}>+</Button>
-        <Button onClick={() => router.push(`/edithabit/${habit._id}`)}>
-          edit
-        </Button>
+
+        {router.pathname.includes("/habit/") ? (
+          <div className="flex justify-center">
+            <Button width={"w-full"} onClick={() => addAmountForDid(-1)}>
+              -
+            </Button>
+            <Button width={"w-full"} onClick={() => addAmountForDid(1)}>
+              +
+            </Button>
+          </div>
+        ) : (
+          <>
+            <Button onClick={() => router.push(`/edithabit/${habit._id}`)}>
+              edit
+            </Button>
+            <Button onClick={removeHabit}>delete</Button>
+          </>
+        )}
       </div>
     </div>
   );
