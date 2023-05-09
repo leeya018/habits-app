@@ -2,14 +2,16 @@ import Button from "components/habits/Button";
 import Habit from "components/habits/Habit";
 import ItemCompleted from "components/habits/ItemCompleted";
 import Title from "components/habits/Title";
-import { getHabit } from "lib/api";
+import * as API from "lib/api";
 import { useRouter } from "next/router";
 
 export const getServerSideProps = async (context) => {
   const id = context.query.id;
   console.log("================");
   console.log({ id });
-  const habit = await getHabit(id);
+  const habit = await API.getHabit(id);
+  console.log("getServerSideProps");
+  console.log(habit);
   return {
     props: { habit },
   };

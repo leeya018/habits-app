@@ -1,12 +1,12 @@
 import nc from "next-connect";
 import fs from "fs";
-import { removeHabit } from "lib/db";
+import * as DB from "lib/db";
 
 const handler = nc({ attachParams: true });
 handler.delete(async (req, res) => {
   const { id } = req.query;
   try {
-    const doc = await removeHabit(id);
+    const doc = await DB.removeHabit(id);
     if (doc === null) {
       throw new Error("no doc is found");
     }

@@ -1,7 +1,7 @@
 import { useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Button from "./Button";
-import { addDidAmount, deleteHabit, editHabit } from "actions";
+import * as Action from "actions";
 import Title from "./Title";
 import { useRouter } from "next/router";
 import ItemCompleted from "./ItemCompleted";
@@ -14,12 +14,12 @@ export default function Habit({ habit, showHandle = true }) {
   // console.log(habits);
   // console.log(habit);
   const removeHabit = () => {
-    dispatch(deleteHabit(_id, habit.category));
+    dispatch(Action.deleteHabit(_id, habit.category));
   };
   // console.log(habits, createdAt);
   const addAmountForDid = (amountToAdd) => {
     console.log({ habit });
-    dispatch(addDidAmount(habit, amountToAdd));
+    dispatch(Action.addDidAmount(habit, amountToAdd));
   };
   return (
     <div className="flex justify-center">

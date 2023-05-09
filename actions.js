@@ -2,7 +2,7 @@ import { createThrill, randLeft } from "@/util";
 import * as types from "./types";
 import axios from "axios";
 import { getTodayDate } from "@/util";
-import { editHabitApi } from "lib/api";
+import * as API from "lib/api";
 
 export const addThrill = () => {
   const thrill = createThrill();
@@ -216,7 +216,7 @@ export const addDidAmount = (habit, amountToAdd) => async (dispatch) => {
     const urlGet = process.env.NEXT_PUBLIC_BASIC_URL + "/api/habit";
     try {
       // const resPost = await axios.post(urlUpdate, dupHabit);
-      await editHabitApi(dupHabit);
+      await API.editHabit(dupHabit);
       const resGet = await axios.get(urlGet, {
         params: { category: habit.category },
       });

@@ -1,13 +1,13 @@
 import nc from "next-connect";
 import fs from "fs";
-import { getHabit } from "lib/db";
+import * as DB from "lib/db";
 
 const handler = nc({ attachParams: true });
 handler.get(async (req, res) => {
   console.log(req.query);
   const { id } = req.query;
   try {
-    const habit = await getHabit(id);
+    const habit = await DB.getHabit(id);
     if (!habit) {
       throw new Error("habit is not on db");
     }

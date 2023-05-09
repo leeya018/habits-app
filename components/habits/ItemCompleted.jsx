@@ -1,7 +1,6 @@
 import { useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Button from "./Button";
-import { addDidAmount, deleteHabit, editHabit } from "actions";
 import Title from "./Title";
 import { useRouter } from "next/router";
 import Input from "./Input";

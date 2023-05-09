@@ -1,9 +1,4 @@
-import {
-  addCategory,
-  getCategories,
-  updateChosenCategory,
-  updateError,
-} from "actions";
+import * as Action from "actions";
 import Button from "components/habits/Button";
 import Title from "components/habits/Title";
 import Input from "components/habits/Input";
@@ -23,12 +18,12 @@ export default function Categories({}) {
 
   useEffect(() => {
     if (!name) {
-      dispatch(getCategories());
+      dispatch(Action.getCategories());
     }
   }, [name]);
 
   const handleAdd = () => {
-    dispatch(addCategory(name));
+    dispatch(Action.addCategory(name));
     setName("");
   };
 
@@ -42,7 +37,7 @@ export default function Categories({}) {
             <li
               key={category.name}
               onClick={() => {
-                dispatch(updateChosenCategory(category.name));
+                dispatch(Action.updateChosenCategory(category.name));
                 router.push(`/habits/${category.name}`);
               }}
               className="font-bold p-2 border-2 bg-gray-300 hover:bg-gray-500"
@@ -57,7 +52,7 @@ export default function Categories({}) {
             value={name}
             onChange={(e) => {
               setName(e.target.value);
-              dispatch(updateError(""));
+              dispatch(Action.updateError(""));
             }}
           />
           <Button onClick={handleAdd}>add</Button>

@@ -1,9 +1,4 @@
-import {
-  addHabit,
-  getHabitsByCategory,
-  updateChosenCategory,
-  updateError,
-} from "actions";
+import * as Action from "actions";
 import Button from "components/habits/Button";
 import Input from "components/habits/Input";
 import Title from "components/habits/Title";

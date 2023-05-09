@@ -1,4 +1,4 @@
-import { addHabit } from "actions";
+import * as Action from "actions";
 import Button from "components/habits/Button";
 import Title from "components/habits/Title";
 import { useRouter } from "next/router";
@@ -20,7 +20,7 @@ export default function Handle({ id }) {
   };
 
   const updateHabitHandle = () => {
-    dispatch(update(newHabit));
+    dispatch(Action.editHabit(newHabit));
   };
   return (
     <div className="flex justify-center">

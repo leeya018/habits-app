@@ -1,4 +1,4 @@
-import { getHabitsByCategory } from "actions";
+import * as Action from "actions";
 import Button from "components/habits/Button";
 import Habit from "components/habits/Habit";
 import { useRouter } from "next/router";
@@ -12,7 +12,7 @@ export default function AllHabits({ category }) {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getHabitsByCategory(category));
+    dispatch(Action.getHabitsByCategory(category));
   }, []);
 
   console.log("===================HABITS=====");

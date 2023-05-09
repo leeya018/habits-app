@@ -1,9 +1,9 @@
 import nc from "next-connect";
-import { getCategories } from "lib/db";
+import * as DB from "lib/db";
 
 const handler = nc({ attachParams: true });
 handler.get(async (req, res) => {
-  const data = await getCategories();
+  const data = await DB.getCategories();
   return res.status(200).send(data);
 });
 

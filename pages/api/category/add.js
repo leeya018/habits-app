@@ -1,13 +1,13 @@
 import nc from "next-connect";
 import fs from "fs";
-import { addCategory } from "lib/db";
+import * as DB from "lib/db";
 
 const handler = nc({ attachParams: true });
 
 handler.post(async (req, res) => {
   const category = req.body;
   try {
-    const data = await addCategory(category);
+    const data = await DB.addCategory(category);
 
     return res.status(200).send("succuss");
   } catch (error) {
