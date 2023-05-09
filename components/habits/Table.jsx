@@ -20,6 +20,7 @@ function Table({ items, updateTodaysHabit }) {
           console.log({ index });
           return (
             <TableRow
+              key={index}
               index={index}
               item={item}
               updateTodaysHabit={updateTodaysHabit}
