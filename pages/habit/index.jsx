@@ -8,7 +8,7 @@
 //     <div className="flex justify-center">
 //       {/* <div className="flex flex-col">
 //         <Title>HABIT</Title>
-//         <Habit habit={habit} />
+//         <Habit habitItem={habit} />
 //       </div> */}
 //       hello
 //     </div>

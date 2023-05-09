@@ -32,7 +32,7 @@ export default function HabitItem({ habit }) {
         <div className="flex flex-col">
           <Title>HABIT</Title>
           {/* <div>{JSON.stringify(habit)}</div> */}
-          <Habit habit={habit} />
+          <Habit habitItem={habit} />
         </div>
       </div>
     </div>

@@ -26,7 +26,7 @@ export default function AllHabits({ category }) {
         <ul>
           {habits.map((habit, key) => (
             <li key={key}>
-              <Habit habit={habit} />
+              <Habit habitItem={habit} />
             </li>
           ))}
         </ul>

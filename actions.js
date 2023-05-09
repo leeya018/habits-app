@@ -184,7 +184,7 @@ export const updateError = (payload) => {
 const createNewTrace = (amountToAdd) => {
   return {
     date: UTIL.getTodayDate(),
-    amount: 0,
+    amount: 1,
     improve: "",
     reserve: "",
     learn: "",
@@ -193,10 +193,15 @@ const createNewTrace = (amountToAdd) => {
 
 export const addDidAmount = (habit, amountToAdd) => async (dispatch) => {
   const dupHabit = { ...habit };
-  if (!dupHabit.traces) {
+  if (!dupHabit.traces || dupHabit.traces.length === 0) {
     dupHabit.traces = [];
+    dupHabit.traces.push(createNewTrace(amountToAdd));
+  } else {
+    const len = dupHabit.traces.length;
+    if (dupHabit.traces[len - 1].date === UTIL.getTodayDate()) {
+      dupHabit.traces[len - 1].amount += amountToAdd;
+    }
   }
-  dupHabit.traces.push(createNewTrace(amountToAdd));
   try {
     const data = await API.editHabit(dupHabit);
     dispatch(getHabitsByCategory(habit.category));

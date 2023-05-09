@@ -5,9 +5,13 @@ export default function Button({
   onClick,
   color = "bg-blue-500",
   width = "",
+  position = "",
 }) {
   return (
-    <button className={`p-2 border-2 ${color} ${width}`} onClick={onClick}>
+    <button
+      className={`p-2 border-2 text-white ${color} ${width} ${position}`}
+      onClick={onClick}
+    >
       {/* <button className={`p-2 border-2 bg-${color}-500`} onClick={onClick}> */}
       {children}
     </button>
