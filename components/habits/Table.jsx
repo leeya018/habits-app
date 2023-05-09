@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Input from "./Input";
+import * as UTIL from "@/util";
 
 function Table({ items, updateTodaysHabit }) {
   return (
@@ -49,6 +50,7 @@ function TableRow({ index, item, updateTodaysHabit }) {
       <td className="border-4 ">
         <Input
           name="improve"
+          disabled={UTIL.getTodayDate() !== item.date}
           value={texts.improve}
           onChange={(e) => {
             handleChange(e.target);
@@ -59,6 +61,7 @@ function TableRow({ index, item, updateTodaysHabit }) {
       <td className="border-4 ">
         <Input
           name="reserve"
+          disabled={UTIL.getTodayDate() !== item.date}
           value={texts.reserve}
           onChange={(e) => {
             handleChange(e.target);
@@ -69,6 +72,7 @@ function TableRow({ index, item, updateTodaysHabit }) {
       <td className="border-4 ">
         <Input
           name="learn"
+          disabled={UTIL.getTodayDate() !== item.date}
           value={texts.learn}
           onChange={(e) => {
             handleChange(e.target);
