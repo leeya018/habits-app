@@ -33,7 +33,7 @@ export const getDateStr = (date) => {
 export const getFullDateStr = (date) => {
   return new Date(date).toISOString();
 };
-export const dateAreEquals = (d1, d2) => {
+export const datesAreEquals = (d1, d2) => {
   return getDateStr(new Date(d1)) === getDateStr(new Date(d2));
 };
 export const fullDatesAreEquals = (d1, d2) => {

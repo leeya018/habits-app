@@ -40,10 +40,11 @@ export default function Habit({ habitItem, showHandle = true }) {
       dupHabit.traces.push(createNewTrace());
     } else {
       const len = dupHabit.traces.length;
-      if (UTIL.fullDatesAreEquals(dupHabit.traces[len - 1].date, new Date())) {
-        const newAmount = dupHabit.traces[len - 1].amount + amountToAdd;
+
+      if (UTIL.datesAreEquals(dupHabit.traces[0].date, new Date())) {
+        const newAmount = dupHabit.traces[0].amount + amountToAdd;
         if (newAmount >= 0) {
-          dupHabit.traces[len - 1].amount = newAmount;
+          dupHabit.traces[0].amount = newAmount;
         }
       } else {
         dupHabit.traces.push(createNewTrace());
@@ -52,12 +53,14 @@ export default function Habit({ habitItem, showHandle = true }) {
     setHabit(dupHabit);
   };
 
-  const updateTodaysHabit = ({ name, value }) => {
+  const updateTodaysHabit = ({ name, value }, index) => {
     let dupHabit = { ...habit };
-    const len = dupHabit.traces.length;
-    dupHabit.traces[len - 1][name] = value;
-    console.log({ dupHabit });
+
+    const dupTraces = [...habit.traces];
+    dupTraces[index][name] = value;
+    dupHabit.traces = dupTraces;
     setHabit(dupHabit);
+
     setIsChanged(true);
   };
   const saveHabit = () => {
@@ -104,7 +107,6 @@ export default function Habit({ habitItem, showHandle = true }) {
                 <ul className="flex flex-col">
                   <Table
                     totalAmount={habit.amount}
-                    // items={[...habit.traces] || []}
                     items={
                       habit.traces.sort(
                         (itemA, itemB) =>

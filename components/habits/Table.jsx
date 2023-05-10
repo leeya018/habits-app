@@ -35,16 +35,6 @@ function Table({ items, updateTodaysHabit, totalAmount }) {
 }
 
 function TableRow({ index, item, updateTodaysHabit, totalAmount }) {
-  const [texts, setTexts] = useState({
-    improve: item.improve,
-    reserve: item.reserve,
-    learn: item.learn,
-  });
-
-  const handleChange = ({ name, value }) => {
-    setTexts({ ...texts, [name]: value });
-  };
-  console.log(item.date);
   return (
     <tr
       className={`border-4 ${
@@ -64,33 +54,30 @@ function TableRow({ index, item, updateTodaysHabit, totalAmount }) {
       <td className="border-4 ">
         <Input
           name="improve"
-          disabled={!UTIL.dateAreEquals(item.date, new Date())}
-          value={texts.improve}
+          disabled={!UTIL.datesAreEquals(item.date, new Date())}
+          value={item.improve}
           onChange={(e) => {
-            handleChange(e.target);
-            updateTodaysHabit(e.target);
+            updateTodaysHabit(e.target, index);
           }}
         />
       </td>
       <td className="border-4 ">
         <Input
           name="reserve"
-          disabled={!UTIL.dateAreEquals(item.date, new Date())}
-          value={texts.reserve}
+          disabled={!UTIL.datesAreEquals(item.date, new Date())}
+          value={item.reserve}
           onChange={(e) => {
-            handleChange(e.target);
-            updateTodaysHabit(e.target);
+            updateTodaysHabit(e.target, index);
           }}
         />
       </td>
       <td className="border-4 ">
         <Input
           name="learn"
-          disabled={!UTIL.dateAreEquals(item.date, new Date())}
-          value={texts.learn}
+          disabled={!UTIL.datesAreEquals(item.date, new Date())}
+          value={item.learn}
           onChange={(e) => {
-            handleChange(e.target);
-            updateTodaysHabit(e.target);
+            updateTodaysHabit(e.target, index);
           }}
         />
       </td>

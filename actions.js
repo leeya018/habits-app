@@ -190,33 +190,33 @@ const createNewTrace = (amountToAdd) => {
     learn: "",
   };
 };
-
-export const addDidAmount = (habit, amountToAdd) => async (dispatch) => {
-  const dupHabit = { ...habit };
-  if (!dupHabit.traces || dupHabit.traces.length === 0) {
-    dupHabit.traces = [];
-    dupHabit.traces.push(createNewTrace(amountToAdd));
-  } else {
-    const len = dupHabit.traces.length;
-    if (UTIL.dateAreEquals(dupHabit.traces[len - 1].date, new Date())) {
-      dupHabit.traces[len - 1].amount += amountToAdd;
-    }
-  }
-  try {
-    const data = await API.editHabit(dupHabit);
-    dispatch(getHabitsByCategory(habit.category));
-    console.log({ dupHabit });
-    dispatch({
-      type: types.UPDATE_HABIT,
-      payload: dupHabit,
-    });
-  } catch (error) {
-    dispatch({
-      type: types.UPDATE_ERROR,
-      payload: error.message,
-    });
-  }
-};
+// no good
+// export const addDidAmount = (habit, amountToAdd) => async (dispatch) => {
+//   const dupHabit = { ...habit };
+//   if (!dupHabit.traces || dupHabit.traces.length === 0) {
+//     dupHabit.traces = [];
+//     dupHabit.traces.push(createNewTrace(amountToAdd));
+//   } else {
+//     const len = dupHabit.traces.length;
+//     if (UTIL.datesAreEquals(dupHabit.traces[len - 1].date, new Date())) {
+//       dupHabit.traces[len - 1].amount += amountToAdd;
+//     }
+//   }
+//   try {
+//     const data = await API.editHabit(dupHabit);
+//     dispatch(getHabitsByCategory(habit.category));
+//     console.log({ dupHabit });
+//     dispatch({
+//       type: types.UPDATE_HABIT,
+//       payload: dupHabit,
+//     });
+//   } catch (error) {
+//     dispatch({
+//       type: types.UPDATE_ERROR,
+//       payload: error.message,
+//     });
+//   }
+// };
 export const addCategory = (name) => async (dispatch, getState) => {
   const url = process.env.NEXT_PUBLIC_BASIC_URL + "/api/category/add";
   try {
