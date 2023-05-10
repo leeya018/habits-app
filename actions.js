@@ -181,6 +181,7 @@ export const updateError = (payload) => {
     payload,
   };
 };
+
 const createNewTrace = (amountToAdd) => {
   return {
     date: new Date(),

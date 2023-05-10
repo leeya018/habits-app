@@ -33,6 +33,7 @@ export default function Habit({ habitItem, showHandle = true }) {
   console.log({ habitItem });
   const addTraces = (amountToAdd) => {
     setIsChanged(true);
+
     const dupHabit = { ...habit };
     if (!dupHabit.traces || dupHabit.traces.length === 0) {
       dupHabit.traces = [];
@@ -69,6 +70,9 @@ export default function Habit({ habitItem, showHandle = true }) {
     setIsChanged(false);
   };
 
+  const showGraph = () => {
+    router.push(`/graph?habitid=${habit._id}`);
+  };
   return (
     <div>
       <div className="flex justify-center">
@@ -101,6 +105,9 @@ export default function Habit({ habitItem, showHandle = true }) {
                   +
                 </Button>
               </div>
+              <Button width={"w-full"} onClick={showGraph}>
+                show graph
+              </Button>
               <div>
                 <Title>traces </Title>
                 <ul className="flex flex-col">
