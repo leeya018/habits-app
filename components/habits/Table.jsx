@@ -53,7 +53,8 @@ function TableRow({ index, item, updateTodaysHabit, totalAmount }) {
       key={index}
     >
       <td className="border-4 ">{index + 1}</td>
-      <td className="border-4 ">{UTIL.getDateStr(item.date)}</td>
+      <td className="border-4 ">{UTIL.getFullDateStr(item.date)}</td>
+      {/* <td className="border-4 ">{UTIL.getDateStr(item.date)}</td> */}
 
       <td className="border-4 "> {item.amount}</td>
       <td className="border-4 ">

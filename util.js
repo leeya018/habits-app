@@ -28,10 +28,14 @@ export const minLevel = 600;
 //===============================HABITS ======================
 
 export const getDateStr = (date) => {
-  console.log({ date });
-  if (typeof date === "string") return date.split("T")[0];
-  else return date.toISOString().split("T")[0];
+  return new Date(date).toISOString().split("T")[0];
+};
+export const getFullDateStr = (date) => {
+  return new Date(date).toISOString();
 };
 export const dateAreEquals = (d1, d2) => {
-  return getDateStr(d1) === getDateStr(d2);
+  return getDateStr(new Date(d1)) === getDateStr(new Date(d2));
+};
+export const fullDatesAreEquals = (d1, d2) => {
+  return getFullDateStr(new Date(d1)) === getFullDateStr(new Date(d2));
 };

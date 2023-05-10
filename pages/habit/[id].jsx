@@ -1,6 +1,5 @@
 import Button from "components/habits/Button";
 import Habit from "components/habits/Habit";
-import ItemCompleted from "components/habits/ItemCompleted";
 import Title from "components/habits/Title";
 import * as API from "lib/api";
 import { useRouter } from "next/router";

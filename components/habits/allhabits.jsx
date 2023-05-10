@@ -24,11 +24,16 @@ export default function AllHabits({ category }) {
         {habits.length === 0 && <div>{"habit list is empty"}</div>}
 
         <ul>
-          {habits.map((habit, key) => (
-            <li key={key}>
-              <Habit habitItem={habit} />
-            </li>
-          ))}
+          {habits
+            .sort((h1, h2) => {
+              console.log({ d1: h1.createdAt, d2: h2.createdAt });
+              return new Date(h2.createdAt) - new Date(h1.createdAt);
+            })
+            .map((habit, key) => (
+              <li key={key}>
+                <Habit habitItem={habit} />
+              </li>
+            ))}
         </ul>
       </div>
     </div>

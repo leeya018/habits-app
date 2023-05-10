@@ -50,8 +50,8 @@ export default function HabitHandle({
           onChange={(e) => updateHabit(e.target)}
         />
         <Button onClick={onClick}>{title}</Button>
-        {/* <div>{JSON.stringify(habits)}</div> */}
-        <div>{JSON.stringify(habit)}</div>
+        {/* <div>{JSON.stringify(habits)}</div>
+        <div>{JSON.stringify(habit)}</div> */}
         <Button onClick={() => router.push(`/habits/${habit.category}`)}>
           go to habits
         </Button>

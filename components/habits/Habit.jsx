@@ -5,7 +5,6 @@ import * as Action from "actions";
 import * as UTIL from "@/util";
 import Title from "./Title";
 import { useRouter } from "next/router";
-import ItemCompleted from "./ItemCompleted";
 import Table from "./Table";
 import { useState } from "react";
 
@@ -22,28 +21,32 @@ export default function Habit({ habitItem, showHandle = true }) {
     dispatch(Action.deleteHabit(_id, habit.category));
   };
 
-  const createNewTrace = (amountToAdd) => {
+  const createNewTrace = () => {
     return {
-      date: new Date(),
+      date: new Date().toISOString(),
       amount: 1,
       improve: "",
       reserve: "",
       learn: "",
     };
   };
+  console.log({ habitItem });
   const addTraces = (amountToAdd) => {
     setIsChanged(true);
     const dupHabit = { ...habit };
+    // dupHabit.traces.push(createNewTrace());
     if (!dupHabit.traces || dupHabit.traces.length === 0) {
       dupHabit.traces = [];
       dupHabit.traces.push(createNewTrace());
     } else {
       const len = dupHabit.traces.length;
-      if (UTIL.dateAreEquals(dupHabit.traces[len - 1].date, new Date())) {
+      if (UTIL.fullDatesAreEquals(dupHabit.traces[len - 1].date, new Date())) {
         const newAmount = dupHabit.traces[len - 1].amount + amountToAdd;
         if (newAmount >= 0) {
           dupHabit.traces[len - 1].amount = newAmount;
         }
+      } else {
+        dupHabit.traces.push(createNewTrace());
       }
     }
     setHabit(dupHabit);
@@ -59,7 +62,7 @@ export default function Habit({ habitItem, showHandle = true }) {
   };
   const saveHabit = () => {
     console.log("saveHabit");
-    console.log(habit);
+    console.log({ habit });
     dispatch(Action.editHabit(habit));
     setIsChanged(false);
   };
@@ -101,7 +104,13 @@ export default function Habit({ habitItem, showHandle = true }) {
                 <ul className="flex flex-col">
                   <Table
                     totalAmount={habit.amount}
-                    items={[...habit.traces.reverse()] || []}
+                    // items={[...habit.traces] || []}
+                    items={
+                      habit.traces.sort(
+                        (itemA, itemB) =>
+                          new Date(itemB.date) - new Date(itemA.date)
+                      ) || []
+                    }
                     updateTodaysHabit={updateTodaysHabit}
                   />
                 </ul>
