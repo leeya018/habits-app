@@ -34,7 +34,6 @@ export default function Habit({ habitItem, showHandle = true }) {
   const addTraces = (amountToAdd) => {
     setIsChanged(true);
     const dupHabit = { ...habit };
-    // dupHabit.traces.push(createNewTrace());
     if (!dupHabit.traces || dupHabit.traces.length === 0) {
       dupHabit.traces = [];
       dupHabit.traces.push(createNewTrace());
