@@ -12,6 +12,8 @@ import {
 } from "chart.js";
 import { Line } from "react-chartjs-2";
 import faker from "faker";
+import Button from "./Button";
+import { useRouter } from "next/router";
 
 ChartJS.register(
   CategoryScale,
@@ -25,6 +27,7 @@ ChartJS.register(
 );
 
 export default function Graph({ items, totalAmount }) {
+  const router = useRouter();
   console.log({ totalAmount });
   const options = {
     responsive: true,
@@ -82,5 +85,12 @@ export default function Graph({ items, totalAmount }) {
       },
     ],
   };
-  return <Line options={options} data={data} items={items} />;
+  return (
+    <div>
+      <Button position="absolute top-1" onClick={() => router.back()}>
+        back to habit
+      </Button>
+      <Line options={options} data={data} items={items} />;
+    </div>
+  );
 }
