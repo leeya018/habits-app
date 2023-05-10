@@ -28,7 +28,9 @@ export const minLevel = 600;
 //===============================HABITS ======================
 
 export const getDateStr = (date) => {
-  return date.toISOString().split("T")[0];
+  console.log({ date });
+  if (typeof date === "string") return date.split("T")[0];
+  else return date.toISOString().split("T")[0];
 };
 export const dateAreEquals = (d1, d2) => {
   return getDateStr(d1) === getDateStr(d2);

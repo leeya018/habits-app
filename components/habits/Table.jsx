@@ -44,7 +44,7 @@ function TableRow({ index, item, updateTodaysHabit, totalAmount }) {
   const handleChange = ({ name, value }) => {
     setTexts({ ...texts, [name]: value });
   };
-  console.log(totalAmount, item.amount);
+  console.log(item.date);
   return (
     <tr
       className={`border-4 ${
@@ -63,7 +63,7 @@ function TableRow({ index, item, updateTodaysHabit, totalAmount }) {
       <td className="border-4 ">
         <Input
           name="improve"
-          disabled={UTIL.dateAreEquals(item.date, new Date())}
+          disabled={!UTIL.dateAreEquals(item.date, new Date())}
           value={texts.improve}
           onChange={(e) => {
             handleChange(e.target);
@@ -74,7 +74,7 @@ function TableRow({ index, item, updateTodaysHabit, totalAmount }) {
       <td className="border-4 ">
         <Input
           name="reserve"
-          disabled={UTIL.dateAreEquals(item.date, new Date())}
+          disabled={!UTIL.dateAreEquals(item.date, new Date())}
           value={texts.reserve}
           onChange={(e) => {
             handleChange(e.target);
@@ -85,7 +85,7 @@ function TableRow({ index, item, updateTodaysHabit, totalAmount }) {
       <td className="border-4 ">
         <Input
           name="learn"
-          disabled={UTIL.dateAreEquals(item.date, new Date())}
+          disabled={!UTIL.dateAreEquals(item.date, new Date())}
           value={texts.learn}
           onChange={(e) => {
             handleChange(e.target);
