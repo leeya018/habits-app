@@ -30,7 +30,7 @@ export default function AddHabit({ goal }) {
   });
 
   useEffect(() => {
-    dispatch(ACTION.updateChosenCategory(goal));
+    dispatch(ACTION.updateChosenGoal(goal));
   }, [goal]);
 
   const updateHabit = ({ name, value }) => {

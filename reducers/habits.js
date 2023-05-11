@@ -4,7 +4,7 @@ const habitInitial = {
   goals: [],
   habits: [],
   error: "",
-  chosenCategory: "",
+  chosenGoal: "",
 };
 
 let newHabits = null;
@@ -51,7 +51,7 @@ const habitReducer = (state = habitInitial, { type, payload }) => {
     case types.GET_HABITS:
       return { ...state, habits: payload };
     case types.UPDATE_COSEN_CATEGORY:
-      return { ...state, chosenCategory: payload };
+      return { ...state, chosenGoal: payload };
     default:
       return state;
   }

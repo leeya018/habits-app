@@ -12,7 +12,7 @@ export default function AllHabits({ goal }) {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(Action.getHabitsByCategory(goal));
+    dispatch(Action.getHabitsByGoal(goal));
   }, []);
 
   console.log("===================HABITS=====");

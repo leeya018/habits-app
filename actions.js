@@ -129,7 +129,7 @@ export const addHabit = (habit) => async (dispatch) => {
   const url = process.env.NEXT_PUBLIC_BASIC_URL + `/api/habit/add`;
   try {
     const newHabit = await API.addHabit(habit);
-    dispatch(getHabitsByCategory(habit.goal));
+    dispatch(getHabitsByGoal(habit.goal));
   } catch (error) {
     console.log("addHabit error: ");
     console.log(error);
@@ -152,15 +152,15 @@ export const deleteHabit = (id, goal) => async (dispatch) => {
     });
   }
 };
-export const updateChosenCategory = (categoryName) => {
+export const updateChosenGoal = (goalName) => {
   return {
     type: types.UPDATE_COSEN_CATEGORY,
-    payload: categoryName,
+    payload: goalName,
   };
 };
 export const editHabit = (habit) => async (dispatch, getState) => {
   await API.editHabit(habit);
-  dispatch(getHabitsByCategory(habit.goal));
+  dispatch(getHabitsByGoal(habit.goal));
 
   try {
     dispatch({
@@ -205,7 +205,7 @@ const createNewTrace = (amountToAdd) => {
 //   }
 //   try {
 //     const data = await API.editHabit(dupHabit);
-//     dispatch(getHabitsByCategory(habit.goal));
+//     dispatch(getHabitsByGoal(habit.goal));
 //     console.log({ dupHabit });
 //     dispatch({
 //       type: types.UPDATE_HABIT,
@@ -218,7 +218,7 @@ const createNewTrace = (amountToAdd) => {
 //     });
 //   }
 // };
-export const addCategory = (name) => async (dispatch, getState) => {
+export const addGoal = (name) => async (dispatch, getState) => {
   const url = process.env.NEXT_PUBLIC_BASIC_URL + "/api/goal/add";
   try {
     if (!name) {
@@ -248,7 +248,7 @@ export const getCategories = () => async (dispatch) => {
     });
   }
 };
-export const getHabitsByCategory = (goal) => async (dispatch) => {
+export const getHabitsByGoal = (goal) => async (dispatch) => {
   const url = process.env.NEXT_PUBLIC_BASIC_URL + "/api/habit";
   try {
     const res = await axios.get(url, {

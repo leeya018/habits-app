@@ -18,9 +18,7 @@ export default function HabitHandle({
   const router = useRouter();
 
   console.log(goal);
-  const { habits, error, chosenCategory } = useSelector(
-    (state) => state.habits
-  );
+  const { habits, error, chosenGoal } = useSelector((state) => state.habits);
 
   return (
     <div className="flex justify-center">

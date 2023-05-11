@@ -7,7 +7,7 @@ const handler = nc({ attachParams: true });
 handler.post(async (req, res) => {
   const goal = req.body;
   try {
-    const data = await DB.addCategory(goal);
+    const data = await DB.addGoal(goal);
 
     return res.status(200).send("succuss");
   } catch (error) {

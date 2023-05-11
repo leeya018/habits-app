@@ -24,7 +24,7 @@ export default function Edit({ habitItem }) {
   const router = useRouter();
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(Action.updateChosenCategory(habit.goal));
+    dispatch(Action.updateChosenGoal(habit.goal));
   }, [habit.goal]);
 
   const updateHabit = ({ name, value }) => {

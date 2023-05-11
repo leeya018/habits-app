@@ -23,7 +23,7 @@ export default function Goals({}) {
   }, [name]);
 
   const handleAdd = () => {
-    dispatch(Action.addCategory(name));
+    dispatch(Action.addGoal(name));
     setName("");
   };
 
@@ -37,7 +37,7 @@ export default function Goals({}) {
             <li
               key={goal.name}
               onClick={() => {
-                dispatch(Action.updateChosenCategory(goal.name));
+                dispatch(Action.updateChosenGoal(goal.name));
                 // router.push({
                 //   pathname: "habits",
                 //   query: "goal=" + goal.name,
