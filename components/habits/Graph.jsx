@@ -14,7 +14,7 @@ import { Line } from "react-chartjs-2";
 import faker from "faker";
 import Button from "./Button";
 import { useRouter } from "next/router";
-
+import * as UTIL from "@/util";
 ChartJS.register(
   CategoryScale,
   LinearScale,
@@ -71,7 +71,7 @@ export default function Graph({ items, totalAmount }) {
     },
   };
 
-  const labels = items.map((data) => data.date);
+  const labels = items.map((data) => UTIL.getDateStrIsrael(data.date));
 
   const data = {
     labels,
@@ -90,7 +90,9 @@ export default function Graph({ items, totalAmount }) {
       <Button position="absolute top-1" onClick={() => router.back()}>
         back to habit
       </Button>
-      <Line options={options} data={data} items={items} />;
+      <div className="scale-75">
+        <Line options={options} data={data} items={items} />;
+      </div>
     </div>
   );
 }

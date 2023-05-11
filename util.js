@@ -28,7 +28,23 @@ export const minLevel = 600;
 //===============================HABITS ======================
 
 export const getDateStr = (date) => {
-  return new Date(date).toISOString().split("T")[0];
+  try {
+    const resDate = new Date(date).toISOString().split("T")[0];
+    return resDate;
+  } catch (error) {
+    console.log(error.message, date);
+  }
+};
+export const getDateStrIsrael = (date) => {
+  try {
+    const dateStr = getDateStr(date);
+    const dateStrIsrael = dateStr.split("-").reverse().join("-");
+
+    return dateStrIsrael;
+  } catch (error) {
+    console.log(error.message, date);
+  }
+  return;
 };
 export const getFullDateStr = (date) => {
   return new Date(date).toISOString();
