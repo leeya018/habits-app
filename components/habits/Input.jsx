@@ -4,10 +4,11 @@ export default function Input({
   onChange,
   value,
   disabled,
+  size = "",
 }) {
   return (
     <input
-      className="border-2 rounded-sm"
+      className={`border-2  ${size}`}
       type={type}
       disabled={disabled}
       placeholder={name}

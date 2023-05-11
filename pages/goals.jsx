@@ -28,14 +28,42 @@ export default function Goals({}) {
   };
 
   return (
-    <div className="flex justify-center">
-      <div className="flex flex-col">
-        <Title>goals: </Title>
+    <div className="flex justify-center text-white">
+      <div
+        className="flex flex-col justify-between  shadow-lg items-center bg-gray w-[350px]
+       h-[250px] "
+      >
+        <h1
+          className="font-medium text-[18px] text-white w-[177px] 
+          h-[30px] relative top-[44px] text-center"
+        >
+          Add Goal:{" "}
+        </h1>
 
+        <Input
+          size={"w-[177px] h-[30px]"}
+          name="goal name"
+          value={name}
+          onChange={(e) => {
+            setName(e.target.value);
+            dispatch(Action.updateError(""));
+          }}
+        />
+
+        <Button
+          position="relative bottom-[22px]"
+          size={"w-[128px] h-[43px]"}
+          color="bg-blue"
+          onClick={handleAdd}
+        >
+          add
+        </Button>
+        {/* </div> */}
+        {/* 
         <ul className="flex flex-col">
-          {goals.map((goal) => (
-            <li
-              key={goal.name}
+        {goals.map((goal) => (
+          <li
+          key={goal.name}
               onClick={() => {
                 dispatch(Action.updateChosenGoal(goal.name));
                 // router.push({
@@ -49,19 +77,9 @@ export default function Goals({}) {
               {goal.name}
             </li>
           ))}
-        </ul>
-        <div>
-          <Input
-            name="goal name"
-            value={name}
-            onChange={(e) => {
-              setName(e.target.value);
-              dispatch(Action.updateError(""));
-            }}
-          />
-          <Button onClick={handleAdd}>add</Button>
-        </div>
-        <Error>{error}</Error>
+        </ul> */}
+
+        {/* <Error>{error}</Error> */}
         {/* <div>{JSON.stringify(goals)}</div> */}
       </div>
     </div>

@@ -10,6 +10,10 @@ module.exports = {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
+    colors: {
+      gray: "#D9D9D9",
+      blue: "#18A0FB",
+    },
     extend: {},
   },
   plugins: [],
