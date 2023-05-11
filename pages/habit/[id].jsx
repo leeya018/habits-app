@@ -25,7 +25,7 @@ export default function HabitItem({ habit }) {
   return (
     <div>
       <Button onClick={() => router.back()}>back </Button>
-      <Button onClick={() => router.push("/categories")}>categories </Button>
+      <Button onClick={() => router.push("/goals")}>goals </Button>
 
       <div className="flex justify-center">
         <div className="flex flex-col">

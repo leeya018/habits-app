@@ -9,11 +9,11 @@ import Error from "components/habits/Error";
 import { useEffect } from "react";
 
 // getCategories
-export default function Categories({}) {
+export default function Goals({}) {
   const [name, setName] = useState("");
-  const { categories, error } = useSelector((state) => state.habits);
+  const { goals, error } = useSelector((state) => state.habits);
   const router = useRouter();
-  console.log(categories);
+  console.log(goals);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -30,29 +30,29 @@ export default function Categories({}) {
   return (
     <div className="flex justify-center">
       <div className="flex flex-col">
-        <Title>categories: </Title>
+        <Title>goals: </Title>
 
         <ul className="flex flex-col">
-          {categories.map((category) => (
+          {goals.map((goal) => (
             <li
-              key={category.name}
+              key={goal.name}
               onClick={() => {
-                dispatch(Action.updateChosenCategory(category.name));
+                dispatch(Action.updateChosenCategory(goal.name));
                 // router.push({
                 //   pathname: "habits",
-                //   query: "category=" + category.name,
+                //   query: "goal=" + goal.name,
                 // });
-                router.push(`/habits/${category.name}`);
+                router.push(`/habits/${goal.name}`);
               }}
               className="font-bold p-2 border-2 bg-gray-300 hover:bg-gray-500"
             >
-              {category.name}
+              {goal.name}
             </li>
           ))}
         </ul>
         <div>
           <Input
-            name="category name"
+            name="goal name"
             value={name}
             onChange={(e) => {
               setName(e.target.value);
@@ -62,7 +62,7 @@ export default function Categories({}) {
           <Button onClick={handleAdd}>add</Button>
         </div>
         <Error>{error}</Error>
-        {/* <div>{JSON.stringify(categories)}</div> */}
+        {/* <div>{JSON.stringify(goals)}</div> */}
       </div>
     </div>
   );

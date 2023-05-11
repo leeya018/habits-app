@@ -12,12 +12,12 @@ import AllHabits from "components/habits/allhabits";
 import HabitHandle from "components/habits/HabitHandle";
 
 export async function getServerSideProps(context) {
-  const { category } = context.query;
+  const { goal } = context.query;
   return {
-    props: { category }, // will be passed to the page component as props
+    props: { goal }, // will be passed to the page component as props
   };
 }
-export default function AddHabit({ category }) {
+export default function AddHabit({ goal }) {
   const router = useRouter();
   const dispatch = useDispatch();
 
@@ -33,12 +33,12 @@ export default function AddHabit({ category }) {
       </Button>
       <Button
         onClick={() => {
-          router.push(`/addhabit/${category}`);
+          router.push(`/addhabit/${goal}`);
         }}
       >
         add habit{" "}
       </Button>
-      <AllHabits category={category} />
+      <AllHabits goal={goal} />
     </div>
   );
 }

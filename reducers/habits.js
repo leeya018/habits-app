@@ -1,7 +1,7 @@
 import * as types from "../types";
 
 const habitInitial = {
-  categories: [],
+  goals: [],
   habits: [],
   error: "",
   chosenCategory: "",
@@ -46,7 +46,7 @@ const habitReducer = (state = habitInitial, { type, payload }) => {
     case types.ADD_DID_AMOUNT:
       return { ...state, habits: newHabits };
     case types.GET_CATEGORIES:
-      return { ...state, categories: payload };
+      return { ...state, goals: payload };
 
     case types.GET_HABITS:
       return { ...state, habits: payload };

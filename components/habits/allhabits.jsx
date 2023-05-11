@@ -6,13 +6,13 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 
-export default function AllHabits({ category }) {
+export default function AllHabits({ goal }) {
   const router = useRouter();
   const { habits } = useSelector((state) => state.habits);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(Action.getHabitsByCategory(category));
+    dispatch(Action.getHabitsByCategory(goal));
   }, []);
 
   console.log("===================HABITS=====");

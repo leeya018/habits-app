@@ -18,7 +18,7 @@ export default function Habit({ habitItem, showHandle = true }) {
   // const { habits } = useSelector((state) => state.habits);
 
   const removeHabit = () => {
-    dispatch(Action.deleteHabit(_id, habit.category));
+    dispatch(Action.deleteHabit(_id, habit.goal));
   };
 
   const createNewTrace = () => {

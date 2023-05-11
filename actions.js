@@ -67,8 +67,8 @@ export const updateStop = (payload) => (dispatch, getState) => {
     payload,
   });
 };
-export const getHabits = (category) => async (dispatch, getState) => {
-  const habits = await API.getHabits(category);
+export const getHabits = (goal) => async (dispatch, getState) => {
+  const habits = await API.getHabits(goal);
   dispatch({
     type: types.GET_HABITS,
     payload: habits,
@@ -129,7 +129,7 @@ export const addHabit = (habit) => async (dispatch) => {
   const url = process.env.NEXT_PUBLIC_BASIC_URL + `/api/habit/add`;
   try {
     const newHabit = await API.addHabit(habit);
-    dispatch(getHabitsByCategory(habit.category));
+    dispatch(getHabitsByCategory(habit.goal));
   } catch (error) {
     console.log("addHabit error: ");
     console.log(error);
@@ -140,10 +140,10 @@ export const addHabit = (habit) => async (dispatch) => {
   }
 };
 
-export const deleteHabit = (id, category) => async (dispatch) => {
+export const deleteHabit = (id, goal) => async (dispatch) => {
   try {
     const isDeleted = await API.deleteHabit(id);
-    dispatch(getHabits(category));
+    dispatch(getHabits(goal));
   } catch (error) {
     console.log(error.message);
     dispatch({
@@ -160,7 +160,7 @@ export const updateChosenCategory = (categoryName) => {
 };
 export const editHabit = (habit) => async (dispatch, getState) => {
   await API.editHabit(habit);
-  dispatch(getHabitsByCategory(habit.category));
+  dispatch(getHabitsByCategory(habit.goal));
 
   try {
     dispatch({
@@ -205,7 +205,7 @@ const createNewTrace = (amountToAdd) => {
 //   }
 //   try {
 //     const data = await API.editHabit(dupHabit);
-//     dispatch(getHabitsByCategory(habit.category));
+//     dispatch(getHabitsByCategory(habit.goal));
 //     console.log({ dupHabit });
 //     dispatch({
 //       type: types.UPDATE_HABIT,
@@ -219,10 +219,10 @@ const createNewTrace = (amountToAdd) => {
 //   }
 // };
 export const addCategory = (name) => async (dispatch, getState) => {
-  const url = process.env.NEXT_PUBLIC_BASIC_URL + "/api/category/add";
+  const url = process.env.NEXT_PUBLIC_BASIC_URL + "/api/goal/add";
   try {
     if (!name) {
-      throw new Error("category must be set");
+      throw new Error("goal must be set");
     }
     const res = await axios.post(url, { name });
   } catch (error) {
@@ -234,7 +234,7 @@ export const addCategory = (name) => async (dispatch, getState) => {
 };
 
 export const getCategories = () => async (dispatch) => {
-  const url = process.env.NEXT_PUBLIC_BASIC_URL + "/api/categories";
+  const url = process.env.NEXT_PUBLIC_BASIC_URL + "/api/goals";
   try {
     const res = await axios.get(url);
     dispatch({
@@ -248,11 +248,11 @@ export const getCategories = () => async (dispatch) => {
     });
   }
 };
-export const getHabitsByCategory = (category) => async (dispatch) => {
+export const getHabitsByCategory = (goal) => async (dispatch) => {
   const url = process.env.NEXT_PUBLIC_BASIC_URL + "/api/habit";
   try {
     const res = await axios.get(url, {
-      params: { category },
+      params: { goal },
     });
     dispatch({
       type: types.GET_HABITS,

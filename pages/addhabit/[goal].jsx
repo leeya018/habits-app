@@ -12,12 +12,12 @@ import AllHabits from "components/habits/allhabits";
 import HabitHandle from "components/habits/HabitHandle";
 
 export async function getServerSideProps(context) {
-  const { category } = context.query;
+  const { goal } = context.query;
   return {
-    props: { category }, // will be passed to the page component as props
+    props: { goal }, // will be passed to the page component as props
   };
 }
-export default function AddHabit({ category }) {
+export default function AddHabit({ goal }) {
   const router = useRouter();
   const dispatch = useDispatch();
 
@@ -26,12 +26,12 @@ export default function AddHabit({ category }) {
     description: "",
     amount: "",
     mainGoal: "",
-    category,
+    goal,
   });
 
   useEffect(() => {
-    dispatch(ACTION.updateChosenCategory(category));
-  }, [category]);
+    dispatch(ACTION.updateChosenCategory(goal));
+  }, [goal]);
 
   const updateHabit = ({ name, value }) => {
     dispatch(ACTION.updateError());
@@ -43,7 +43,7 @@ export default function AddHabit({ category }) {
     if (checkValidation()) {
       const newHabit = {
         ...habit,
-        category,
+        goal,
         createdAt: new Date().toISOString(),
         traces: [],
       };
@@ -74,13 +74,13 @@ export default function AddHabit({ category }) {
         go back
       </Button>
       <HabitHandle
-        category={category}
+        goal={goal}
         onClick={addNewHabit}
         updateHabit={updateHabit}
         habit={habit}
         title={"ADD HABIT"}
       />
-      <AllHabits category={category} />
+      <AllHabits goal={goal} />
     </div>
   );
 }

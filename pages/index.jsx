@@ -4,7 +4,7 @@ import { useEffect } from "react";
 export default function Homepage() {
   const router = useRouter();
   useEffect(() => {
-    router.push("/categories");
+    router.push("/goals");
     // router.push("/habit");
     // router.push("/game1");
   }, []);

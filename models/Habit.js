@@ -21,7 +21,7 @@ const HabitSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  category: {
+  goal: {
     type: String,
     required: true,
   },

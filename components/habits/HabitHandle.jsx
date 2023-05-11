@@ -9,7 +9,7 @@ import Error from "components/habits/Error";
 import { useEffect } from "react";
 
 export default function HabitHandle({
-  category,
+  goal,
   onClick,
   updateHabit,
   habit,
@@ -17,7 +17,7 @@ export default function HabitHandle({
 }) {
   const router = useRouter();
 
-  console.log(category);
+  console.log(goal);
   const { habits, error, chosenCategory } = useSelector(
     (state) => state.habits
   );
@@ -26,7 +26,7 @@ export default function HabitHandle({
     <div className="flex justify-center">
       <div className="flex flex-col">
         <Title>
-          ${title} for : {category}
+          ${title} for : {goal}
         </Title>
         <Input
           name="name"
@@ -52,7 +52,7 @@ export default function HabitHandle({
         <Button onClick={onClick}>{title}</Button>
         {/* <div>{JSON.stringify(habits)}</div>
         <div>{JSON.stringify(habit)}</div> */}
-        <Button onClick={() => router.push(`/habits/${habit.category}`)}>
+        <Button onClick={() => router.push(`/habits/${habit.goal}`)}>
           go to habits
         </Button>
         <Error>{error}</Error>

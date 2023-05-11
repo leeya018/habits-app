@@ -24,8 +24,8 @@ export default function Edit({ habitItem }) {
   const router = useRouter();
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(Action.updateChosenCategory(habit.category));
-  }, [habit.category]);
+    dispatch(Action.updateChosenCategory(habit.goal));
+  }, [habit.goal]);
 
   const updateHabit = ({ name, value }) => {
     dispatch(Action.updateError());
@@ -36,7 +36,7 @@ export default function Edit({ habitItem }) {
   const editHabitHandle = async () => {
     if (checkValidation()) {
       dispatch(Action.editHabit(habit));
-      router.push(`/habits/${habit.category}`);
+      router.push(`/habits/${habit.goal}`);
     } else {
       dispatch(Action.updateError("one of the fields is not set"));
     }
@@ -60,7 +60,7 @@ export default function Edit({ habitItem }) {
         go back
       </Button>
       <HabitHandle
-        category={habit.category}
+        goal={habit.goal}
         onClick={editHabitHandle}
         updateHabit={updateHabit}
         habit={habit}
