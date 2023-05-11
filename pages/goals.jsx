@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/router";
 import Error from "components/habits/Error";
 import { useEffect } from "react";
+import Goal from "components/habits/Goal";
 
 // getCategories
 export default function Goals({}) {
@@ -28,60 +29,48 @@ export default function Goals({}) {
   };
 
   return (
-    <div className="flex justify-center text-white">
-      <div
-        className="flex flex-col justify-between  shadow-lg items-center bg-gray w-[350px]
-       h-[250px] "
-      >
-        <h1
-          className="font-medium text-[18px] text-white w-[177px] 
+    <div>
+      {/* // first time */}
+      <div className="flex justify-center border-2">
+        <div
+          className="flex flex-col justify-between  shadow-lg items-center bg-gray w-[350px]
+        h-[250px] "
+        >
+          <h1
+            className="font-medium text-[18px] text-white w-[177px] 
           h-[30px] relative top-[44px] text-center"
-        >
-          Add Goal:{" "}
-        </h1>
+          >
+            Add Goal:{" "}
+          </h1>
 
-        <Input
-          size={"w-[177px] h-[30px]"}
-          name="goal name"
-          value={name}
-          onChange={(e) => {
-            setName(e.target.value);
-            dispatch(Action.updateError(""));
-          }}
-        />
+          <Input
+            size={"w-[177px] h-[30px]"}
+            name="goal name"
+            value={name}
+            onChange={(e) => {
+              setName(e.target.value);
+              dispatch(Action.updateError(""));
+            }}
+          />
 
-        <Button
-          position="relative bottom-[22px]"
-          size={"w-[128px] h-[43px]"}
-          color="bg-blue"
-          onClick={handleAdd}
-        >
-          add
-        </Button>
-        {/* </div> */}
-        {/* 
-        <ul className="flex flex-col">
-        {goals.map((goal) => (
-          <li
-          key={goal.name}
-              onClick={() => {
-                dispatch(Action.updateChosenGoal(goal.name));
-                // router.push({
-                //   pathname: "habits",
-                //   query: "goal=" + goal.name,
-                // });
-                router.push(`/habits/${goal.name}`);
-              }}
-              className="font-bold p-2 border-2 bg-gray-300 hover:bg-gray-500"
-            >
-              {goal.name}
-            </li>
-          ))}
-        </ul> */}
-
-        {/* <Error>{error}</Error> */}
-        {/* <div>{JSON.stringify(goals)}</div> */}
+          <Button
+            position="relative bottom-[22px]"
+            size={"w-[128px] h-[43px]"}
+            color="bg-blue"
+            onClick={handleAdd}
+          >
+            add
+          </Button>
+        </div>
       </div>
+      <ul className="m-2 flex gap-2">
+        {goals.map((goal) => (
+          <Goal goal={goal} />
+        ))}
+      </ul>
+
+      {/* <Error>{error}</Error> */}
+      {/* <div>{JSON.stringify(goals)}</div> */}
     </div>
   );
 }
