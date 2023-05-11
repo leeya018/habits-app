@@ -76,9 +76,12 @@ export default function Habit({ habitItem, showHandle = true }) {
   return (
     <div>
       <div className="flex justify-center">
-        <div className="flex flex-col border-2 border-black rounded-md">
+        <div
+          className="flex flex-col justify-between  shadow-lg items-center bg-gray w-[350px]
+       h-[250px] m-2 "
+        >
           <div
-            className="flex flex-col relative"
+            className="flex flex-col justify-between relative top-2 h-[70%]"
             onClick={() => router.push(`/habit/${habit._id}`)}
           >
             {isChanged && (
@@ -86,12 +89,17 @@ export default function Habit({ habitItem, showHandle = true }) {
                 save
               </Button>
             )}
-            <div>id : {_id}</div>
-            <div>name : {name}</div>
-            <div>description : {description}</div>
-            <div>amount : {amount}</div>
-            <div>createdAt : {createdAt}</div>
-            <div>mainGoal : {mainGoal}</div>
+            {/* <div>id : {_id}</div> */}
+            <Title extra={"flex justify-center"}>name</Title>
+            {/* <div className="flex justify-center">name : {name}</div> */}
+            <div className="flex justify-center">
+              description : {description}
+            </div>
+            <div className="flex justify-center">amount : {amount}</div>
+            <div className="flex justify-center">
+              createdAt : {UTIL.getDateStrIsrael(createdAt)}
+            </div>
+            {/* <div>mainGoal : {mainGoal}</div> */}
           </div>
 
           {router.pathname.includes("/habit/") ? (
@@ -125,12 +133,24 @@ export default function Habit({ habitItem, showHandle = true }) {
               </div>
             </div>
           ) : (
-            <>
-              <Button onClick={() => router.push(`/edithabit/${habit._id}`)}>
+            <div className="flex justify-center gap-2 relative bottom-2">
+              <Button
+                // position="relative bottom-[22px]"
+                size={"w-[128px] h-[43px]"}
+                color="bg-blue"
+                onClick={() => router.push(`/edithabit/${habit._id}`)}
+              >
                 edit
               </Button>
-              <Button onClick={removeHabit}>delete</Button>
-            </>
+              <Button
+                // position="relative bottom-[22px]"
+                size={"w-[128px] h-[43px]"}
+                color="bg-blue"
+                onClick={removeHabit}
+              >
+                delete
+              </Button>
+            </div>
           )}
         </div>
       </div>
