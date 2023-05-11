@@ -64,7 +64,7 @@ export default function Edit({ habitItem }) {
         onClick={editHabitHandle}
         updateHabit={updateHabit}
         habit={habit}
-        title={"EDIT HABIT"}
+        title={"Edit Habit"}
       />
       {/* <div>{JSON.stringify(habit)}</div> */}
     </div>

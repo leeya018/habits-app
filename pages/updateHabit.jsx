@@ -25,7 +25,7 @@ export default function Handle({ id }) {
   return (
     <div className="flex justify-center">
       <div className="flex flex-col">
-        <Title>NEW HABIT</Title>
+        <Title>NEW HABIT </Title>
         <input
           type="text"
           name="name"

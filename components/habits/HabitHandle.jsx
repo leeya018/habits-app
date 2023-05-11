@@ -22,39 +22,66 @@ export default function HabitHandle({
 
   return (
     <div className="flex justify-center">
-      <div className="flex flex-col">
-        <Title>
-          ${title} for : {goal}
-        </Title>
-        <Input
-          name="name"
-          value={habit.name}
-          onChange={(e) => updateHabit(e.target)}
-        />
-        <Input
-          name="description"
-          value={habit.description}
-          onChange={(e) => updateHabit(e.target)}
-        />
-        <Input
-          type="number"
-          name="amount"
-          value={habit.amount}
-          onChange={(e) => updateHabit(e.target)}
-        />
-        <Input
-          value={habit.mainGoal}
-          name="mainGoal"
-          onChange={(e) => updateHabit(e.target)}
-        />
-        <Button onClick={onClick}>{title}</Button>
+      <div
+        className="flex flex-col justify-between  shadow-lg items-center bg-gray w-[350px]
+       h-[250px] m-2 "
+      >
+        <Title extra="">{title}</Title>
+        <div className="w-[80%] border-2 flex-col justify-between">
+          <RowSection
+            text={"name"}
+            value={habit.name}
+            updateHabit={updateHabit}
+            type={"text"}
+          />
+          <RowSection
+            text={"description"}
+            value={habit.description}
+            updateHabit={updateHabit}
+            type={"text"}
+          />
+          <RowSection
+            text={"amount"}
+            value={habit.amount}
+            type={"number"}
+            updateHabit={updateHabit}
+          />
+          <RowSection
+            text={"mainGoal"}
+            value={habit.mainGoal}
+            updateHabit={updateHabit}
+            type={"text"}
+          />
+        </div>
+        <Button
+          position="relative bottom-[22px]"
+          size={"w-[128px] h-[43px]"}
+          color="bg-blue"
+          onClick={onClick}
+        >
+          {title}
+        </Button>
         {/* <div>{JSON.stringify(habits)}</div>
         <div>{JSON.stringify(habit)}</div> */}
-        <Button onClick={() => router.push(`/habits/${habit.goal}`)}>
+        {/* <Button onClick={() => router.push(`/habits/${habit.goal}`)}>
           go to habits
-        </Button>
-        <Error>{error}</Error>
+        </Button> */}
+        {/* <Error>{error}</Error> */}
       </div>
+    </div>
+  );
+}
+
+function RowSection({ text, value, type, updateHabit }) {
+  return (
+    <div className="flex  justify-between ">
+      <span>{text + ":"}</span>
+      <Input
+        type={type}
+        name={text}
+        value={value}
+        onChange={(e) => updateHabit(e.target)}
+      />
     </div>
   );
 }

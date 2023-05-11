@@ -32,7 +32,7 @@ export default function Goal({ goal }) {
         size={"w-[128px] h-[43px]"}
         color="bg-blue"
       >
-        add
+        habit
       </Button>
     </li>
   );
