@@ -21,7 +21,7 @@ export default function Goal({ goal }) {
         {goal.name}
       </h1>
 
-      <div className="">description </div>
+      <div className="">{goal.description} </div>
 
       <Button
         onClick={() => {

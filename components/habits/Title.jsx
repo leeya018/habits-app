@@ -1,8 +1,5 @@
 export default function Title({ children, extra = "" }) {
   return (
-    <div className={`text-2xl  font-bold  underline ${extra} `}>
-      {children}
-      <div className="text-white">ietrientntsranietsraientsra</div>
-    </div>
+    <div className={`text-2xl  font-bold  underline ${extra} `}>{children}</div>
   );
 }

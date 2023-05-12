@@ -218,13 +218,20 @@ const createNewTrace = (amountToAdd) => {
 //     });
 //   }
 // };
-export const addGoal = (name) => async (dispatch, getState) => {
+export const addGoal = (goal) => async (dispatch, getState) => {
   const url = process.env.NEXT_PUBLIC_BASIC_URL + "/api/goal/add";
   try {
-    if (!name) {
+    if (!goal.name || !goal.description) {
       throw new Error("goal must be set");
     }
-    const res = await axios.post(url, { name });
+    await API.addGoal(goal);
+    const goals = await API.getGoals();
+    dispatch({
+      type: types.GET_CATEGORIES,
+      payload: goals,
+    });
+
+    /////////////////
   } catch (error) {
     dispatch({
       type: types.UPDATE_ERROR,

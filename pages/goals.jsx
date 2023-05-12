@@ -9,23 +9,31 @@ import Error from "components/habits/Error";
 import { useEffect } from "react";
 import Goal from "components/habits/Goal";
 
-// getCategories
 export default function Goals({}) {
-  const [name, setName] = useState("");
+  // getCategories
+  const [goalObj, setGoalObj] = useState({
+    name: "",
+    description: "",
+  });
+
   const { goals, error } = useSelector((state) => state.habits);
   const router = useRouter();
   console.log(goals);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (!name) {
-      dispatch(Action.getCategories());
-    }
-  }, [name]);
+    dispatch(Action.getCategories());
+  }, [goalObj]);
+
+  const updateGoal = ({ name, value }) => {
+    dispatch(Action.updateError());
+
+    setGoalObj((prev) => ({ ...prev, [name]: value }));
+  };
 
   const handleAdd = () => {
-    dispatch(Action.addGoal(name));
-    setName("");
+    dispatch(Action.addGoal(goalObj));
+    setGoalObj({ name: "", description: "" });
   };
 
   return (
@@ -45,12 +53,15 @@ export default function Goals({}) {
 
           <Input
             size={"w-[177px] h-[30px]"}
-            name="goal name"
-            value={name}
-            onChange={(e) => {
-              setName(e.target.value);
-              dispatch(Action.updateError(""));
-            }}
+            name="name"
+            value={goalObj.name}
+            onChange={(e) => updateGoal(e.target)}
+          />
+          <Input
+            size={"w-[177px] h-[30px]"}
+            name="description"
+            value={goalObj.description}
+            onChange={(e) => updateGoal(e.target)}
           />
 
           <Button
@@ -64,8 +75,8 @@ export default function Goals({}) {
         </div>
       </div>
       <ul className="m-2 flex gap-2">
-        {goals.map((goal) => (
-          <Goal goal={goal} />
+        {goals.map((goal, key) => (
+          <Goal key={key} goal={goal} />
         ))}
       </ul>
 
