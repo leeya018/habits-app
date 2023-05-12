@@ -55,3 +55,9 @@ export const datesAreEquals = (d1, d2) => {
 export const fullDatesAreEquals = (d1, d2) => {
   return getFullDateStr(new Date(d1)) === getFullDateStr(new Date(d2));
 };
+
+export const addDays = (date, days) => {
+  let result = new Date(date);
+  result.setDate(result.getDate() + days);
+  return result;
+};

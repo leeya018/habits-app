@@ -16,7 +16,6 @@ export default function BasicTable({ items, totalAmount, updateTodaysHabit }) {
   const createData = (data) => {
     const { date, amount, improve, reserve, learn } = data;
     return {
-      //   date: UTIL.getDateStrIsrael(date),
       date: date,
       amount,
       percent: ((amount / totalAmount) * 100).toFixed(0),

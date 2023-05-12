@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Button from "./Button";
 import * as Action from "actions";
@@ -18,6 +18,37 @@ export default function Habit({ habitItem, showHandle = true }) {
   const [isChanged, setIsChanged] = useState(false);
   // const { habits } = useSelector((state) => state.habits);
 
+  useEffect(() => {
+    completLostDays();
+  }, []);
+  const completLostDays = () => {
+    const lastItem = habit.traces.sort(
+      (item1, item2) => item2.date - item1.date
+    )[0];
+
+    const daysDiff = Math.floor(
+      (new Date() - new Date(lastItem.date)) / (1000 * 60 * 60 * 24)
+    );
+    console.log({ daysDiff });
+    let i = 1;
+    let dupTraces = [...habit.traces];
+    while (i <= daysDiff) {
+      const newDay = UTIL.addDays(lastItem.date, i);
+      console.log({ newDay });
+      dupTraces.push({
+        date: newDay,
+        amount: 0,
+        improve: "",
+        reserve: "",
+        learn: "",
+      });
+      i++;
+    }
+    let dupHabit = { ...habit };
+    dupHabit.traces = dupTraces;
+    setHabit(dupHabit);
+    dispatch(Action.editHabit(dupHabit));
+  };
   const removeHabit = () => {
     dispatch(Action.deleteHabit(_id, habit.goal));
   };
@@ -149,15 +180,6 @@ export default function Habit({ habitItem, showHandle = true }) {
         </div>
       </div>
       <ul className="flex flex-col">
-        {/* <Table
-          totalAmount={habit.amount}
-          items={
-            habit.traces.sort(
-              (itemA, itemB) => new Date(itemB.date) - new Date(itemA.date)
-            ) || []
-          }
-          updateTodaysHabit={updateTodaysHabit}
-        /> */}
         <BasicTable
           totalAmount={habit.amount}
           items={
