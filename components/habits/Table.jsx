@@ -28,7 +28,7 @@ export default function BasicTable({ items, totalAmount, updateTodaysHabit }) {
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
         <TableHead>
-          <TableRow>
+          <TableRow sx={{ fontWeight: "bold" }}>
             <TableCell sx={{ fontWeight: "bold" }}>key</TableCell>
             <TableCell sx={{ fontWeight: "bold" }} align="left">
               {" "}
@@ -57,18 +57,29 @@ export default function BasicTable({ items, totalAmount, updateTodaysHabit }) {
             .map((row, key) => (
               <TableRow
                 key={key}
-                sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                sx={{
+                  "&:last-child td, &:last-child th": {
+                    border: 0,
+                  },
+                }}
               >
-                <TableCell align="left">{key + 1}</TableCell>
-                <TableCell align="left">
+                <TableCell align="left" sx={{ minWidth: "10rem" }}>
+                  {key + 1}
+                </TableCell>
+                <TableCell align="left" sx={{ minWidth: "10rem" }}>
                   {UTIL.getDateStrIsrael(row.date)}
                 </TableCell>
-                <TableCell align="left">{row.amount}</TableCell>
-                <TableCell align="left">{row.percent}</TableCell>
+                <TableCell align="left" sx={{ minWidth: "10rem" }}>
+                  {row.amount}
+                </TableCell>
+                <TableCell align="left" sx={{ minWidth: "10rem" }}>
+                  {row.percent}
+                </TableCell>
 
-                <TableCell align="left">
+                <TableCell align="left" sx={{ minWidth: "10rem" }}>
                   <TableSection
                     date={row.date}
+                    width={{ maxWidth: "15rem" }}
                     name={"improve"}
                     value={row.improve}
                     onChange={(e) => {
@@ -76,8 +87,9 @@ export default function BasicTable({ items, totalAmount, updateTodaysHabit }) {
                     }}
                   />
                 </TableCell>
-                <TableCell align="left">
+                <TableCell align="left" sx={{ minWidth: "10rem" }}>
                   <TableSection
+                    width={{ maxWidth: "15rem" }}
                     date={row.date}
                     name={"reserve"}
                     value={row.reserve}
@@ -86,8 +98,9 @@ export default function BasicTable({ items, totalAmount, updateTodaysHabit }) {
                     }}
                   />
                 </TableCell>
-                <TableCell align="left">
+                <TableCell align="left" sx={{ minWidth: "10rem" }}>
                   <TableSection
+                    width={{ maxWidth: "15rem" }}
                     date={row.date}
                     name={"learn"}
                     value={row.learn}
@@ -104,13 +117,14 @@ export default function BasicTable({ items, totalAmount, updateTodaysHabit }) {
   );
 }
 
-function TableSection({ date, name, value, onChange }) {
+function TableSection({ width = {}, date, name, value, onChange }) {
+  console.log(width);
   return (
     <div>
       {UTIL.datesAreEquals(date, new Date()) ? (
         <TextArea name={name} value={value} onChange={onChange} />
       ) : (
-        <div>{value}</div>
+        <div style={width}>{value}</div>
       )}
     </div>
   );
