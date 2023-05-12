@@ -24,12 +24,17 @@ export default function HabitItem({ habit }) {
 
   return (
     <div>
-      <Button onClick={() => router.back()}>back </Button>
-      <Button onClick={() => router.push("/goals")}>goals </Button>
+      <div className="flex absolute top-1 left-1 gap-1">
+        <Button color="bg-gray_dark" onClick={() => router.back()}>
+          back{" "}
+        </Button>
+        <Button color="bg-gray_dark" onClick={() => router.push("/goals")}>
+          goals{" "}
+        </Button>
+      </div>
 
       <div className="flex justify-center">
         <div className="flex flex-col">
-          <Title>HABIT</Title>
           {/* <div>{JSON.stringify(habit)}</div> */}
           <Habit habitItem={habit} />
         </div>

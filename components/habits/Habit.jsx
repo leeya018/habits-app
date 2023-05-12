@@ -7,6 +7,7 @@ import Title from "./Title";
 import { useRouter } from "next/router";
 import Table from "./Table";
 import { useState } from "react";
+import BasicTable from "./Table";
 
 export default function Habit({ habitItem, showHandle = true }) {
   const { _id, name, description, amount, traces, createdAt, mainGoal } =
@@ -74,18 +75,22 @@ export default function Habit({ habitItem, showHandle = true }) {
     router.push(`/graph?habitid=${habit._id}`);
   };
   return (
-    <div>
-      <div className="flex justify-center">
+    <div className="flex flex-col">
+      <div className="flex justify-center ">
         <div
-          className="flex flex-col justify-between  shadow-lg items-center bg-gray w-[350px]
+          className="flex flex-col justify-between relative shadow-lg items-center bg-gray w-[350px]
        h-[250px] m-2 "
         >
           <div
-            className="flex flex-col justify-between relative top-2 h-[70%]"
+            className="flex flex-col justify-between top-2 h-[70%]"
             onClick={() => router.push(`/habit/${habit._id}`)}
           >
             {isChanged && (
-              <Button position={"absolute top-0 right-0"} onClick={saveHabit}>
+              <Button
+                size="w-[90px] h-[43px]"
+                position={"absolute top-0 right-0"}
+                onClick={saveHabit}
+              >
                 save
               </Button>
             )}
@@ -105,39 +110,27 @@ export default function Habit({ habitItem, showHandle = true }) {
 
           {router.pathname.includes("/habit/") ? (
             <div>
-              <div className="flex justify-center">
-                {/* <Button width={"w-full"} onClick={() => addAmountForDid(-1)}> */}
-                <Button width={"w-full"} onClick={() => addTraces(-1)}>
+              <div className="flex justify-center gap-1">
+                <Button size="w-[43px] h-[43px]" onClick={() => addTraces(-1)}>
                   -
                 </Button>
-                <Button width={"w-full"} onClick={() => addTraces(1)}>
+                <Button size="w-[43px] h-[43px]" onClick={() => addTraces(1)}>
                   +
                 </Button>
               </div>
-              <Button width={"w-full"} onClick={showGraph}>
-                show graph
+              <Button
+                size="w-[90px] h-[43px]"
+                position={"absolute top-0 left-0"}
+                onClick={showGraph}
+              >
+                to graph
               </Button>
-              <div>
-                <Title>traces </Title>
-                <ul className="flex flex-col">
-                  <Table
-                    totalAmount={habit.amount}
-                    items={
-                      habit.traces.sort(
-                        (itemA, itemB) =>
-                          new Date(itemB.date) - new Date(itemA.date)
-                      ) || []
-                    }
-                    updateTodaysHabit={updateTodaysHabit}
-                  />
-                </ul>
-              </div>
+              <div>{/* <Title>traces </Title> */}</div>
             </div>
           ) : (
             <div className="flex justify-center gap-2 relative bottom-2">
               <Button
-                // position="relative bottom-[22px]"
-                size={"w-[128px] h-[43px]"}
+                position="absolute top-1 right-0"
                 color="bg-blue"
                 onClick={() => router.push(`/edithabit/${habit._id}`)}
               >
@@ -155,6 +148,26 @@ export default function Habit({ habitItem, showHandle = true }) {
           )}
         </div>
       </div>
+      <ul className="flex flex-col">
+        {/* <Table
+          totalAmount={habit.amount}
+          items={
+            habit.traces.sort(
+              (itemA, itemB) => new Date(itemB.date) - new Date(itemA.date)
+            ) || []
+          }
+          updateTodaysHabit={updateTodaysHabit}
+        /> */}
+        <BasicTable
+          totalAmount={habit.amount}
+          items={
+            habit.traces.sort(
+              (itemA, itemB) => new Date(itemB.date) - new Date(itemA.date)
+            ) || []
+          }
+          updateTodaysHabit={updateTodaysHabit}
+        />
+      </ul>
     </div>
   );
 }

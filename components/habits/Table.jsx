@@ -1,92 +1,106 @@
-import { useState } from "react";
-import Input from "./Input";
+import * as React from "react";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+import Paper from "@mui/material/Paper";
 import * as UTIL from "@/util";
+import Input from "./Input";
 
-function Table({ items, updateTodaysHabit, totalAmount }) {
+// function createData(key, date, amount, percent, improve, reserve, learn) {
+//   return { key, date, amount, percent, improve, reserve, learn };
+// }
+export default function BasicTable({ items, totalAmount, updateTodaysHabit }) {
+  const createData = (data) => {
+    const { date, amount, improve, reserve, learn } = data;
+    return {
+      //   date: UTIL.getDateStrIsrael(date),
+      date: date,
+      amount,
+      percent: ((amount / totalAmount) * 100).toFixed(0),
+      improve,
+      reserve,
+      learn,
+    };
+  };
   return (
-    <table className="border-4 ">
-      <thead>
-        <tr>
-          <th className="border-2 ">key</th>
-          <th className="border-2 ">date</th>
-          <th className="border-2 ">amount</th>
-          <th className="border-2 ">percent</th>
-          <th className="border-2 ">improve</th>
-          <th className="border-2 ">reserve</th>
-          <th className="border-2 ">learn</th>
-        </tr>
-      </thead>
-      <tbody>
-        {items.map((item, index) => {
-          console.log({ index });
-          return (
-            <TableRow
-              key={index}
-              index={index}
-              item={item}
-              totalAmount={totalAmount}
-              updateTodaysHabit={updateTodaysHabit}
-            />
-          );
-        })}
-      </tbody>
-    </table>
+    <TableContainer component={Paper}>
+      <Table sx={{ minWidth: 650 }} aria-label="simple table">
+        <TableHead>
+          <TableRow>
+            <TableCell sx={{ fontWeight: "bold" }}>key</TableCell>
+            <TableCell sx={{ fontWeight: "bold" }} align="left">
+              {" "}
+              date
+            </TableCell>
+            <TableCell sx={{ fontWeight: "bold" }} align="left">
+              amount
+            </TableCell>
+            <TableCell sx={{ fontWeight: "bold" }} align="left">
+              completed&nbsp;(%)
+            </TableCell>
+            <TableCell sx={{ fontWeight: "bold" }} align="left">
+              improve
+            </TableCell>
+            <TableCell sx={{ fontWeight: "bold" }} align="left">
+              reserve
+            </TableCell>
+            <TableCell sx={{ fontWeight: "bold" }} align="left">
+              learn
+            </TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {items
+            .map((data) => createData(data))
+            .map((row, key) => (
+              <TableRow
+                key={key}
+                sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+              >
+                <TableCell align="left">{key + 1}</TableCell>
+                <TableCell align="left">
+                  {UTIL.getDateStrIsrael(row.date)}
+                </TableCell>
+                <TableCell align="left">{row.amount}</TableCell>
+                <TableCell align="left">{row.percent}</TableCell>
+
+                <TableCell align="left">
+                  <Input
+                    name="improve"
+                    disabled={!UTIL.datesAreEquals(row.date, new Date())}
+                    value={row.improve}
+                    onChange={(e) => {
+                      updateTodaysHabit(e.target, key);
+                    }}
+                  />
+                </TableCell>
+                <TableCell align="left">
+                  <Input
+                    name="reserve"
+                    disabled={!UTIL.datesAreEquals(row.date, new Date())}
+                    value={row.reserve}
+                    onChange={(e) => {
+                      updateTodaysHabit(e.target, key);
+                    }}
+                  />
+                </TableCell>
+                <TableCell align="left">
+                  <Input
+                    name="learn"
+                    disabled={!UTIL.datesAreEquals(row.date, new Date())}
+                    value={row.learn}
+                    onChange={(e) => {
+                      updateTodaysHabit(e.target, key);
+                    }}
+                  />
+                </TableCell>
+              </TableRow>
+            ))}
+        </TableBody>
+      </Table>
+    </TableContainer>
   );
 }
-
-function TableRow({ index, item, updateTodaysHabit, totalAmount }) {
-  return (
-    <tr
-      className={`border-4 ${
-        totalAmount <= item.amount ? "bg-green-500" : "bg-white"
-      }`}
-      key={index}
-    >
-      <td className="border-4 ">{index + 1}</td>
-      <td className="border-4 ">{UTIL.getDateStrIsrael(item.date)}</td>
-      {/* <td className="border-4 ">{UTIL.getDateStr(item.date)}</td> */}
-
-      <td className="border-4 "> {item.amount}</td>
-      <td className="border-4 ">
-        {" "}
-        {((item.amount / totalAmount) * 100).toFixed(0)}%
-      </td>
-      <td className="border-4 ">
-        <Input
-          name="improve"
-          disabled={!UTIL.datesAreEquals(item.date, new Date())}
-          value={item.improve}
-          onChange={(e) => {
-            updateTodaysHabit(e.target, index);
-          }}
-        />
-        <div className="text-2xl">hellow</div>
-        <div className="text-2xl">hellow</div>
-        <div className="text-2xl">hellow</div>
-        <div className="text-2xl">hellow</div>
-      </td>
-      <td className="border-4 ">
-        <Input
-          name="reserve"
-          disabled={!UTIL.datesAreEquals(item.date, new Date())}
-          value={item.reserve}
-          onChange={(e) => {
-            updateTodaysHabit(e.target, index);
-          }}
-        />
-      </td>
-      <td className="border-4 ">
-        <Input
-          name="learn"
-          disabled={!UTIL.datesAreEquals(item.date, new Date())}
-          value={item.learn}
-          onChange={(e) => {
-            updateTodaysHabit(e.target, index);
-          }}
-        />
-      </td>
-    </tr>
-  );
-}
-
-export default Table;
