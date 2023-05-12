@@ -10,7 +10,7 @@ import { useState } from "react";
 import BasicTable from "./Table";
 
 export default function Habit({ habitItem, showTable = false }) {
-  const { _id, name, description, amount, traces, createdAt, mainGoal } =
+  const { _id, name, description, amount, traces, createdAt, goal } =
     habitItem;
   const dispatch = useDispatch();
   const router = useRouter();
@@ -133,7 +133,7 @@ export default function Habit({ habitItem, showTable = false }) {
               text={"createdAt"}
               value={UTIL.getDateStrIsrael(createdAt)}
             />
-            <RowSection text={"mainGoal"} value={mainGoal} />
+            <RowSection text={"goal"} value={goal} />
           </div>
 
           {router.pathname.includes("/habit/") ? (

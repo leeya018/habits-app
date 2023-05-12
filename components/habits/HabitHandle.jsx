@@ -54,12 +54,11 @@ export default function HabitHandle({
               type={"number"}
               updateHabit={updateHabit}
             />
-            <RowSection
-              text={"mainGoal"}
-              value={habit.mainGoal}
-              updateHabit={updateHabit}
-              type={"text"}
-            />
+            <div className="flex justify-between">
+              <span>goal : </span>
+
+              <span className="self-baseline text-start w-[66%] ">{goal}</span>
+            </div>
           </div>
           <Button size={"w-[128px] h-[43px]"} color="bg-blue" onClick={onClick}>
             {title}
@@ -75,7 +74,7 @@ export default function HabitHandle({
 
 function RowSection({ inputRef, text, value, type, updateHabit }) {
   return (
-    <div className="flex  justify-between ">
+    <div className="flex justify-between ">
       <span>{text + ":"}</span>
       <Input
         inputRef={inputRef}

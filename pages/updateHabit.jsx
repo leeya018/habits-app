@@ -46,8 +46,8 @@ export default function Handle({ id }) {
         />
         <input
           type="text"
-          name="mainGoal"
-          value={habit.mainGoal}
+          name="goal"
+          value={habit.goal}
           onChange={(e) => updateHabit(e.target)}
         />
       </div>

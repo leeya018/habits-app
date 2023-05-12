@@ -15,7 +15,7 @@ export default function Goal({ goal }) {
        h-[250px] "
     >
       <h1
-        className="font-medium text-[18px] text-white w-[177px] 
+        className="font-medium text-[18px]  w-[177px] 
           h-[30px] relative top-[44px] text-center"
       >
         {goal.name}
