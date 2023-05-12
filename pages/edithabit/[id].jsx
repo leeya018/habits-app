@@ -8,7 +8,20 @@ import * as API from "lib/api";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
+import { Inter, Roboto } from "next/font/google";
 
+// const montserrat = new Montserrat({
+//   weigh: ["400"],
+//   subset: ["latin"],
+//   variable: "--font-montserrat",
+// });
+
+const roboto = Roboto({
+  weight: "400",
+  subsets: ["latin"],
+});
+
+const inter = Inter({ subsets: ["latin"] });
 export async function getServerSideProps(context) {
   const { id } = context.query;
   const habitItem = await API.getHabit(id);
@@ -51,14 +64,22 @@ export default function Edit({ habitItem }) {
   };
   return (
     <div>
-      <Button
-        color="bg-gray-500"
-        onClick={() => {
-          router.back();
-        }}
-      >
-        go back
-      </Button>
+      <div className="flex absolute top-1 gap-1 left-1 ">
+        <Button
+          color="bg-gray_dark"
+          onClick={() => {
+            router.back();
+          }}
+        >
+          go back
+        </Button>
+        <Button
+          color="bg-gray_dark"
+          onClick={() => router.push(`/habits/${habit.goal}`)}
+        >
+          go to habits
+        </Button>
+      </div>
       <HabitHandle
         goal={habit.goal}
         onClick={editHabitHandle}
@@ -66,6 +87,7 @@ export default function Edit({ habitItem }) {
         habit={habit}
         title={"Edit Habit"}
       />
+
       {/* <div>{JSON.stringify(habit)}</div> */}
     </div>
   );

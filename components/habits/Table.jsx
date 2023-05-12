@@ -60,6 +60,10 @@ function TableRow({ index, item, updateTodaysHabit, totalAmount }) {
             updateTodaysHabit(e.target, index);
           }}
         />
+        <div className="text-2xl">hellow</div>
+        <div className="text-2xl">hellow</div>
+        <div className="text-2xl">hellow</div>
+        <div className="text-2xl">hellow</div>
       </td>
       <td className="border-4 ">
         <Input
