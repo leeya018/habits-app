@@ -13,16 +13,16 @@ export default function Goal({ goal }) {
   return (
     <li
       className="flex flex-col justify-between  shadow-lg items-center bg-gray w-[350px]
-       h-[250px] "
+       h-[250px] px-2"
     >
       <h1
         className="font-medium text-[18px]  w-[177px] 
-          h-[30px] relative top-[44px] text-center"
+          h-[30px] relative top-[20px] text-center"
       >
         <Title> {goal.name}</Title>
       </h1>
 
-      <div className="">{goal.description} </div>
+      <div className="pt-2">{goal.description} </div>
 
       <Button
         onClick={() => {

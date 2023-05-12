@@ -10,8 +10,7 @@ import { useState } from "react";
 import BasicTable from "./Table";
 
 export default function Habit({ habitItem, showTable = false }) {
-  const { _id, name, description, amount, traces, createdAt, goal } =
-    habitItem;
+  const { _id, name, description, amount, traces, createdAt, goal } = habitItem;
   const dispatch = useDispatch();
   const router = useRouter();
   const [habit, setHabit] = useState(habitItem);
@@ -113,7 +112,7 @@ export default function Habit({ habitItem, showTable = false }) {
        h-[250px] m-2 "
         >
           <div
-            className="flex flex-col justify-between top-2 h-[70%]"
+            className="px-2 flex flex-col justify-between top-2 h-[70%]"
             onClick={() => router.push(`/habit/${habit._id}`)}
           >
             {isChanged && (

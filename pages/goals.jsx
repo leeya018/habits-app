@@ -46,7 +46,7 @@ export default function Goals({}) {
         >
           <h1
             className="font-medium text-[18px]  w-[177px] 
-          h-[30px] relative top-[44px] text-center"
+          h-[30px] relative top-[22px] text-center"
           >
             Add Goal:{" "}
           </h1>
