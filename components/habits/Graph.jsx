@@ -26,7 +26,7 @@ ChartJS.register(
   Legend
 );
 
-export default function Graph({ items, totalAmount }) {
+export default function Graph({ items, totalAmount, goalName, habitName }) {
   const router = useRouter();
   console.log({ totalAmount });
   const options = {
@@ -39,35 +39,6 @@ export default function Graph({ items, totalAmount }) {
         display: true,
         text: "Chart.js Line Chart",
       },
-      // scales: {
-      //   y: {
-      //     min: 0, // minimum value
-      //     max: 100, // maximum value
-      //   },
-      // },
-      scales: {
-        y: {
-          suggestedMin: 50,
-          suggestedMax: 100,
-          // suggestedMax: totalAmount,
-        },
-      },
-      // scales: {
-      //   yAxes: [
-      //     {
-      //       ticks: {
-      //         min: 0, // minimum value
-      //         max: 100, // maximum value
-      //       },
-      //     },
-      //   ],
-      // },
-      // scales: {
-      //   yAxis: {
-      //     min: 0,
-      //     max: 100,
-      //   },
-      // },
     },
   };
 
@@ -77,21 +48,30 @@ export default function Graph({ items, totalAmount }) {
     labels,
     datasets: [
       {
-        fill: true,
-        label: "Dataset 2",
+        label: "Your Result",
         data: items.map((data) => data.amount),
         borderColor: "rgb(53, 162, 235)",
         backgroundColor: "rgba(53, 162, 235, 0.5)",
       },
+      {
+        label: "Goal Result",
+        data: items.map((_) => totalAmount),
+        borderColor: "rgba(25, 207, 62, 0.5)",
+        backgroundColor: "rgba(25, 207, 62, 0.5)",
+      },
     ],
   };
+
   return (
     <div>
       <Button position="absolute top-1" onClick={() => router.back()}>
         back to habit
       </Button>
+      {/* <Title>{goalName}</Title>
+      <Title>{habitName}</Title> */}
       <div className="scale-75">
-        <Line options={options} data={data} items={items} />;
+        <Line options={options} data={data} items={items} />
+        {/* <Line options={options} data={dataGoal} items={items} />; */}
       </div>
     </div>
   );

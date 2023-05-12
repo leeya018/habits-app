@@ -74,8 +74,6 @@ export default function HabitHandle({
 }
 
 function RowSection({ inputRef, text, value, type, updateHabit }) {
-  console.log({ ref, inputRef });
-
   return (
     <div className="flex  justify-between ">
       <span>{text + ":"}</span>

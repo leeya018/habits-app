@@ -9,7 +9,7 @@ import Table from "./Table";
 import { useState } from "react";
 import BasicTable from "./Table";
 
-export default function Habit({ habitItem, showHandle = true }) {
+export default function Habit({ habitItem, showTable = false }) {
   const { _id, name, description, amount, traces, createdAt, mainGoal } =
     habitItem;
   const dispatch = useDispatch();
@@ -125,8 +125,6 @@ export default function Habit({ habitItem, showHandle = true }) {
                 save
               </Button>
             )}
-            {/* <div>id : {_id}</div> */}
-            {/* <div className="flex justify-center">name : {name}</div> */}
             <Title extra={"flex justify-center"}>{name}</Title>
 
             <RowSection text={"description"} value={description} />
@@ -155,12 +153,10 @@ export default function Habit({ habitItem, showHandle = true }) {
               >
                 to graph
               </Button>
-              <div>{/* <Title>traces </Title> */}</div>
             </div>
           ) : (
             <div className="flex justify-center gap-2 relative bottom-2">
               <Button
-                position="absolute top-1 right-0"
                 color="bg-blue"
                 onClick={() => router.push(`/edithabit/${habit._id}`)}
               >
@@ -178,17 +174,19 @@ export default function Habit({ habitItem, showHandle = true }) {
           )}
         </div>
       </div>
-      <ul className="flex flex-col">
-        <BasicTable
-          totalAmount={habit.amount}
-          items={
-            habit.traces.sort(
-              (itemA, itemB) => new Date(itemB.date) - new Date(itemA.date)
-            ) || []
-          }
-          updateTodaysHabit={updateTodaysHabit}
-        />
-      </ul>
+      {showTable && (
+        <ul className="flex flex-col">
+          <BasicTable
+            totalAmount={habit.amount}
+            items={
+              habit.traces.sort(
+                (itemA, itemB) => new Date(itemB.date) - new Date(itemA.date)
+              ) || []
+            }
+            updateTodaysHabit={updateTodaysHabit}
+          />
+        </ul>
+      )}
     </div>
   );
 }

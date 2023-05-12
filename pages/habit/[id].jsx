@@ -36,7 +36,7 @@ export default function HabitItem({ habit }) {
       <div className="flex justify-center">
         <div className="flex flex-col">
           {/* <div>{JSON.stringify(habit)}</div> */}
-          <Habit habitItem={habit} />
+          <Habit habitItem={habit} showTable={true} />
         </div>
       </div>
     </div>
