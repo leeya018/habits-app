@@ -67,9 +67,9 @@ export default function BasicTable({ items, totalAmount, updateTodaysHabit }) {
                 <TableCell align="left">{row.percent}</TableCell>
 
                 <TableCell align="left">
-                  <Input
-                    name="improve"
-                    disabled={!UTIL.datesAreEquals(row.date, new Date())}
+                  <TableSection
+                    date={row.date}
+                    name={"improve"}
                     value={row.improve}
                     onChange={(e) => {
                       updateTodaysHabit(e.target, key);
@@ -77,9 +77,9 @@ export default function BasicTable({ items, totalAmount, updateTodaysHabit }) {
                   />
                 </TableCell>
                 <TableCell align="left">
-                  <Input
-                    name="reserve"
-                    disabled={!UTIL.datesAreEquals(row.date, new Date())}
+                  <TableSection
+                    date={row.date}
+                    name={"reserve"}
                     value={row.reserve}
                     onChange={(e) => {
                       updateTodaysHabit(e.target, key);
@@ -87,9 +87,9 @@ export default function BasicTable({ items, totalAmount, updateTodaysHabit }) {
                   />
                 </TableCell>
                 <TableCell align="left">
-                  <Input
-                    name="learn"
-                    disabled={!UTIL.datesAreEquals(row.date, new Date())}
+                  <TableSection
+                    date={row.date}
+                    name={"learn"}
                     value={row.learn}
                     onChange={(e) => {
                       updateTodaysHabit(e.target, key);
@@ -101,5 +101,31 @@ export default function BasicTable({ items, totalAmount, updateTodaysHabit }) {
         </TableBody>
       </Table>
     </TableContainer>
+  );
+}
+
+function TableSection({ date, name, value, onChange }) {
+  return (
+    <div>
+      {UTIL.datesAreEquals(date, new Date()) ? (
+        <TextArea name={name} value={value} onChange={onChange} />
+      ) : (
+        <div>{value}</div>
+      )}
+    </div>
+  );
+}
+
+function TextArea({ name, value, onChange }) {
+  return (
+    <textarea
+      className="border-2"
+      name={name}
+      value={value}
+      onChange={onChange}
+      id=""
+      cols="30"
+      rows="6"
+    ></textarea>
   );
 }

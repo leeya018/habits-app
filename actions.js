@@ -230,8 +230,6 @@ export const addGoal = (goal) => async (dispatch, getState) => {
       type: types.GET_CATEGORIES,
       payload: goals,
     });
-
-    /////////////////
   } catch (error) {
     dispatch({
       type: types.UPDATE_ERROR,
