@@ -1,6 +1,7 @@
 export default function Input({
   type = "text",
   name,
+  inputRef = null,
   onChange,
   value,
   disabled,
@@ -9,6 +10,7 @@ export default function Input({
   return (
     <input
       className={`border-2  ${size}`}
+      ref={inputRef}
       type={type}
       disabled={disabled}
       placeholder={name}

@@ -25,9 +25,9 @@ export default function Habit({ habitItem, showHandle = true }) {
     const lastItem = habit.traces.sort(
       (item1, item2) => item2.date - item1.date
     )[0];
-
+    if (!lastItem) return;
     const daysDiff = Math.floor(
-      (new Date() - new Date(lastItem.date)) / (1000 * 60 * 60 * 24)
+      (new Date() - new Date(lastItem?.date)) / (1000 * 60 * 60 * 24)
     );
     console.log({ daysDiff });
     let i = 1;
@@ -135,8 +135,7 @@ export default function Habit({ habitItem, showHandle = true }) {
               text={"createdAt"}
               value={UTIL.getDateStrIsrael(createdAt)}
             />
-
-            {/* <div>mainGoal : {mainGoal}</div> */}
+            <RowSection text={"mainGoal"} value={mainGoal} />
           </div>
 
           {router.pathname.includes("/habit/") ? (
