@@ -21,7 +21,12 @@ export default function Homepage({ habit }) {
   return (
     <div className="">
       <h1>graph</h1>
-      <Graph items={dataArr} totalAmount={parseInt(habit.amount)} />
+      <Graph
+        items={dataArr.sort(
+          (dataA, dataB) => new Date(dataA.date) - new Date(dataB.date)
+        )}
+        totalAmount={parseInt(habit.amount)}
+      />
     </div>
   );
 }
