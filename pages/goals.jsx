@@ -74,7 +74,7 @@ export default function Goals({}) {
           </Button>
         </div>
       </div>
-      <ul className="m-2 flex gap-2">
+      <ul className="m-2 flex flex-wrap justify-center gap-2">
         {goals.map((goal, key) => (
           <Goal key={key} goal={goal} />
         ))}

@@ -19,26 +19,35 @@ export async function getServerSideProps(context) {
 }
 export default function AddHabit({ goal }) {
   const router = useRouter();
-  const dispatch = useDispatch();
 
   return (
     <div>
-      <Button
-        color="bg-gray-500"
-        onClick={() => {
-          router.back();
-        }}
-      >
-        go back
-      </Button>
-      <Button
-        position="absolute top-1 left-1"
-        onClick={() => {
-          router.push(`/addhabit/${goal}`);
-        }}
-      >
-        add habit{" "}
-      </Button>
+      <div className="flex gap-1 ">
+        <Button
+          color="bg-gray_dark"
+          onClick={() => {
+            router.back();
+          }}
+        >
+          go back
+        </Button>
+        <Button
+          color="bg-gray_dark"
+          onClick={() => {
+            router.push(`/goals`);
+          }}
+        >
+          goals{" "}
+        </Button>
+        <Button
+          color="bg-blue"
+          onClick={() => {
+            router.push(`/addhabit/${goal}`);
+          }}
+        >
+          add habit{" "}
+        </Button>
+      </div>
       <AllHabits goal={goal} />
     </div>
   );

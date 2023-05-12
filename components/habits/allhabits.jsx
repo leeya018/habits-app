@@ -23,7 +23,7 @@ export default function AllHabits({ goal }) {
       <div className="flex flex-col">
         {habits.length === 0 && <div>{"habit list is empty"}</div>}
 
-        <ul>
+        <ul className="flex flex-wrap justify-center">
           {habits
             .sort((h1, h2) => {
               console.log({ d1: h1.createdAt, d2: h2.createdAt });

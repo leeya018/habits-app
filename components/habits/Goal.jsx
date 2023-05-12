@@ -3,6 +3,7 @@ import Button from "./Button";
 import * as Action from "actions";
 import { useRouter } from "next/router";
 import { useDispatch } from "react-redux";
+import Title from "./Title";
 
 // getCategories
 export default function Goal({ goal }) {
@@ -18,7 +19,7 @@ export default function Goal({ goal }) {
         className="font-medium text-[18px]  w-[177px] 
           h-[30px] relative top-[44px] text-center"
       >
-        {goal.name}
+        <Title> {goal.name}</Title>
       </h1>
 
       <div className="">{goal.description} </div>
@@ -32,7 +33,7 @@ export default function Goal({ goal }) {
         size={"w-[128px] h-[43px]"}
         color="bg-blue"
       >
-        habit
+        see habits
       </Button>
     </li>
   );
