@@ -90,15 +90,16 @@ export default function Habit({ habitItem, showHandle = true }) {
               </Button>
             )}
             {/* <div>id : {_id}</div> */}
-            <Title extra={"flex justify-center"}>name</Title>
             {/* <div className="flex justify-center">name : {name}</div> */}
-            <div className="flex justify-center">
-              description : {description}
-            </div>
-            <div className="flex justify-center">amount : {amount}</div>
-            <div className="flex justify-center">
-              createdAt : {UTIL.getDateStrIsrael(createdAt)}
-            </div>
+            <Title extra={"flex justify-center"}>{name}</Title>
+
+            <RowSection text={"description"} value={description} />
+            <RowSection text={"amount"} value={amount} />
+            <RowSection
+              text={"createdAt"}
+              value={UTIL.getDateStrIsrael(createdAt)}
+            />
+
             {/* <div>mainGoal : {mainGoal}</div> */}
           </div>
 
@@ -154,6 +155,16 @@ export default function Habit({ habitItem, showHandle = true }) {
           )}
         </div>
       </div>
+    </div>
+  );
+}
+
+function RowSection({ text, value }) {
+  return (
+    <div className="flex ">
+      <span>{text + " : "}</span>
+      <span />
+      {value}
     </div>
   );
 }

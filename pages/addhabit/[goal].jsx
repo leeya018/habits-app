@@ -66,7 +66,8 @@ export default function AddHabit({ goal }) {
   return (
     <div>
       <Button
-        color="bg-gray-500"
+        position="absolute top-1 left-1"
+        color="bg-gray_dark"
         onClick={() => {
           router.back();
         }}

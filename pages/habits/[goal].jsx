@@ -32,6 +32,7 @@ export default function AddHabit({ goal }) {
         go back
       </Button>
       <Button
+        position="absolute top-1 left-1"
         onClick={() => {
           router.push(`/addhabit/${goal}`);
         }}
