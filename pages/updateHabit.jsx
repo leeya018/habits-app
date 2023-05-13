@@ -29,25 +29,25 @@ export default function Handle({ id }) {
         <input
           type="text"
           name="name"
-          value={habit.name}
+          value={habit?.name}
           onChange={(e) => updateHabit(e.target)}
         />
         <input
           type="text"
           name="description"
-          value={habit.description}
+          value={habit?.description}
           onChange={(e) => updateHabit(e.target)}
         />
         <input
           type="text"
           name="amount"
-          value={habit.amount}
+          value={habit?.amount}
           onChange={(e) => updateHabit(e.target)}
         />
         <input
           type="text"
           name="goal"
-          value={habit.goal}
+          value={habit?.goal}
           onChange={(e) => updateHabit(e.target)}
         />
       </div>

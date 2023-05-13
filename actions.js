@@ -1,4 +1,3 @@
-import * as UTIL from "@/util";
 import * as types from "./types";
 import axios from "axios";
 
