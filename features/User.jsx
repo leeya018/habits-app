@@ -1,5 +1,4 @@
-
-mport Label from "components/Label";
+import Label from "components/Label";
 import { AiFillLike, AiFillDislike } from "react-icons/ai";
 
 export default function User({
