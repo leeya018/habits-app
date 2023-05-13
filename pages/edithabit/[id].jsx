@@ -1,12 +1,9 @@
 import * as Action from "actions";
-import axios from "axios";
 import Button from "components/habits/Button";
 import HabitHandle from "components/habits/HabitHandle";
-import Input from "components/habits/Input";
-import Title from "components/habits/Title";
 import * as API from "lib/api";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Inter, Roboto } from "next/font/google";
 

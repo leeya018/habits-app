@@ -1,12 +1,8 @@
 import * as ACTION from "actions";
 import Button from "components/habits/Button";
-import Input from "components/habits/Input";
-import Title from "components/habits/Title";
 import { useRouter } from "next/router";
 import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { v4 as uuidv4 } from "uuid";
-import Error from "components/habits/Error";
+import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import AllHabits from "components/habits/allhabits";
 import HabitHandle from "components/habits/HabitHandle";

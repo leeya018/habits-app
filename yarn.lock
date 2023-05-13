@@ -1422,6 +1422,17 @@ eslint-module-utils@^2.7.4:
   dependencies:
     debug "^3.2.7"
 
+eslint-plugin-autofix@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-autofix/-/eslint-plugin-autofix-1.1.0.tgz#157231b9e0f787e3d28e924da05cca46864960ce"
+  integrity sha512-aKQ7s6CTeJRJgnhSlsGI7kQhnNCa1q3UYBM+9PTEgvdC5b+GjV/SZA233VNqkoBldb7/BkeWBRjorUjxeUfrxA==
+  dependencies:
+    eslint-rule-composer "^0.3.0"
+    espree "^9.0.0"
+    esutils "^2.0.2"
+    lodash "^4.17.20"
+    string-similarity "^4.0.3"
+
 eslint-plugin-import@^2.26.0, eslint-plugin-import@^2.27.5:
   version "2.27.5"
   resolved "https://registry.yarnpkg.com/eslint-plugin-import/-/eslint-plugin-import-2.27.5.tgz#876a6d03f52608a3e5bb439c2550588e51dd6c65"
@@ -1562,7 +1573,7 @@ eslint@8.36.0:
     strip-json-comments "^3.1.0"
     text-table "^0.2.0"
 
-espree@^9.5.0, espree@^9.5.2:
+espree@^9.0.0, espree@^9.5.0, espree@^9.5.2:
   version "9.5.2"
   resolved "https://registry.yarnpkg.com/espree/-/espree-9.5.2.tgz#e994e7dc33a082a7a82dceaf12883a829353215b"
   integrity sha512-7OASN1Wma5fum5SrNhFMAMJxOUAbhyfQ8dQ//PJaJbNw0URTPWqIghHWt1MmAANKhHZIYOHruW4Kw4ruUWOdGw==
@@ -2318,7 +2329,7 @@ lodash.merge@^4.6.2:
   resolved "https://registry.yarnpkg.com/lodash.merge/-/lodash.merge-4.6.2.tgz#558aa53b43b661e1925a0afdfa36a9a1085fe57a"
   integrity sha512-0KpjqXRVvrYyCsX1swR/XTK0va6VQkQM6MNo7PqW77ByjAhoARA8EfrP1N4+KlKj8YS0ZUCtRT/YUuhyYDujIQ==
 
-lodash@^4.17.21:
+lodash@^4.17.20, lodash@^4.17.21:
   version "4.17.21"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.21.tgz#679591c564c3bffaae8454cf0b3df370c3d6911c"
   integrity sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==
@@ -3099,6 +3110,11 @@ stop-iteration-iterator@^1.0.0:
   integrity sha512-iCGQj+0l0HOdZ2AEeBADlsRC+vsnDsZsbdSiH1yNSjcfKM7fdpCMfqAL/dwF5BLiw/XhRft/Wax6zQbhq2BcjQ==
   dependencies:
     internal-slot "^1.0.4"
+
+string-similarity@^4.0.3:
+  version "4.0.4"
+  resolved "https://registry.yarnpkg.com/string-similarity/-/string-similarity-4.0.4.tgz#42d01ab0b34660ea8a018da8f56a3309bb8b2a5b"
+  integrity sha512-/q/8Q4Bl4ZKAPjj8WerIBJWALKkaPRfrvhfF8k/B23i4nzrlRj2/go1m90In7nG/3XDSbOo0+pu6RvCTM9RGMQ==
 
 string.prototype.matchall@^4.0.8:
   version "4.0.8"

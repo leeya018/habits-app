@@ -3,17 +3,14 @@ import { useSelector, useDispatch } from "react-redux";
 import mexican from "@/images/mexican.jpg";
 import { minLevel } from "@/util";
 import Thrill from "components/Thrill";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import {
   updatePositions,
   addLevel,
-  addPoints,
   addThrill,
   resetGame,
   clearThrills,
   updateStop,
-  resetLevl,
-  intervalTimerProccess,
   increaseSpeedLevel,
 } from "actions";
 import Input from "components/math/Input";

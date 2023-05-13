@@ -1,5 +1,4 @@
 import * as types from "../types";
-import { minLevel } from "@/util";
 const levelUp = 50;
 const startLevel = 700;
 

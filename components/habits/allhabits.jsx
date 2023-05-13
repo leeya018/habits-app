@@ -1,5 +1,4 @@
 import * as Action from "actions";
-import Button from "components/habits/Button";
 import Habit from "components/habits/Habit";
 import { useRouter } from "next/router";
 import { useEffect } from "react";

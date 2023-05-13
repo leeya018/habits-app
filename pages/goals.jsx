@@ -1,11 +1,9 @@
 import * as Action from "actions";
 import Button from "components/habits/Button";
-import Title from "components/habits/Title";
 import Input from "components/habits/Input";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/router";
-import Error from "components/habits/Error";
 import { useEffect } from "react";
 import Goal from "components/habits/Goal";
 

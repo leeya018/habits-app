@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import Button from "./Button";
 import * as Action from "actions";
 import { useRouter } from "next/router";

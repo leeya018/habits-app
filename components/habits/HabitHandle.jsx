@@ -2,9 +2,8 @@ import Button from "components/habits/Button";
 import Input from "components/habits/Input";
 import Title from "components/habits/Title";
 import { useRouter } from "next/router";
-import { useRef, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { v4 as uuidv4 } from "uuid";
+import { useRef } from "react";
+import { useSelector } from "react-redux";
 import Error from "components/habits/Error";
 import { useEffect } from "react";
 

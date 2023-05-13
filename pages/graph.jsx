@@ -1,6 +1,5 @@
 import Graph from "components/habits/Graph";
 import { useRouter } from "next/router";
-import { useSelector } from "react-redux";
 import * as API from "lib/api";
 
 export async function getServerSideProps(context) {

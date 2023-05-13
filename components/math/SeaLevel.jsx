@@ -1,7 +1,4 @@
-import { useState } from "react";
 import { useSelector } from "react-redux";
-import { useRef } from "react";
-import { useEffect } from "react";
 
 export default function SeaLevel({}) {
   const { level } = useSelector((state) => state.math);

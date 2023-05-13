@@ -1,5 +1,4 @@
 import nc from "next-connect";
-import fs from "fs";
 import * as DB from "lib/db";
 
 const handler = nc({ attachParams: true });

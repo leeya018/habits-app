@@ -1,11 +1,10 @@
-import { useEffect, useRef } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
 import Button from "./Button";
 import * as Action from "actions";
 import * as UTIL from "@/util";
 import Title from "./Title";
 import { useRouter } from "next/router";
-import Table from "./Table";
 import { useState } from "react";
 import BasicTable from "./Table";
 

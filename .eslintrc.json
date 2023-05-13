@@ -1,11 +1,12 @@
 {
   "extends": "next/core-web-vitals",
-  "plugins": ["unused-imports"],
+  "plugins": ["import", "unused-imports", "autofix"],
   "rules": {
     "@next/next/no-img-element": "off",
     "react-hooks/rules-of-hooks": "off",
     "react/jsx-key": "off",
     "react-hooks/exhaustive-deps": "off",
-    "unused-imports/no-unused-imports": "error"
+    "unused-imports/no-unused-imports": "error",
+    "autofix/no-unused-imports": "error"
   }
 }
