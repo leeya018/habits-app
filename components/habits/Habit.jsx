@@ -54,9 +54,9 @@ export default function Habit({ habitItem, showTable = false }) {
     setHabit(dupHabit);
     dispatch(Action.editHabit(dupHabit));
   };
-  const removeHabit = () => {
-    dispatch(Action.deleteHabit(_id, habit.goal));
-  };
+  // const removeHabit = () => {
+  //   dispatch(Action.deleteHabit(_id, habit.goal));
+  // };
 
   const createNewTrace = () => {
     return {
@@ -100,6 +100,7 @@ export default function Habit({ habitItem, showTable = false }) {
 
     setIsChanged(true);
   };
+
   const saveHabit = () => {
     console.log("saveHabit");
     console.log({ habit });
@@ -130,18 +131,20 @@ export default function Habit({ habitItem, showTable = false }) {
                     className="text-red"
                     onClick={() => {
                       dispatch(Action.updateModalShow(true));
-                      dispatch(Action.updateChosenHabit(habit));
+                      console.log("chosent on trash =>  " + habitItem._id);
+                      console.log({ trashHabit: habitItem });
+                      dispatch(Action.updateChosenHabit(habitItem));
                     }}
                   />
-                  <AiOutlineEdit className="text-blue" />
+                  <AiOutlineEdit
+                    onClick={() => router.push(`/edithabit/${habit._id}`)}
+                    className="text-blue"
+                  />
                 </div>
               </div>
             )}
           </div>
-          <div
-            className="px-2 flex flex-col justify-between top-2 h-[70%]"
-            onClick={() => router.push(`/habit/${habit._id}`)}
-          >
+          <div className="px-2 flex flex-col justify-between top-2 h-[70%]">
             {isChanged && (
               <Button
                 size="w-[90px] h-[43px]"
@@ -183,17 +186,9 @@ export default function Habit({ habitItem, showTable = false }) {
             <div className="flex justify-center gap-2 relative bottom-2">
               <Button
                 color="bg-blue"
-                onClick={() => router.push(`/edithabit/${habit._id}`)}
+                onClick={() => router.push(`/habit/${habit._id}`)}
               >
-                edit
-              </Button>
-              <Button
-                // position="relative bottom-[22px]"
-                size={"w-[128px] h-[43px]"}
-                color="bg-blue"
-                onClick={removeHabit}
-              >
-                delete
+                Details
               </Button>
             </div>
           )}

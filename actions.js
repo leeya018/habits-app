@@ -31,10 +31,11 @@ export const deleteHabit = (id, goal) => async (dispatch) => {
     const isDeleted = await API.deleteHabit(id);
     dispatch(getHabits(goal));
   } catch (error) {
-    console.log(error.message);
+    console.log("deleteHabit ->" + error.message);
+    console.log("deleteHabit ->" + error.message);
     dispatch({
       type: types.UPDATE_ERROR,
-      payload: error.message,
+      payload: error.message + " => " + error.response?.data,
     });
   }
 };

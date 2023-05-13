@@ -42,6 +42,7 @@ const habitReducer = (state = habitInitial, { type, payload }) => {
     case types.UPDATE_COSEN_CATEGORY:
       return { ...state, chosenGoal: payload };
     case types.UPDATE_CHOSEN_HABIT:
+      console.log({ payload });
       return { ...state, chosenHabit: payload };
     case types.SHOW_MODAL:
       return { ...state, showModal: payload };
