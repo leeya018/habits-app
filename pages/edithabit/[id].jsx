@@ -13,12 +13,6 @@ import { Inter, Roboto } from "next/font/google";
 //   variable: "--font-montserrat",
 // });
 
-const roboto = Roboto({
-  weight: "400",
-  subsets: ["latin"],
-});
-
-const inter = Inter({ subsets: ["latin"] });
 export async function getServerSideProps(context) {
   const { id } = context.query;
   const habitItem = await API.getHabit(id);

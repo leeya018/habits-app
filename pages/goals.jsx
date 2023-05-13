@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 import Goal from "components/habits/Goal";
+import { v4 as uuidv4 } from "uuid";
 
 export default function Goals({}) {
   // getCategories
@@ -30,9 +31,8 @@ export default function Goals({}) {
   };
 
   const handleAdd = () => {
-    dispatch(Action.addGoal(goalObj));
+    dispatch(Action.addGoal({ ...goalObj, id: uuidv4() }));
     setGoalObj({ name: "", description: "" });
-    dispatch(Action.getCategories());
   };
 
   return (
@@ -79,7 +79,7 @@ export default function Goals({}) {
         ))}
       </ul>
 
-      {/* <Error  >{error}</Error> */}
+      {/* <Error>{error.message}</Error> */}
       {/* <div>{JSON.stringify(goals)}</div> */}
     </div>
   );

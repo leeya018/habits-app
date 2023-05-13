@@ -4,7 +4,7 @@ const habitInitial = {
   goals: [],
   habits: [],
   error: "",
-  chosenGoal: "",
+  chosenGoal: null,
   chosenHabit: null,
   showModal: false,
 };
@@ -15,6 +15,8 @@ const habitReducer = (state = habitInitial, { type, payload }) => {
   switch (type) {
     case types.ADD_HABIT:
       return { ...state, habits: [...state.habits, payload] };
+    case types.ADD_GOAL:
+      return { ...state, goals: [...state.goals, payload] };
     case types.UPDATE_HABIT:
       newHabits = state.habits.map((habit) =>
         habit.id === payload ? { ...habit, payload } : habit

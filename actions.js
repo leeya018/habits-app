@@ -84,11 +84,11 @@ export const addGoal = (goal) => async (dispatch, getState) => {
     if (!goal.name || !goal.description) {
       throw new Error("goal must be set");
     }
-    await API.addGoal(goal);
-    const goals = await API.getGoals();
+
+    API.addGoal(goal);
     dispatch({
-      type: types.GET_CATEGORIES,
-      payload: goals,
+      type: types.ADD_GOAL,
+      payload: goal,
     });
   } catch (error) {
     dispatch({

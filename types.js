@@ -11,3 +11,4 @@ export const ADD_AMOUNT_TO_HABIT = "ADD_AMOUNT_TO_HABIT";
 export const UPDATE_HABIT = "UPDATE_HABIT";
 export const SHOW_MODAL = "SHOW_MODAL";
 export const UPDATE_CHOSEN_HABIT = "UPDATE_CHOSEN_HABIT";
+export const ADD_GOAL = "ADD_GOAL";

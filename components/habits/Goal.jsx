@@ -25,8 +25,8 @@ export default function Goal({ goal }) {
 
       <Button
         onClick={() => {
-          dispatch(Action.updateChosenGoal(goal.name));
-          router.push(`/habits/${goal.name}`);
+          dispatch(Action.updateChosenGoal(goal));
+          router.push(`/goal/${goal.id}/addhabit`);
         }}
         position="relative bottom-[22px]"
         size={"w-[128px] h-[43px]"}
