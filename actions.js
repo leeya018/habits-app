@@ -6,12 +6,11 @@ import * as API from "lib/api";
 export const addHabit = (habit) => async (dispatch) => {
   const url = process.env.NEXT_PUBLIC_BASIC_URL + `/api/habit/add`;
   try {
-    API.addHabit(habit);
-
     dispatch({
       type: types.ADD_HABIT,
       payload: habit,
     });
+    API.addHabit(habit);
   } catch (error) {
     console.log("addHabit error: ");
     console.log(error);
@@ -32,10 +31,12 @@ export const getHabits = (category) => async (dispatch, getState) => {
 
 export const deleteHabit = (id, goal) => async (dispatch) => {
   try {
-    const isDeleted = await API.deleteHabit(id);
-    dispatch(getHabits(goal));
+    dispatch({
+      type: types.REMOVE_HABIT,
+      payload: id,
+    });
+    API.deleteHabit(id);
   } catch (error) {
-    console.log("deleteHabit ->" + error.message);
     console.log("deleteHabit ->" + error.message);
     dispatch({
       type: types.UPDATE_ERROR,
@@ -50,13 +51,12 @@ export const updateChosenGoal = (goalName) => {
   };
 };
 export const editHabit = (habit) => async (dispatch, getState) => {
-  await API.editHabit(habit);
-  dispatch(getHabitsByGoal(habit.goal));
-
   try {
     dispatch({
       type: types.EDIT_HABIT, //not doign a thing  - no therer e
+      payload: habit,
     });
+    API.editHabit(habit);
   } catch (error) {
     dispatch({
       type: types.UPDATE_ERROR,
@@ -73,15 +73,6 @@ export const updateError = (payload) => {
   };
 };
 
-const createNewTrace = (amountToAdd) => {
-  return {
-    date: new Date(),
-    amount: 1,
-    improve: "",
-    reserve: "",
-    learn: "",
-  };
-};
 export const addGoal = (goal) => async (dispatch, getState) => {
   const url = process.env.NEXT_PUBLIC_BASIC_URL + "/api/goal/add";
   try {

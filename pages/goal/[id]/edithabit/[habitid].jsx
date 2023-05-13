@@ -9,8 +9,10 @@ import { useDispatch } from "react-redux";
 
 //  make folder to id
 export async function getServerSideProps(context) {
-  const { id } = context.query;
-  const habitItem = await API.getHabit(id);
+  const { habitid } = context.query;
+  console.log("edit it long");
+  console.log({ habitid });
+  const habitItem = await API.getHabit(habitid);
   return {
     props: { habitItem }, // will be passed to the page component as props
   };

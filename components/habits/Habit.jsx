@@ -19,7 +19,7 @@ export default function Habit({ habitItem, showTable = false }) {
   const [habit, setHabit] = useState(habitItem);
   const [isChanged, setIsChanged] = useState(false);
   const [showNav, setShowNav] = useState(false);
-  // const { habits } = useSelector((state) => state.habits);
+  const { chosenGoal } = useSelector((state) => state.habits);
 
   // const { showModal } = useSelector((state) => state.habits);
   useEffect(() => {
@@ -54,9 +54,6 @@ export default function Habit({ habitItem, showTable = false }) {
     setHabit(dupHabit);
     dispatch(Action.editHabit(dupHabit));
   };
-  // const removeHabit = () => {
-  //   dispatch(Action.deleteHabit(id, habit.goal));
-  // };
 
   const createNewTrace = () => {
     return {
@@ -137,7 +134,11 @@ export default function Habit({ habitItem, showTable = false }) {
                     }}
                   />
                   <AiOutlineEdit
-                    onClick={() => router.push(`/edithabit/${habit.id}`)}
+                    onClick={() =>
+                      router.push(
+                        `/goal/${chosenGoal.id}/edithabit/${habitItem.id}`
+                      )
+                    }
                     className="text-blue"
                   />
                 </div>

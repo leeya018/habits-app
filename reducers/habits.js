@@ -31,6 +31,14 @@ const habitReducer = (state = habitInitial, { type, payload }) => {
     case types.REMOVE_HABIT:
       newHabits = state.habits.filter((habit) => habit.id !== payload);
       return { ...state, habits: newHabits };
+    case types.EDIT_HABIT:
+      newHabits = state.habits.map((habit) => {
+        if (habit.id === payload.id) {
+          return payload;
+        }
+        return habit;
+      });
+      return { ...state, habits: newHabits };
 
     case types.UPDATE_ERROR:
       return { ...state, error: payload };
