@@ -77,33 +77,6 @@ const createNewTrace = (amountToAdd) => {
     learn: "",
   };
 };
-// no good
-// export const addDidAmount = (habit, amountToAdd) => async (dispatch) => {
-//   const dupHabit = { ...habit };
-//   if (!dupHabit.traces || dupHabit.traces.length === 0) {
-//     dupHabit.traces = [];
-//     dupHabit.traces.push(createNewTrace(amountToAdd));
-//   } else {
-//     const len = dupHabit.traces.length;
-//     if (UTIL.datesAreEquals(dupHabit.traces[len - 1].date, new Date())) {
-//       dupHabit.traces[len - 1].amount += amountToAdd;
-//     }
-//   }
-//   try {
-//     const data = await API.editHabit(dupHabit);
-//     dispatch(getHabitsByGoal(habit.goal));
-//     console.log({ dupHabit });
-//     dispatch({
-//       type: types.UPDATE_HABIT,
-//       payload: dupHabit,
-//     });
-//   } catch (error) {
-//     dispatch({
-//       type: types.UPDATE_ERROR,
-//       payload: error.message,
-//     });
-//   }
-// };
 export const addGoal = (goal) => async (dispatch, getState) => {
   const url = process.env.NEXT_PUBLIC_BASIC_URL + "/api/goal/add";
   try {
@@ -155,4 +128,18 @@ export const getHabitsByGoal = (goal) => async (dispatch) => {
       payload: error.message,
     });
   }
+};
+
+export const updateModalShow = (isShow) => {
+  return {
+    type: types.SHOW_MODAL,
+    payload: isShow,
+  };
+};
+
+export const updateChosenHabit = (chosenHabit) => {
+  return {
+    type: types.UPDATE_CHOSEN_HABIT,
+    payload: chosenHabit,
+  };
 };

@@ -4,11 +4,13 @@ import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
+import Modal from "./Modal";
 
 export default function AllHabits({ goal }) {
   const router = useRouter();
   const { habits } = useSelector((state) => state.habits);
   const dispatch = useDispatch();
+  const { showModal, chosenHabit } = useSelector((state) => state.habits);
 
   useEffect(() => {
     dispatch(Action.getHabitsByGoal(goal));
@@ -16,9 +18,21 @@ export default function AllHabits({ goal }) {
 
   console.log("===================HABITS=====");
   // console.log(habits);
+  const removeHabit = () => {
+    dispatch(Action.deleteHabit(chosenHabit._id, chosenHabit.goal));
+    dispatch(Action.updateModalShow(false));
+    dispatch(Action.updateChosenHabit(null));
+  };
 
   return (
     <div className="flex justify-center">
+      <Modal
+        isShow={showModal}
+        title="Habit Deletion"
+        text="Are you sue you want to delete habit"
+        textButton="Delete Habit"
+        onClick={removeHabit}
+      />
       <div className="flex flex-col">
         {habits.length === 0 && <div>{"habit list is empty"}</div>}
 

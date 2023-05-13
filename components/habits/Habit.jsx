@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Button from "./Button";
 import * as Action from "actions";
 import * as UTIL from "@/util";
@@ -8,17 +8,24 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 import BasicTable from "./Table";
 
+import { BsTrash, BsThreeDotsVertical } from "react-icons/bs";
+import { AiOutlineEdit } from "react-icons/ai";
+
 export default function Habit({ habitItem, showTable = false }) {
   const { _id, name, description, amount, traces, createdAt, goal } = habitItem;
   const dispatch = useDispatch();
   const router = useRouter();
+
   const [habit, setHabit] = useState(habitItem);
   const [isChanged, setIsChanged] = useState(false);
+  const [showNav, setShowNav] = useState(false);
   // const { habits } = useSelector((state) => state.habits);
 
+  // const { showModal } = useSelector((state) => state.habits);
   useEffect(() => {
     completLostDays();
   }, []);
+
   const completLostDays = () => {
     const lastItem = habit.traces.sort(
       (item1, item2) => item2.date - item1.date
@@ -111,6 +118,27 @@ export default function Habit({ habitItem, showTable = false }) {
        h-[250px] m-2 "
         >
           <div
+            className="absolute top-3 flex flex-col right-1 p-2 cursor-pointer"
+            onClick={() => setShowNav((prev) => !prev)}
+          >
+            <BsThreeDotsVertical />
+
+            {showNav && (
+              <div className="absolute right-10">
+                <div className="flex flex-col gap-2">
+                  <BsTrash
+                    className="text-red"
+                    onClick={() => {
+                      dispatch(Action.updateModalShow(true));
+                      dispatch(Action.updateChosenHabit(habit));
+                    }}
+                  />
+                  <AiOutlineEdit className="text-blue" />
+                </div>
+              </div>
+            )}
+          </div>
+          <div
             className="px-2 flex flex-col justify-between top-2 h-[70%]"
             onClick={() => router.push(`/habit/${habit._id}`)}
           >
@@ -133,7 +161,6 @@ export default function Habit({ habitItem, showTable = false }) {
             />
             <RowSection text={"goal"} value={goal} />
           </div>
-
           {router.pathname.includes("/habit/") ? (
             <div>
               <div className="flex justify-center gap-1">

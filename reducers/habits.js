@@ -5,6 +5,8 @@ const habitInitial = {
   habits: [],
   error: "",
   chosenGoal: "",
+  chosenHabit: null,
+  showModal: false,
 };
 
 let newHabits = null;
@@ -30,19 +32,6 @@ const habitReducer = (state = habitInitial, { type, payload }) => {
 
     case types.UPDATE_ERROR:
       return { ...state, error: payload };
-    // case types.ADD_DID_AMOUNT:
-    //   newHabits = state.habits.map((habit) => {
-    //     if (habit.id === payload) {
-    //       let dupHabit = { ...habit };
-    //       const value = dupHabit.traces[habit.createdAt];
-    //       dupHabit.traces[habit.createdAt] =
-    //         value === undefined ? 0 : value + 1;
-    //       return dupHabit;
-    //     } else {
-    //       return habit;
-    //     }
-    //   });
-    //   return { ...state, habits: newHabits };
     case types.ADD_DID_AMOUNT:
       return { ...state, habits: newHabits };
     case types.GET_CATEGORIES:
@@ -52,6 +41,10 @@ const habitReducer = (state = habitInitial, { type, payload }) => {
       return { ...state, habits: payload };
     case types.UPDATE_COSEN_CATEGORY:
       return { ...state, chosenGoal: payload };
+    case types.UPDATE_CHOSEN_HABIT:
+      return { ...state, chosenHabit: payload };
+    case types.SHOW_MODAL:
+      return { ...state, showModal: payload };
     default:
       return state;
   }

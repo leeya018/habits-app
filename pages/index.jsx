@@ -5,8 +5,6 @@ export default function Homepage() {
   const router = useRouter();
   useEffect(() => {
     router.push("/goals");
-    // router.push("/habit");
-    // router.push("/game1");
   }, []);
-  return <div className="">{/* <Tinder /> */}</div>;
+  return <div className=""></div>;
 }

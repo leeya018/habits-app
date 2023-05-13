@@ -79,7 +79,7 @@ export default function Goals({}) {
         ))}
       </ul>
 
-      {/* <Error>{error}</Error> */}
+      {/* <Error  >{error}</Error> */}
       {/* <div>{JSON.stringify(goals)}</div> */}
     </div>
   );
