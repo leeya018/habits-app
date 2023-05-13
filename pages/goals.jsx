@@ -21,7 +21,7 @@ export default function Goals({}) {
 
   useEffect(() => {
     dispatch(Action.getCategories());
-  }, [goalObj]);
+  }, []);
 
   const updateGoal = ({ name, value }) => {
     dispatch(Action.updateError());
@@ -32,6 +32,7 @@ export default function Goals({}) {
   const handleAdd = () => {
     dispatch(Action.addGoal(goalObj));
     setGoalObj({ name: "", description: "" });
+    dispatch(Action.getCategories());
   };
 
   return (
