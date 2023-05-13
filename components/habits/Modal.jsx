@@ -14,7 +14,7 @@ function Modal({ isShow, title, text, textButton = "", onClick = () => {} }) {
     <>
       {isShow && (
         <div
-          className="absolute w-full h-full bg-black
+          className="absolute top-0  w-full h-full bg-black
      flex justify-center items-center z-20 bg-gray_dark bg-opacity-75 border-2 border-blue "
         >
           <div
