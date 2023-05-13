@@ -9,13 +9,14 @@ import { useEffect } from "react";
 import AllHabits from "components/habits/allhabits";
 import HabitHandle from "components/habits/HabitHandle";
 import { useSelector } from "react-redux";
+import { v4 as uuidv4 } from "uuid";
 
 export async function getServerSideProps(context) {
   const { id } = context.query;
   const goal = await API.getGoal(id);
-  console.log("getGoal done " + id);
-  console.log({ goal });
-  console.log("getGoal wireded " + id);
+  // console.log("getGoal done " + id);
+  // console.log({ goal });
+  // console.log("getGoal wireded " + id);
   return {
     props: { goalName: goal.name }, // will be passed to the page component as props
   };
@@ -42,6 +43,7 @@ export default function AddHabit({ goalName }) {
     if (checkValidation()) {
       const newHabit = {
         ...habit,
+        id: uuidv4(),
         goal: goalName,
         createdAt: new Date().toISOString(),
         traces: [],

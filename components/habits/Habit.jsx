@@ -12,7 +12,7 @@ import { BsTrash, BsThreeDotsVertical } from "react-icons/bs";
 import { AiOutlineEdit } from "react-icons/ai";
 
 export default function Habit({ habitItem, showTable = false }) {
-  const { _id, name, description, amount, traces, createdAt, goal } = habitItem;
+  const { id, name, description, amount, traces, createdAt, goal } = habitItem;
   const dispatch = useDispatch();
   const router = useRouter();
 
@@ -55,7 +55,7 @@ export default function Habit({ habitItem, showTable = false }) {
     dispatch(Action.editHabit(dupHabit));
   };
   // const removeHabit = () => {
-  //   dispatch(Action.deleteHabit(_id, habit.goal));
+  //   dispatch(Action.deleteHabit(id, habit.goal));
   // };
 
   const createNewTrace = () => {
@@ -109,7 +109,7 @@ export default function Habit({ habitItem, showTable = false }) {
   };
 
   const showGraph = () => {
-    router.push(`/graph?habitid=${habit._id}`);
+    router.push(`/graph?habitid=${habit.id}`);
   };
   return (
     <div className="flex flex-col">
@@ -131,13 +131,13 @@ export default function Habit({ habitItem, showTable = false }) {
                     className="text-red"
                     onClick={() => {
                       dispatch(Action.updateModalShow(true));
-                      console.log("chosent on trash =>  " + habitItem._id);
+                      console.log("chosent on trash =>  " + habitItem.id);
                       console.log({ trashHabit: habitItem });
                       dispatch(Action.updateChosenHabit(habitItem));
                     }}
                   />
                   <AiOutlineEdit
-                    onClick={() => router.push(`/edithabit/${habit._id}`)}
+                    onClick={() => router.push(`/edithabit/${habit.id}`)}
                     className="text-blue"
                   />
                 </div>
@@ -186,7 +186,7 @@ export default function Habit({ habitItem, showTable = false }) {
             <div className="flex justify-center gap-2 relative bottom-2">
               <Button
                 color="bg-blue"
-                onClick={() => router.push(`/habit/${habit._id}`)}
+                onClick={() => router.push(`/habit/${habit.id}`)}
               >
                 Details
               </Button>

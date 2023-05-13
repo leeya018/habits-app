@@ -19,7 +19,7 @@ export default function AllHabits({ goal }) {
   console.log("===================HABITS=====");
   // console.log(habits);
   const removeHabit = () => {
-    dispatch(Action.deleteHabit(chosenHabit._id, chosenHabit.goal));
+    dispatch(Action.deleteHabit(chosenHabit.id, chosenHabit.goal));
     dispatch(Action.updateModalShow(false));
     dispatch(Action.updateChosenHabit(null));
   };

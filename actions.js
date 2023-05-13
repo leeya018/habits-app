@@ -6,8 +6,12 @@ import * as API from "lib/api";
 export const addHabit = (habit) => async (dispatch) => {
   const url = process.env.NEXT_PUBLIC_BASIC_URL + `/api/habit/add`;
   try {
-    const newHabit = await API.addHabit(habit);
-    dispatch(getHabitsByGoal(habit.goal));
+    API.addHabit(habit);
+
+    dispatch({
+      type: types.ADD_HABIT,
+      payload: habit,
+    });
   } catch (error) {
     console.log("addHabit error: ");
     console.log(error);
