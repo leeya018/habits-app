@@ -15,6 +15,7 @@ export async function getServerSideProps(context) {
   const goal = await API.getGoal(id);
   console.log("getGoal done " + id);
   console.log({ goal });
+  console.log("getGoal wireded " + id);
   return {
     props: { goalName: goal.name }, // will be passed to the page component as props
   };
