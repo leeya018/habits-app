@@ -117,7 +117,7 @@ export default function BasicTable({ items, totalAmount, updateTodaysHabit }) {
 }
 
 function TableSection({ width = {}, date, name, value, onChange }) {
-  console.log(width);
+  // console.log(width);
   return (
     <div>
       {UTIL.datesAreEquals(date, new Date()) ? (

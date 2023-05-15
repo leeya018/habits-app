@@ -7,11 +7,12 @@ import Title from "./Title";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import BasicTable from "./Table";
+import * as API from "lib/api";
 
 import { BsTrash, BsThreeDotsVertical } from "react-icons/bs";
 import { AiOutlineEdit } from "react-icons/ai";
 
-export default function Habit({ habitItem, showTable = false, goal }) {
+export default function Habit({ habitItem, showTable = false, goal = null }) {
   const {
     id,
     name,
@@ -24,6 +25,7 @@ export default function Habit({ habitItem, showTable = false, goal }) {
   const dispatch = useDispatch();
   const router = useRouter();
 
+  const [goalItem, setGoalItem] = useState(goal);
   const [habit, setHabit] = useState(habitItem);
   const [isChanged, setIsChanged] = useState(false);
   const [showNav, setShowNav] = useState(false);
@@ -32,6 +34,14 @@ export default function Habit({ habitItem, showTable = false, goal }) {
   // const { showModal } = useSelector((state) => state.habits);
   useEffect(() => {
     completLostDays();
+    if (!goalItem) {
+      console.log({ goalName });
+      API.getGoalByName(goalName).then((data) => {
+        // not adding
+        console.log({ data });
+        setGoalItem(data);
+      });
+    }
   }, []);
 
   const completLostDays = () => {
@@ -142,10 +152,12 @@ export default function Habit({ habitItem, showTable = false, goal }) {
                     }}
                   />
                   <AiOutlineEdit
-                    onClick={() =>
-                      // dispatch(Action.updateChosenGoal(habitItem));
-                      router.push(`/goal/${goal.id}/edithabit/${habitItem.id}`)
-                    }
+                    onClick={() => {
+                      dispatch(Action.updateChosenGoal(goalItem));
+                      router.push(
+                        `/goal/${goalItem.id}/edithabit/${habitItem.id}`
+                      );
+                    }}
                     className="text-blue"
                   />
                 </div>
@@ -196,7 +208,7 @@ export default function Habit({ habitItem, showTable = false, goal }) {
                 color="bg-blue"
                 onClick={() => {
                   Action.updateChosenGoal(goal);
-                  router.push(`/habit/${habit.id}`);
+                  router.push(`/goal/${chosenGoal.id}/habit/${habit.id}`);
                 }}
               >
                 Details

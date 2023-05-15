@@ -8,10 +8,10 @@ import { useDispatch, useSelector } from "react-redux";
 import Modal from "components/habits/Modal";
 
 export const getServerSideProps = async (context) => {
-  const id = context.query.id;
+  const { habitid } = context.query;
   console.log("================");
-  console.log({ id });
-  const habit = await API.getHabit(id);
+  console.log({ habitid });
+  const habit = await API.getHabit(habitid);
   console.log("getServerSideProps");
   console.log(habit);
   return {
