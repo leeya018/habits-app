@@ -1,9 +1,11 @@
 import Button from "components/habits/Button";
 import { useRouter } from "next/router";
 import AllHabits from "components/habits/allhabits";
+import * as API from "lib/api";
 
 export async function getServerSideProps(context) {
-  const { goal } = context.query;
+  const { id } = context.query;
+  const goal = await API.getGoal(id);
   return {
     props: { goal }, // will be passed to the page component as props
   };
@@ -33,7 +35,7 @@ export default function AddHabit({ goal }) {
         <Button
           color="bg-blue"
           onClick={() => {
-            router.push(`/addhabit/${goal}`);
+            router.push(`/goal/${goal.id}/addhabit`);
           }}
         >
           add habit{" "}

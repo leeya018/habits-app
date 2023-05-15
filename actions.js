@@ -44,12 +44,7 @@ export const deleteHabit = (id, goal) => async (dispatch) => {
     });
   }
 };
-export const updateChosenGoal = (goalName) => {
-  return {
-    type: types.UPDATE_COSEN_CATEGORY,
-    payload: goalName,
-  };
-};
+
 export const editHabit = (habit) => async (dispatch, getState) => {
   try {
     dispatch({
@@ -137,5 +132,11 @@ export const updateChosenHabit = (chosenHabit) => {
   return {
     type: types.UPDATE_CHOSEN_HABIT,
     payload: chosenHabit,
+  };
+};
+export const updateChosenGoal = (goal) => {
+  return {
+    type: types.UPDATE_CHOSEN_GOAL,
+    payload: goal,
   };
 };

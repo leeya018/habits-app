@@ -11,8 +11,16 @@ import BasicTable from "./Table";
 import { BsTrash, BsThreeDotsVertical } from "react-icons/bs";
 import { AiOutlineEdit } from "react-icons/ai";
 
-export default function Habit({ habitItem, showTable = false }) {
-  const { id, name, description, amount, traces, createdAt, goal } = habitItem;
+export default function Habit({ habitItem, showTable = false, goal }) {
+  const {
+    id,
+    name,
+    description,
+    amount,
+    traces,
+    createdAt,
+    goal: goalName,
+  } = habitItem;
   const dispatch = useDispatch();
   const router = useRouter();
 
@@ -135,9 +143,8 @@ export default function Habit({ habitItem, showTable = false }) {
                   />
                   <AiOutlineEdit
                     onClick={() =>
-                      router.push(
-                        `/goal/${chosenGoal.id}/edithabit/${habitItem.id}`
-                      )
+                      // dispatch(Action.updateChosenGoal(habitItem));
+                      router.push(`/goal/${goal.id}/edithabit/${habitItem.id}`)
                     }
                     className="text-blue"
                   />
@@ -163,7 +170,7 @@ export default function Habit({ habitItem, showTable = false }) {
               text={"createdAt"}
               value={UTIL.getDateStrIsrael(createdAt)}
             />
-            <RowSection text={"goal"} value={goal} />
+            <RowSection text={"goal"} value={goalName} />
           </div>
           {router.pathname.includes("/habit/") ? (
             <div>

@@ -14,14 +14,14 @@ import { v4 as uuidv4 } from "uuid";
 export async function getServerSideProps(context) {
   const { id } = context.query;
   const goal = await API.getGoal(id);
-  // console.log("getGoal done " + id);
-  // console.log({ goal });
-  // console.log("getGoal wireded " + id);
+  console.log("getGoal done " + id);
+  console.log({ goal });
+  console.log("getGoal wireded " + id);
   return {
-    props: { goalName: goal.name }, // will be passed to the page component as props
+    props: { goal }, // will be passed to the page component as props
   };
 }
-export default function AddHabit({ goalName }) {
+export default function AddHabit({ goal }) {
   const router = useRouter();
   const dispatch = useDispatch();
   //   const { chosenGoal } = useSelector((state) => state.habits);
@@ -30,7 +30,7 @@ export default function AddHabit({ goalName }) {
     name: "",
     description: "",
     amount: "",
-    goal: goalName,
+    goal: goal.name,
   });
 
   const updateHabit = ({ name, value }) => {
@@ -44,13 +44,13 @@ export default function AddHabit({ goalName }) {
       const newHabit = {
         ...habit,
         id: uuidv4(),
-        goal: goalName,
+        goal: goal.name,
         createdAt: new Date().toISOString(),
         traces: [],
       };
       console.log({ newHabit });
       dispatch(ACTION.addHabit(newHabit));
-      setHabit({ name: "", description: "", amount: "", goal: goalName });
+      setHabit({ name: "", description: "", amount: "", goal: goal.name });
     } else {
       dispatch(ACTION.updateError("one of the fields is not set"));
     }
@@ -76,13 +76,13 @@ export default function AddHabit({ goalName }) {
         go back
       </Button>
       <HabitHandle
-        goal={goalName}
+        goal={goal.name}
         onClick={addNewHabit}
         updateHabit={updateHabit}
         habit={habit}
         title={"ADD HABIT"}
       />
-      <AllHabits goal={goalName} />
+      <AllHabits goal={goal} />
     </div>
   );
 }

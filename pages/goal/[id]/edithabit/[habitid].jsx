@@ -37,7 +37,8 @@ export default function Edit({ habitItem }) {
   const editHabitHandle = async () => {
     if (checkValidation()) {
       dispatch(Action.editHabit(habit));
-      router.push(`/habits/${habit.goal}`);
+      // router.push(`/habits/${habit.goal}`);
+      router.push(`/goal/${router.query.id}/habits`);
     } else {
       dispatch(Action.updateError("one of the fields is not set"));
     }

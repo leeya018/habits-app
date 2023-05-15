@@ -13,7 +13,7 @@ export default function AllHabits({ goal }) {
   const { showModal, chosenHabit } = useSelector((state) => state.habits);
 
   useEffect(() => {
-    dispatch(Action.getHabitsByGoal(goal));
+    dispatch(Action.getHabitsByGoal(goal.name));
   }, []);
 
   console.log("===================HABITS=====");
@@ -44,7 +44,7 @@ export default function AllHabits({ goal }) {
             })
             .map((habit, key) => (
               <li key={key}>
-                <Habit habitItem={habit} />
+                <Habit habitItem={habit} goal={goal} />
               </li>
             ))}
         </ul>

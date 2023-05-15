@@ -49,7 +49,7 @@ const habitReducer = (state = habitInitial, { type, payload }) => {
 
     case types.GET_HABITS:
       return { ...state, habits: payload };
-    case types.UPDATE_COSEN_CATEGORY:
+    case types.UPDATE_CHOSEN_GOAL:
       return { ...state, chosenGoal: payload };
     case types.UPDATE_CHOSEN_HABIT:
       console.log({ payload });
