@@ -31,8 +31,21 @@ export default function Goals({}) {
   };
 
   const handleAdd = () => {
-    dispatch(Action.addGoal({ ...goalObj, id: uuidv4() }));
+    dispatch(
+      Action.addGoal({
+        ...goalObj,
+        id: uuidv4(),
+        createdAt: new Date().toISOString(),
+      })
+    );
     setGoalObj({ name: "", description: "" });
+  };
+
+  const sort = (arr) => {
+    return arr.sort((g1, g2) => {
+      console.log({ g1: g1.createdAt, g2: g2.createdAt });
+      return new Date(g2.createdAt) - new Date(g1.createdAt);
+    });
   };
 
   return (
@@ -74,7 +87,7 @@ export default function Goals({}) {
         </div>
       </div>
       <ul className="m-2 flex flex-wrap justify-center gap-2">
-        {goals.map((goal, key) => (
+        {sort(goals).map((goal, key) => (
           <Goal key={key} goal={goal} />
         ))}
       </ul>

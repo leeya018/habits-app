@@ -194,7 +194,10 @@ export default function Habit({ habitItem, showTable = false, goal }) {
             <div className="flex justify-center gap-2 relative bottom-2">
               <Button
                 color="bg-blue"
-                onClick={() => router.push(`/habit/${habit.id}`)}
+                onClick={() => {
+                  Action.updateChosenGoal(goal);
+                  router.push(`/habit/${habit.id}`);
+                }}
               >
                 Details
               </Button>
