@@ -40,10 +40,10 @@ export default function BasicTable({ items, totalAmount, updateTodaysHabit }) {
               completed&nbsp;(%)
             </TableCell>
             <TableCell sx={{ fontWeight: "bold" }} align="left">
-              improve
+              did bad
             </TableCell>
             <TableCell sx={{ fontWeight: "bold" }} align="left">
-              reserve
+              did good
             </TableCell>
             <TableCell sx={{ fontWeight: "bold" }} align="left">
               learn
@@ -59,6 +59,7 @@ export default function BasicTable({ items, totalAmount, updateTodaysHabit }) {
                 sx={{
                   "&:last-child td, &:last-child th": {
                     border: 0,
+                    backgroundColor: row.percent >= 100 && "#40cea8",
                   },
                 }}
               >
