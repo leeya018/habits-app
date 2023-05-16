@@ -2,9 +2,10 @@ import * as types from "./types";
 import axios from "axios";
 
 import * as API from "lib/api";
+import * as UTIL from "@/util";
 
 export const addHabit = (habit) => async (dispatch) => {
-  const url = process.env.NEXT_PUBLIC_BASIC_URL + `/api/habit/add`;
+  const url = UTIL.getUrl() + `/api/habit/add`;
   try {
     dispatch({
       type: types.ADD_HABIT,
@@ -69,7 +70,7 @@ export const updateError = (payload) => {
 };
 
 export const addGoal = (goal) => async (dispatch, getState) => {
-  const url = process.env.NEXT_PUBLIC_BASIC_URL + "/api/goal/add";
+  const url = UTIL.getUrl() + "/api/goal/add";
   try {
     if (!goal.name || !goal.description) {
       throw new Error("goal must be set");
@@ -89,7 +90,7 @@ export const addGoal = (goal) => async (dispatch, getState) => {
 };
 
 export const getCategories = () => async (dispatch) => {
-  const url = process.env.NEXT_PUBLIC_BASIC_URL + "/api/goals";
+  const url = UTIL.getUrl() + "/api/goals";
   try {
     const res = await axios.get(url);
     dispatch({
@@ -104,7 +105,7 @@ export const getCategories = () => async (dispatch) => {
   }
 };
 export const getHabitsByGoal = (goal) => async (dispatch) => {
-  const url = process.env.NEXT_PUBLIC_BASIC_URL + "/api/habit";
+  const url = UTIL.getUrl() + "/api/habit";
   try {
     const res = await axios.get(url, {
       params: { goal },

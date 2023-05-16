@@ -5,10 +5,8 @@ import Button from "components/habits/Button";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { useEffect } from "react";
 import AllHabits from "components/habits/allhabits";
 import HabitHandle from "components/habits/HabitHandle";
-import { useSelector } from "react-redux";
 import { v4 as uuidv4 } from "uuid";
 
 export async function getServerSideProps(context) {

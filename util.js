@@ -61,3 +61,8 @@ export const addDays = (date, days) => {
   result.setDate(result.getDate() + days);
   return result;
 };
+export const getUrl = () => {
+  return process.env.NODE_ENV === "development"
+    ? process.env.NEXT_PUBLIC_BASIC_URL
+    : process.env.NEXT_PUBLIC_BASIC_URL_PRODUCTION;
+};
