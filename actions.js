@@ -5,7 +5,7 @@ import * as API from "lib/api";
 import * as UTIL from "@/util";
 
 export const addHabit = (habit) => async (dispatch) => {
-  const url = UTIL.getUrl() + `/api/habit/add`;
+  // const url = UTIL.getUrl() + `/api/habit/add`;
   try {
     dispatch({
       type: types.ADD_HABIT,
@@ -70,7 +70,7 @@ export const updateError = (payload) => {
 };
 
 export const addGoal = (goal) => async (dispatch, getState) => {
-  const url = UTIL.getUrl() + "/api/goal/add";
+  // const url = UTIL.getUrl() + "/api/goal/add";
   try {
     if (!goal.name || !goal.description) {
       throw new Error("goal must be set");
@@ -91,6 +91,8 @@ export const addGoal = (goal) => async (dispatch, getState) => {
 
 export const getCategories = () => async (dispatch) => {
   const url = UTIL.getUrl() + "/api/goals";
+  console.log({ util: UTIL.getUrl() });
+  console.log({ url });
   try {
     const res = await axios.get(url);
     dispatch({
