@@ -61,9 +61,9 @@ export default function Habit({ habitItem, showTable = false, goal = null }) {
       dupTraces.push({
         date: newDay,
         amount: 0,
-        improve: "",
-        reserve: "",
-        learn: "",
+        habitBlocker: "",
+        habitImplementationStrategy: "",
+        dailyLesson: "",
       });
       i++;
     }
@@ -77,9 +77,14 @@ export default function Habit({ habitItem, showTable = false, goal = null }) {
     return {
       date: new Date().toISOString(),
       amount: 1,
-      improve: "",
-      reserve: "",
-      learn: "",
+      habitBlocker: "",
+      habitImplementationStrategy: "",
+      dailyLesson: "",
+      // date: new Date().toISOString(),
+      // amount: 1,
+      // improve: "",
+      // reserve: "",
+      // learn: "",
     };
   };
   console.log({ habitItem });

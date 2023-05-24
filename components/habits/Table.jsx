@@ -9,19 +9,25 @@ import Paper from "@mui/material/Paper";
 import * as UTIL from "@/util";
 import TextArea from "./Textarea";
 
-// function createData(key, date, amount, percent, improve, reserve, learn) {
-//   return { key, date, amount, percent, improve, reserve, learn };
+// function createData(key, date, amount, percent, habitBlocker, habitImplementationStrategy, dailyLesson) {
+//   return { key, date, amount, percent, habitBlocker, habitImplementationStrategy, dailyLesson };
 // }
 export default function BasicTable({ items, totalAmount, updateTodaysHabit }) {
   const createData = (data) => {
-    const { date, amount, improve, reserve, learn } = data;
+    const {
+      date,
+      amount,
+      habitBlocker,
+      habitImplementationStrategy,
+      dailyLesson,
+    } = data;
     return {
       date: date,
       amount,
       percent: ((amount / totalAmount) * 100).toFixed(0),
-      improve,
-      reserve,
-      learn,
+      habitBlocker,
+      habitImplementationStrategy,
+      dailyLesson,
     };
   };
   return (
@@ -41,13 +47,13 @@ export default function BasicTable({ items, totalAmount, updateTodaysHabit }) {
               completed&nbsp;(%)
             </TableCell>
             <TableCell sx={{ fontWeight: "bold" }} align="left">
-              did bad
+              Habit Blockers
             </TableCell>
             <TableCell sx={{ fontWeight: "bold" }} align="left">
-              did good
+              Implementation Strategy
             </TableCell>
             <TableCell sx={{ fontWeight: "bold" }} align="left">
-              learn
+              Daily Lesson
             </TableCell>
           </TableRow>
         </TableHead>
@@ -81,8 +87,8 @@ export default function BasicTable({ items, totalAmount, updateTodaysHabit }) {
                   <TableSection
                     date={row.date}
                     width={{ maxWidth: "15rem" }}
-                    name={"improve"}
-                    value={row.improve}
+                    name={"habitBlocker"}
+                    value={row.habitBlocker}
                     onChange={(e) => {
                       updateTodaysHabit(e.target, key);
                     }}
@@ -92,8 +98,8 @@ export default function BasicTable({ items, totalAmount, updateTodaysHabit }) {
                   <TableSection
                     width={{ maxWidth: "15rem" }}
                     date={row.date}
-                    name={"reserve"}
-                    value={row.reserve}
+                    name={"habitImplementationStrategy"}
+                    value={row.habitImplementationStrategy}
                     onChange={(e) => {
                       updateTodaysHabit(e.target, key);
                     }}
@@ -103,8 +109,8 @@ export default function BasicTable({ items, totalAmount, updateTodaysHabit }) {
                   <TableSection
                     width={{ maxWidth: "15rem" }}
                     date={row.date}
-                    name={"learn"}
-                    value={row.learn}
+                    name={"dailyLesson"}
+                    value={row.dailyLesson}
                     onChange={(e) => {
                       updateTodaysHabit(e.target, key);
                     }}
