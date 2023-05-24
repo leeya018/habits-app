@@ -32,8 +32,6 @@ export default function AddHabit({ goal }) {
   });
 
   const updateHabit = ({ name, value }) => {
-    dispatch(ACTION.updateError());
-
     setHabit((prev) => ({ ...prev, [name]: value }));
   };
 

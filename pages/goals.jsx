@@ -7,6 +7,7 @@ import { useRouter } from "next/router";
 import { useEffect } from "react";
 import Goal from "components/habits/Goal";
 import { v4 as uuidv4 } from "uuid";
+import Error from "components/habits/Error";
 
 export default function Goals({}) {
   // getCategories
@@ -25,8 +26,6 @@ export default function Goals({}) {
   }, []);
 
   const updateGoal = ({ name, value }) => {
-    dispatch(Action.updateError());
-
     setGoalObj((prev) => ({ ...prev, [name]: value }));
   };
 
@@ -92,7 +91,7 @@ export default function Goals({}) {
         ))}
       </ul>
 
-      {/* <Error>{error.message}</Error> */}
+      <Error>{error}</Error>
       {/* <div>{JSON.stringify(goals)}</div> */}
     </div>
   );

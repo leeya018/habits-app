@@ -4,10 +4,19 @@ import axios from "axios";
 import * as API from "lib/api";
 import * as UTIL from "@/util";
 
+function handleErrors(err) {
+  if (err.response.data) {
+    return err.response?.data;
+  } else if (err.message) {
+    return err.message;
+  } else {
+    return "please check error handler function";
+  }
+}
+
 export const addHabit = (habit) => async (dispatch) => {
-  // const url = UTIL.getUrl() + `/api/habit/add`;
-  const newHabit = await API.addHabit(habit);
   try {
+    const newHabit = await API.addHabit(habit);
     dispatch({
       type: types.ADD_HABIT,
       payload: newHabit,
@@ -17,17 +26,24 @@ export const addHabit = (habit) => async (dispatch) => {
     console.log(error);
     dispatch({
       type: types.UPDATE_ERROR,
-      payload: error.message + " ====> " + error.response?.data,
+      payload: handleErrors(error),
     });
   }
 };
 
 export const getHabits = (category) => async (dispatch, getState) => {
-  const habits = await API.getHabits(category);
-  dispatch({
-    type: types.GET_HABITS,
-    payload: habits,
-  });
+  try {
+    const habits = await API.getHabits(category);
+    dispatch({
+      type: types.GET_HABITS,
+      payload: habits,
+    });
+  } catch (error) {
+    dispatch({
+      type: types.UPDATE_ERROR,
+      payload: handleErrors(error),
+    });
+  }
 };
 
 export const deleteHabit = (id) => async (dispatch) => {
@@ -41,26 +57,24 @@ export const deleteHabit = (id) => async (dispatch) => {
     console.log("deleteHabit ->" + error.message);
     dispatch({
       type: types.UPDATE_ERROR,
-      payload: error.message + " => " + error.response?.data,
+      payload: handleErrors(error),
     });
   }
 };
 
 export const editHabit = (habit) => async (dispatch, getState) => {
   try {
+    const editedHabit = await API.editHabit(habit);
     dispatch({
       type: types.EDIT_HABIT, //not doign a thing  - no therer e
-      payload: habit,
+      payload: editedHabit,
     });
-    API.editHabit(habit);
   } catch (error) {
     dispatch({
       type: types.UPDATE_ERROR,
-      payload: error.message,
+      payload: handleErrors(error),
     });
   }
-
-  return {};
 };
 export const updateError = (payload) => {
   return {
@@ -84,7 +98,7 @@ export const addGoal = (goal) => async (dispatch, getState) => {
   } catch (error) {
     dispatch({
       type: types.UPDATE_ERROR,
-      payload: error.message,
+      payload: handleErrors(error),
     });
   }
 };
@@ -102,7 +116,7 @@ export const getCategories = () => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: types.UPDATE_ERROR,
-      payload: error.message,
+      payload: handleErrors(error),
     });
   }
 };
@@ -119,7 +133,7 @@ export const getHabitsByGoal = (goal) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: types.UPDATE_ERROR,
-      payload: error.message,
+      payload: handleErrors(error),
     });
   }
 };

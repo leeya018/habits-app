@@ -29,8 +29,6 @@ export default function Edit({ habitItem }) {
   // }, [habit.goal]);
 
   const updateHabit = ({ name, value }) => {
-    dispatch(Action.updateError());
-
     setHabit((prev) => ({ ...prev, [name]: value }));
   };
 

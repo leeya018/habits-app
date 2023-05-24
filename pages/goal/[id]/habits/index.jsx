@@ -36,6 +36,7 @@ export default function AddHabit({ goal }) {
           color="bg-blue"
           onClick={() => {
             router.push(`/goal/${goal.id}/addhabit`);
+            // router.push(`/goal/${goal.id}/addhabit`);
           }}
         >
           add habit{" "}
