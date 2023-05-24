@@ -7,6 +7,7 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import * as UTIL from "@/util";
+import TextArea from "./Textarea";
 
 // function createData(key, date, amount, percent, improve, reserve, learn) {
 //   return { key, date, amount, percent, improve, reserve, learn };
@@ -127,19 +128,5 @@ function TableSection({ width = {}, date, name, value, onChange }) {
         <div style={width}>{value}</div>
       )}
     </div>
-  );
-}
-
-function TextArea({ name, value, onChange }) {
-  return (
-    <textarea
-      className="border-2"
-      name={name}
-      value={value}
-      onChange={onChange}
-      id=""
-      cols="30"
-      rows="6"
-    ></textarea>
   );
 }

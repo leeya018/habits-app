@@ -6,6 +6,7 @@ export default function Input({
   value,
   disabled,
   size = "",
+  onKeyDown = () => {},
 }) {
   return (
     <input
@@ -17,6 +18,7 @@ export default function Input({
       name={name}
       value={value}
       onChange={onChange}
+      onKeyDown={onKeyDown}
     />
   );
 }
