@@ -1,4 +1,4 @@
-import * as ACTION from "actions";
+import * as Action from "actions";
 import * as API from "lib/api";
 
 import Button from "components/habits/Button";
@@ -32,6 +32,8 @@ export default function AddHabit({ goal }) {
   });
 
   const updateHabit = ({ name, value }) => {
+    dispatch(Action.updateError(""));
+
     setHabit((prev) => ({ ...prev, [name]: value }));
   };
 
@@ -45,10 +47,10 @@ export default function AddHabit({ goal }) {
         traces: [],
       };
       console.log({ newHabit });
-      dispatch(ACTION.addHabit(newHabit));
+      dispatch(Action.addHabit(newHabit));
       // setHabit({ name: "", description: "", amount: "", goal: goal.name });
     } else {
-      dispatch(ACTION.updateError("one of the fields is not set"));
+      dispatch(Action.updateError("one of the fields is not set"));
     }
   };
 

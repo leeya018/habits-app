@@ -1,4 +1,5 @@
 import * as Action from "actions";
+
 import Button from "components/habits/Button";
 import Title from "components/habits/Title";
 import { useRouter } from "next/router";
@@ -16,6 +17,7 @@ export default function Handle({ id }) {
   const dispatch = useDispatch();
 
   const updateHabit = ({ name, value }) => {
+    dispatch(Action.updateError(""));
     setHabit((prev) => ({ ...prev, [name]: value }));
   };
 

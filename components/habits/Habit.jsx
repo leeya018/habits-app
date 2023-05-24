@@ -208,7 +208,7 @@ export default function Habit({ habitItem, showTable = false, goal = null }) {
                 color="bg-blue"
                 onClick={() => {
                   Action.updateChosenGoal(goal);
-                  router.push(`/goal/${chosenGoal.id}/habit/${habit.id}`);
+                  router.push(`/goal/${goal.id}/habit/${habit.id}`);
                 }}
               >
                 Details
