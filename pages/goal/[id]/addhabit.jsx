@@ -3,7 +3,7 @@ import * as API from "lib/api";
 
 import Button from "components/habits/Button";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import AllHabits from "components/habits/allhabits";
 import HabitHandle from "components/habits/HabitHandle";
@@ -31,6 +31,11 @@ export default function AddHabit({ goal }) {
     goal: goal.name,
   });
 
+  useEffect(() => {
+    if (!goal.name) {
+      router.push("/");
+    }
+  }, []);
   const updateHabit = ({ name, value }) => {
     dispatch(Action.updateError(""));
 
