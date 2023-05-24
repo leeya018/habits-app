@@ -30,13 +30,13 @@ export const getHabits = (category) => async (dispatch, getState) => {
   });
 };
 
-export const deleteHabit = (id, goal) => async (dispatch) => {
+export const deleteHabit = (id) => async (dispatch) => {
   try {
+    const deletedDoc = await API.deleteHabit(id);
     dispatch({
       type: types.REMOVE_HABIT,
-      payload: id,
+      payload: deletedDoc,
     });
-    API.deleteHabit(id);
   } catch (error) {
     console.log("deleteHabit ->" + error.message);
     dispatch({

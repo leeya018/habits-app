@@ -22,7 +22,7 @@ handler.delete(async (req, res) => {
     if (doc === null) {
       throw new Error("no doc is found");
     }
-    return res.status(200).send("habit was removed");
+    return res.status(200).json(doc);
   } catch (error) {
     return res.status(450).send(error.message);
   }
