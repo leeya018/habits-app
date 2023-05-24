@@ -4,9 +4,9 @@ import { useEffect } from "react";
 export default function Homepage() {
   const router = useRouter();
   useEffect(() => {
-    router.push("/waltdisney");
+    // router.push("/waltdisney");
     // router.push("/qr");
-    // router.push("/goals");
+    router.push("/goals");
   }, []);
   return <div className=""></div>;
 }

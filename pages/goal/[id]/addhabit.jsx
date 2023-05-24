@@ -48,7 +48,7 @@ export default function AddHabit({ goal }) {
       };
       console.log({ newHabit });
       dispatch(ACTION.addHabit(newHabit));
-      setHabit({ name: "", description: "", amount: "", goal: goal.name });
+      // setHabit({ name: "", description: "", amount: "", goal: goal.name });
     } else {
       dispatch(ACTION.updateError("one of the fields is not set"));
     }

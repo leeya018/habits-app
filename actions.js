@@ -6,12 +6,12 @@ import * as UTIL from "@/util";
 
 export const addHabit = (habit) => async (dispatch) => {
   // const url = UTIL.getUrl() + `/api/habit/add`;
+  const newHabit = await API.addHabit(habit);
   try {
     dispatch({
       type: types.ADD_HABIT,
-      payload: habit,
+      payload: newHabit,
     });
-    API.addHabit(habit);
   } catch (error) {
     console.log("addHabit error: ");
     console.log(error);
