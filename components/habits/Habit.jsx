@@ -80,11 +80,6 @@ export default function Habit({ habitItem, showTable = false, goal = null }) {
       habitBlocker: "",
       habitImplementationStrategy: "",
       dailyLesson: "",
-      // date: new Date().toISOString(),
-      // amount: 1,
-      // improve: "",
-      // reserve: "",
-      // learn: "",
     };
   };
   console.log({ habitItem });
@@ -131,6 +126,9 @@ export default function Habit({ habitItem, showTable = false, goal = null }) {
   const showGraph = () => {
     router.push(`/graph?habitid=${habit.id}`);
   };
+  const isExpired = () => {
+    return UTIL.getDaysDiff(new Date(), habit.createdAt) >= UTIL.daysToExpired;
+  };
   return (
     <div className="flex flex-col">
       <div className="flex justify-center ">
@@ -138,18 +136,20 @@ export default function Habit({ habitItem, showTable = false, goal = null }) {
           className="border-2 flex flex-col justify-between relative shadow-lg items-center bg-gray w-[350px]
        h-[250px] m-2 "
         >
-          <div className="absolute top-0 right-0 bg-opacity-20 flex justify-center items-center  bg-yellow font-bold text-2xl w-full h-full">
-            <div className="transform rotate-45 text-gray_dark text-4xl">
-              Expired
+          {isExpired() && (
+            <div className="absolute top-0 right-0 bg-opacity-20 flex justify-center items-center  bg-yellow font-bold text-2xl w-full h-full">
+              <div className="transform rotate-45 text-gray_dark text-4xl">
+                Expired
+              </div>
             </div>
-          </div>
+          )}
           <div
             className="absolute top-3 flex flex-col right-1 p-2 cursor-pointer"
             onClick={() => setShowNav((prev) => !prev)}
           >
             <BsThreeDotsVertical />
 
-            {showNav && (
+            {showNav && !isExpired() && (
               <div className="absolute right-10">
                 <div className="flex flex-col gap-2">
                   <BsTrash

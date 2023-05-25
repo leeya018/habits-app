@@ -55,6 +55,9 @@ export const datesAreEquals = (d1, d2) => {
 export const fullDatesAreEquals = (d1, d2) => {
   return getFullDateStr(new Date(d1)) === getFullDateStr(new Date(d2));
 };
+export const getDaysDiff = (d1, d2) => {
+  return Math.floor((new Date(d1) - new Date(d2)) / (1000 * 60 * 60 * 24));
+};
 
 export const addDays = (date, days) => {
   let result = new Date(date);
@@ -66,3 +69,4 @@ export const getUrl = () => {
     ? process.env.NEXT_PUBLIC_BASIC_URL
     : process.env.NEXT_PUBLIC_BASIC_URL_PRODUCTION;
 };
+export const daysToExpired = 7;

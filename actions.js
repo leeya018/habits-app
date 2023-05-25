@@ -5,7 +5,7 @@ import * as API from "lib/api";
 import * as UTIL from "@/util";
 
 function handleErrors(err) {
-  if (err.response.data) {
+  if (err.response?.data) {
     return err.response?.data;
   } else if (err.message) {
     return err.message;
@@ -89,8 +89,11 @@ export const addGoal = (goal) => async (dispatch, getState) => {
     if (!goal.name || !goal.description) {
       throw new Error("goal must be set");
     }
+    if (new Date(goal.dateToAccomplish) <= new Date()) {
+      throw new Error("dateToAccomplish must be in the future");
+    }
 
-    API.addGoal(goal);
+    await API.addGoal(goal);
     dispatch({
       type: types.ADD_GOAL,
       payload: goal,

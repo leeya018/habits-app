@@ -14,6 +14,7 @@ export default function Goals({}) {
   const [goalObj, setGoalObj] = useState({
     name: "",
     description: "",
+    dateToAccomplish: "",
   });
 
   const { goals, error } = useSelector((state) => state.habits);
@@ -30,6 +31,8 @@ export default function Goals({}) {
   };
 
   const handleAdd = () => {
+    dispatch(Action.updateError(""));
+    console.log({ goalObj });
     dispatch(
       Action.addGoal({
         ...goalObj,
@@ -37,7 +40,8 @@ export default function Goals({}) {
         createdAt: new Date().toISOString(),
       })
     );
-    setGoalObj({ name: "", description: "" });
+
+    !error && setGoalObj({ name: "", description: "", dateToAccomplish: "" });
   };
 
   const sort = (arr) => {
@@ -53,11 +57,11 @@ export default function Goals({}) {
       <div className="flex justify-center border-2">
         <div
           className="flex flex-col justify-between  shadow-lg items-center bg-gray w-[350px]
-        h-[250px] "
+        h-[250px] py-2"
         >
           <h1
             className="font-medium text-[18px]  w-[177px] 
-          h-[30px] relative top-[22px] text-center"
+          h-[30px] relative  text-center"
           >
             Add Goal:{" "}
           </h1>
@@ -74,9 +78,17 @@ export default function Goals({}) {
             value={goalObj.description}
             onChange={(e) => updateGoal(e.target)}
           />
+          <Input
+            type="date"
+            size={"w-[177px] h-[30px]"}
+            name="dateToAccomplish"
+            value={goalObj.dateToAccomplish}
+            onChange={(e) => updateGoal(e.target)}
+          />
+          {/* <input type="date" /> */}
 
           <Button
-            position="relative bottom-[22px]"
+            // position="relative bottom-[22px]"
             size={"w-[128px] h-[43px]"}
             color="bg-blue"
             onClick={handleAdd}
@@ -85,14 +97,13 @@ export default function Goals({}) {
           </Button>
         </div>
       </div>
+      <Error>{error}</Error>
+
       <ul className="m-2 flex flex-wrap justify-center gap-2">
         {sort(goals).map((goal, key) => (
           <Goal key={key} goal={goal} />
         ))}
       </ul>
-
-      <Error>{error}</Error>
-      {/* <div>{JSON.stringify(goals)}</div> */}
     </div>
   );
 }

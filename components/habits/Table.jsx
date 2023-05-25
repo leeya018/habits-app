@@ -64,8 +64,8 @@ export default function BasicTable({ items, totalAmount, updateTodaysHabit }) {
               <TableRow
                 key={key}
                 sx={{
-                  "&:last-child td, &:last-child th": {
-                    border: 0,
+                  "td, th": {
+                    border: "1px solid",
                     backgroundColor: row.percent >= 100 && "#40cea8",
                   },
                 }}
