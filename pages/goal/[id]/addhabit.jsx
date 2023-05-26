@@ -28,6 +28,8 @@ export default function AddHabit({ goal }) {
     name: "",
     description: "",
     amount: "",
+    punishment: "",
+    prize: "",
     goal: goal.name,
   });
 

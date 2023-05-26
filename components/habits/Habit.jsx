@@ -18,6 +18,8 @@ export default function Habit({ habitItem, showTable = false, goal = null }) {
     name,
     description,
     amount,
+    punishment,
+    prize,
     traces,
     createdAt,
     goal: goalName,
@@ -188,6 +190,8 @@ export default function Habit({ habitItem, showTable = false, goal = null }) {
 
             <RowSection text={"description"} value={description} />
             <RowSection text={"amount"} value={amount} />
+            <RowSection text={"prize"} value={prize} />
+            <RowSection text={"punishment"} value={punishment} />
             <RowSection
               text={"createdAt"}
               value={UTIL.getDateStrIsrael(createdAt)}

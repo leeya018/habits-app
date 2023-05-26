@@ -84,9 +84,8 @@ export const updateError = (payload) => {
 };
 
 export const addGoal = (goal) => async (dispatch, getState) => {
-  // const url = UTIL.getUrl() + "/api/goal/add";
   try {
-    if (!goal.name || !goal.description) {
+    if (!goal.name || !goal.description || !goal.prize || !goal.punishment) {
       throw new Error("goal must be set");
     }
     if (new Date(goal.dateToAccomplish) <= new Date()) {

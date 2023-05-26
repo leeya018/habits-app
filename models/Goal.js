@@ -21,6 +21,14 @@ const GoalSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  prize: {
+    type: String,
+    required: true,
+  },
+  punishment: {
+    type: String,
+    required: true,
+  },
 });
 
 module.exports = mongoose.models.Goal || mongoose.model("Goal", GoalSchema);

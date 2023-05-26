@@ -10,7 +10,7 @@ export default function Goal({ goal }) {
   const router = useRouter();
   const dispatch = useDispatch();
   const shortDate = UTIL.getDateStr(goal.dateToAccomplish);
-  const timeLeft = UTIL.getDaysDiff(new Date(), goal.dateToAccomplish);
+  const timeLeft = UTIL.getDaysDiff(goal.dateToAccomplish, new Date());
 
   return (
     <li
@@ -26,9 +26,11 @@ export default function Goal({ goal }) {
 
       <div className="">description: {goal.description} </div>
       <div className="">dateToAccomplish: {shortDate}</div>
+      <div className="">prize: {goal.prize}</div>
+      <div className="">punishment: {goal.punishment}</div>
       <div className="">
         time left:{" "}
-        <span className={`${timeLeft < 10 ? "text-red" : "text-blue"}`}>
+        <span className={`${timeLeft < 10 ? "text-red" : "text-blue_dark"}`}>
           {timeLeft}
         </span>
       </div>

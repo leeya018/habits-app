@@ -30,6 +30,14 @@ const HabitSchema = new mongoose.Schema({
     required: false,
     default: [],
   },
+  prize: {
+    type: String,
+    required: true,
+  },
+  punishment: {
+    type: String,
+    required: true,
+  },
 });
 
 module.exports = mongoose.models.Habit || mongoose.model("Habit", HabitSchema);

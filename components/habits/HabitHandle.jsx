@@ -53,6 +53,18 @@ export default function HabitHandle({
               type={"number"}
               updateHabit={updateHabit}
             />
+            <RowSection
+              text={"prize"}
+              value={habit.prize}
+              type={"string"}
+              updateHabit={updateHabit}
+            />
+            <RowSection
+              text={"punishment"}
+              value={habit.punishment}
+              type={"string"}
+              updateHabit={updateHabit}
+            />
             <div className="flex justify-between">
               <span>goal : </span>
 

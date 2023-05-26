@@ -1,3 +1,4 @@
+import { AddGoal } from "../components/AddGoal";
 import * as Action from "actions";
 import Button from "components/habits/Button";
 import Input from "components/habits/Input";
@@ -41,7 +42,14 @@ export default function Goals({}) {
       })
     );
 
-    !error && setGoalObj({ name: "", description: "", dateToAccomplish: "" });
+    !error &&
+      setGoalObj({
+        name: "",
+        description: "",
+        dateToAccomplish: "",
+        prize: "",
+        punishment: "",
+      });
   };
 
   const sort = (arr) => {
@@ -55,47 +63,11 @@ export default function Goals({}) {
     <div>
       {/* // first time */}
       <div className="flex justify-center border-2">
-        <div
-          className="flex flex-col justify-between  shadow-lg items-center bg-gray w-[350px]
-        h-[250px] py-2"
-        >
-          <h1
-            className="font-medium text-[18px]  w-[177px] 
-          h-[30px] relative  text-center"
-          >
-            Add Goal:{" "}
-          </h1>
-
-          <Input
-            size={"w-[177px] h-[30px]"}
-            name="name"
-            value={goalObj.name}
-            onChange={(e) => updateGoal(e.target)}
-          />
-          <Input
-            size={"w-[177px] h-[30px]"}
-            name="description"
-            value={goalObj.description}
-            onChange={(e) => updateGoal(e.target)}
-          />
-          <Input
-            type="date"
-            size={"w-[177px] h-[30px]"}
-            name="dateToAccomplish"
-            value={goalObj.dateToAccomplish}
-            onChange={(e) => updateGoal(e.target)}
-          />
-          {/* <input type="date" /> */}
-
-          <Button
-            // position="relative bottom-[22px]"
-            size={"w-[128px] h-[43px]"}
-            color="bg-blue"
-            onClick={handleAdd}
-          >
-            add
-          </Button>
-        </div>
+        <AddGoal
+          goalObj={goalObj}
+          updateGoal={updateGoal}
+          handleAdd={handleAdd}
+        />
       </div>
       <Error>{error}</Error>
 
