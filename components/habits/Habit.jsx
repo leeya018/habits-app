@@ -12,6 +12,15 @@ import * as API from "lib/api";
 import { BsTrash, BsThreeDotsVertical } from "react-icons/bs";
 import { AiOutlineEdit } from "react-icons/ai";
 
+const validateHabit = (habit) => {
+  const newTraces =
+    typeof habit.traces[0] === "string"
+      ? JSON.parse(habit.traces)
+      : habit.traces;
+  habit.traces = newTraces;
+  return habit;
+};
+
 export default function Habit({ habitItem, showTable = false, goal = null }) {
   const {
     id,
@@ -28,21 +37,21 @@ export default function Habit({ habitItem, showTable = false, goal = null }) {
   const router = useRouter();
 
   const [goalItem, setGoalItem] = useState(goal);
-  const [habit, setHabit] = useState(habitItem);
-  const [traceItems, setTraceItems] = useState([]);
+  const [habit, setHabit] = useState(validateHabit(habitItem));
+  // const [traceItems, setTraceItems] = useState([]);
   const [isChanged, setIsChanged] = useState(false);
   const [showNav, setShowNav] = useState(false);
   const { chosenGoal } = useSelector((state) => state.habits);
 
   // const { showModal } = useSelector((state) => state.habits);
-  useEffect(() => {
-    let parsedTraces =
-      typeof habit.traces[0] === "string"
-        ? JSON.parse(habit.traces)
-        : habit.traces;
-    setTraceItems(parsedTraces);
-    console.log("%cYour message here", "color: green; font-size: 20px;");
-  }, [habit]);
+  // useEffect(() => {
+  //   let parsedTraces =
+  //     typeof habit.traces[0] === "string"
+  //       ? JSON.parse(habit.traces)
+  //       : habit.traces;
+  //   setTraceItems(parsedTraces);
+  //   console.log("%cYour message here", "color: green; font-size: 20px;");
+  // }, [habit]);
 
   useEffect(() => {
     completLostDays();
@@ -249,7 +258,7 @@ export default function Habit({ habitItem, showTable = false, goal = null }) {
             totalAmount={habit.amount}
             items={
               // JSON.parse(habit.traces).sort(
-              traceItems.sort(
+              habit.traces.sort(
                 (itemA, itemB) => new Date(itemB.date) - new Date(itemA.date)
               ) || []
             }
