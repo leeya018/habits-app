@@ -29,11 +29,21 @@ export default function Habit({ habitItem, showTable = false, goal = null }) {
 
   const [goalItem, setGoalItem] = useState(goal);
   const [habit, setHabit] = useState(habitItem);
+  const [traceItems, setTraceItems] = useState([]);
   const [isChanged, setIsChanged] = useState(false);
   const [showNav, setShowNav] = useState(false);
   const { chosenGoal } = useSelector((state) => state.habits);
 
   // const { showModal } = useSelector((state) => state.habits);
+  useEffect(() => {
+    let parsedTraces =
+      typeof habit.traces[0] === "string"
+        ? JSON.parse(habit.traces)
+        : habit.traces;
+    setTraceItems(parsedTraces);
+    console.log("%cYour message here", "color: green; font-size: 20px;");
+  }, [habit]);
+
   useEffect(() => {
     completLostDays();
     if (!goalItem) {
@@ -45,6 +55,8 @@ export default function Habit({ habitItem, showTable = false, goal = null }) {
       });
     }
   }, []);
+  console.log({ habit });
+  // console.log(JSON.parse(habit.traces));
 
   const completLostDays = () => {
     const lastItem =
@@ -236,7 +248,8 @@ export default function Habit({ habitItem, showTable = false, goal = null }) {
           <BasicTable
             totalAmount={habit.amount}
             items={
-              habit.traces.sort(
+              // JSON.parse(habit.traces).sort(
+              traceItems.sort(
                 (itemA, itemB) => new Date(itemB.date) - new Date(itemA.date)
               ) || []
             }

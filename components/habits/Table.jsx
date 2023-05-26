@@ -30,6 +30,7 @@ export default function BasicTable({ items, totalAmount, updateTodaysHabit }) {
       dailyLesson,
     };
   };
+  console.log({ items });
   return (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 650 }} aria-label="simple table">

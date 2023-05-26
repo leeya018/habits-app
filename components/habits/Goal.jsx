@@ -11,7 +11,7 @@ export default function Goal({ goal }) {
   const dispatch = useDispatch();
   const shortDate = UTIL.getDateStr(goal.dateToAccomplish);
   const timeLeft = UTIL.getDaysDiff(goal.dateToAccomplish, new Date());
-
+  console.log({ goal });
   return (
     <li
       className="flex flex-col justify-between  shadow-lg items-center bg-gray w-[350px]
