@@ -6,7 +6,8 @@ export default function Homepage() {
   useEffect(() => {
     // router.push("/waltdisney");
     // router.push("/qr");
-    router.push("/goals");
+    router.push("/order");
+    // router.push("/goals");
   }, []);
   return <div className=""></div>;
 }
