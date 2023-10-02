@@ -1,6 +1,10 @@
 import { Provider } from "react-redux";
 import { useStore } from "../store";
+import { GoogleOAuthProvider } from "@react-oauth/google";
+import { autorun } from "mobx";
+
 import "../styles/globals.css";
+import { userStore } from "mobx/userStore";
 
 export function reportWebVitals(metric) {
   if (metric.label === "web-vital") {
@@ -9,10 +13,12 @@ export function reportWebVitals(metric) {
 }
 
 export default function App({ Component, pageProps }) {
-  const store = useStore(pageProps.initialReduxState);
+  autorun(() => {
+    userStore.saveState();
+  });
   return (
-    <Provider store={store}>
+    <GoogleOAuthProvider clientId={process.env.NEXT_PUBLIC_CLIENT_ID}>
       <Component {...pageProps} />
-    </Provider>
+    </GoogleOAuthProvider>
   );
 }
