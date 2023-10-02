@@ -7,6 +7,12 @@ import { addRecordApi, initUserRecordsApi } from "api";
 import { mathStore } from "mobx/mathStore";
 import Table from "components/math/Table";
 import { observer } from "mobx-react-lite";
+import { userStore } from "mobx/userStore";
+import { useRouter } from "next/router";
+import { navStore } from "mobx/navStore";
+import NavSelect from "ui/NavSelect";
+
+const timeTotal = 100;
 const index = observer(() => {
   const [num1, setNum1] = useState(20);
   const [num2, setNum2] = useState(2);
@@ -16,18 +22,24 @@ const index = observer(() => {
   const inputRef = useRef(null);
 
   //
-  const [time, setTime] = useState(10);
+  const [time, setTime] = useState(timeTotal);
   const [countWins, setCountWins] = useState(0);
   const [showTrophy, setShowTrophy] = useState(false);
   //
   const [level, setLevel] = useState(1);
   const { sound, playSound } = useSound("/win.wav");
+  const router = useRouter();
+
+  const { activeNavItem, setActiveNavItem } = navStore;
 
   useEffect(() => {
+    if (!userStore.uid) {
+      router.push("/login");
+    }
     // initUserRecordsApi();
     mathStore.getRecords();
     // addRecordApi({ score: 2, level: 1 });
-    inputRef.current.focus();
+    inputRef?.current?.focus();
   }, []);
   useEffect(() => {
     if (time == 0) {
@@ -40,7 +52,7 @@ const index = observer(() => {
           setTime(10);
         }, 3000);
       } else {
-        alert("times up");
+        // alert("times up");
         // inputRef.current.focus();
       }
       setCountWins(0);
@@ -58,7 +70,7 @@ const index = observer(() => {
     };
   }, []);
   useEffect(() => {
-    setTime(0);
+    setTime(timeTotal);
   }, [level]);
 
   const handleScroll = (e) => {
@@ -111,20 +123,33 @@ const index = observer(() => {
           <div>level : {level}</div>
         </div>
       </div>
+      <NavSelect
+        // items={["tratasr", "tasrtar"]}
+        items={{
+          WorldRecords: "WorldRecords",
+          MyRecords: "MyRecords",
+          Game: "Game",
+        }}
+        active={activeNavItem}
+        setActive={setActiveNavItem}
+      />
 
       {/* Table */}
+      {activeNavItem === "MyRecords" && <Table />}
+      {activeNavItem === "Game" && (
+        <InputGame
+          num2={num2}
+          operator={operator}
+          num1={num1}
+          userInput={userInput}
+          handleKeyDown={handleKeyDown}
+          inputRef={inputRef}
+          handleInputChange={handleInputChange}
+          error={error}
+        />
+      )}
       {/* <Table /> */}
       {/* the game */}
-      <InputGame
-        num2={num2}
-        operator={operator}
-        num1={num1}
-        userInput={userInput}
-        handleKeyDown={handleKeyDown}
-        inputRef={inputRef}
-        handleInputChange={handleInputChange}
-        error={error}
-      />
     </div>
   );
 });
@@ -148,7 +173,7 @@ function InputGame({
       </div>
       <div className="flex justify-center">
         <input
-          className="rounded-md border-black border-2 text text-black "
+          className="appearance-none border-none rounded-md focus:ring-0 focus:border-none text-black "
           type="number"
           value={userInput}
           onKeyDown={handleKeyDown}
