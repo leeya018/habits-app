@@ -2,6 +2,7 @@ import Timer from "components/math/Timer";
 import React, { useState, useEffect, useRef } from "react";
 import useSound from "hooks/useSound";
 import AnimatedImage from "components/math/AnimatedImage";
+import { generateRandomNumbers } from "util";
 
 const operators = ["+", "-", "*"];
 
@@ -14,11 +15,12 @@ function index() {
   const inputRef = useRef(null);
 
   //
-  const [time, setTime] = useState(10);
+  const [time, setTime] = useState(100);
   const [countWins, setCountWins] = useState(0);
   const [bestScore, setBestScore] = useState(0);
   const [showTrophy, setShowTrophy] = useState(false);
   //
+  const [level, setLevel] = useState(1);
   const { sound, playSound } = useSound("/win.wav");
 
   useEffect(() => {
@@ -55,41 +57,23 @@ function index() {
     };
   }, []);
 
+  const handleScroll = (e) => {
+    setLevel(e.target.value); // update the level state with the new value
+  };
+
   const handleInputChange = (e) => {
     setUserInput(e.target.value);
     setError(false);
-    let answer;
-    switch (operator) {
-      case "+":
-        answer = num1 + num2;
-        break;
-      case "-":
-        answer = num1 - num2;
-        break;
-      case "*":
-        answer = num1 * num2;
-        break;
-      // case "/":
-      //   answer = num1 / num2;
-      //   break;
-      default:
-        break;
-    }
+    let answer = eval(`${num1}${operator}${num2}`);
+
     if (parseInt(e.target.value) === answer) {
       setCountWins((prev) => prev + 1);
-      let tempNum1 = Math.floor(Math.random() * 10);
+      const { firstNumber, operator, secondNumber } =
+        generateRandomNumbers(level);
 
-      let tempNum2 = Math.floor(Math.random() * 10);
-      while (tempNum2 === 0) {
-        tempNum2 = Math.floor(Math.random() * 10);
-      }
-
-      while (tempNum2 > tempNum1) {
-        tempNum2 = Math.floor(Math.random() * 10);
-      }
-      setNum1(tempNum1);
-      setNum2(tempNum2);
-      setOperator(operators[Math.floor(Math.random() * operators.length)]);
+      setNum1(firstNumber);
+      setNum2(secondNumber);
+      setOperator(operator);
       setUserInput("");
     } else if (e.target.value.length === answer.toString().length) {
       setError(true);
@@ -112,6 +96,16 @@ function index() {
         <div>Best Score : {bestScore}</div>
         <div>count : {countWins}</div>
         <Timer time={time} setTime={setTime} />
+        <div className=" flex flex-col justify-center">
+          <input
+            type="range"
+            min="1"
+            max="5" // Set the range as 0-100. You can adjust this as needed.
+            value={level}
+            onChange={handleScroll} // handle the scroll event to update the level state
+          />
+          <div>level : {level}</div>
+        </div>
       </div>
       <div className="flex justify-center relative top-44 w-full">
         <div>

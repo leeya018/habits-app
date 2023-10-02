@@ -14,6 +14,72 @@ export const createThrill = () => {
   return thrill;
 };
 
+function generateDivisibleNumbers(level) {
+  function getRandomNumber(max) {
+    return Math.floor(Math.random() * max) + 1;
+  }
+
+  const firstNumber = getRandomNumberConstrain(level); // You can set any max value
+  const multiplier = getRandomNumber(10); // You can set any max value
+  const secondNumber = firstNumber * multiplier;
+  if (firstNumber === 0) return generateDivisibleNumbers(level);
+  return [secondNumber, firstNumber];
+}
+function getRandomNumberConstrain(digits) {
+  const min = digits === 1 ? 0 : Math.pow(10, digits - 1);
+  const max = Math.pow(10, digits);
+  return Math.floor(Math.random() * (max - min) + min);
+}
+
+export const generateRandomNumbers = (input) => {
+  console.log("input is : " + input);
+
+  function getRandomOperator() {
+    const operators = ["/", "*", "-", "+"];
+    const randomIndex = Math.floor(Math.random() * operators.length);
+    return operators[randomIndex];
+  }
+
+  let firstNumber, secondNumber;
+
+  switch (parseInt(input)) {
+    case 1:
+      firstNumber = getRandomNumberConstrain(1);
+      secondNumber = getRandomNumberConstrain(1);
+      break;
+    case 2:
+      firstNumber = getRandomNumberConstrain(1);
+      secondNumber = getRandomNumberConstrain(2);
+      break;
+    case 3:
+      firstNumber = getRandomNumberConstrain(2);
+      secondNumber = getRandomNumberConstrain(2);
+      break;
+    case 4:
+      firstNumber = getRandomNumberConstrain(3);
+      secondNumber = getRandomNumberConstrain(2);
+      break;
+    case 5:
+      firstNumber = getRandomNumberConstrain(3);
+      secondNumber = getRandomNumberConstrain(3);
+      break;
+
+    // You can add more cases as needed
+    default:
+      throw new Error("Invalid Input! Input must be between 1 and 5." + input);
+  }
+
+  const operator = getRandomOperator(); // getting a random operator
+  if (operator === "/") {
+    [firstNumber, secondNumber] = generateDivisibleNumbers(parseInt(input));
+  } else if (operator === "-" && firstNumber < secondNumber) {
+    let temp = firstNumber;
+    firstNumber = secondNumber;
+    secondNumber = temp;
+  }
+  return { firstNumber, operator, secondNumber };
+};
+
 export const sleep = async (time) =>
   new Promise((resolve) =>
     setTimeout(() => {
