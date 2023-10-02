@@ -11,8 +11,9 @@ import { userStore } from "mobx/userStore";
 import { useRouter } from "next/router";
 import { navStore } from "mobx/navStore";
 import NavSelect from "ui/NavSelect";
+import WorldRecs from "components/math/worldRecs";
 
-const timeTotal = 100;
+const timeTotal = 10;
 const index = observer(() => {
   const [num1, setNum1] = useState(20);
   const [num2, setNum2] = useState(2);
@@ -53,7 +54,7 @@ const index = observer(() => {
         }, 3000);
       } else {
         // alert("times up");
-        // inputRef.current.focus();
+        // inputRef.current?.focus();
       }
       setCountWins(0);
       setTime(10);
@@ -148,6 +149,8 @@ const index = observer(() => {
           error={error}
         />
       )}
+      {activeNavItem === "WorldRecords" && <WorldRecs />}
+
       {/* <Table /> */}
       {/* the game */}
     </div>
