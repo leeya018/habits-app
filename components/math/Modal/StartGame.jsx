@@ -8,6 +8,7 @@ import StandardButton from "ui/button/standard";
 import CloseButton from "ui/button/close";
 
 import { sleep } from "util";
+import { timeTotal } from "pages";
 
 const StartGameModal = observer(({ inputRef, setTimerGame, setCountWins }) => {
   const { closeModal, modalName } = modalStore;
@@ -36,7 +37,7 @@ const StartGameModal = observer(({ inputRef, setTimerGame, setCountWins }) => {
     }
     closeModal();
     setCountWins(0);
-    setTimerGame(10);
+    setTimerGame(timeTotal);
     setTime(3);
     inputRef.current?.focus();
   };

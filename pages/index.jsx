@@ -16,7 +16,7 @@ import NavTop from "components/math/NavTop";
 import StartGameModal from "components/math/Modal/StartGame";
 import { modalNames, modalStore } from "mobx/modalStore";
 
-const timeTotal = 10;
+export const timeTotal = 100000;
 const index = observer(() => {
   const [num1, setNum1] = useState(20);
   const [num2, setNum2] = useState(2);
