@@ -15,6 +15,7 @@ import WorldRecs from "components/math/worldRecs";
 import NavTop from "components/math/NavTop";
 import StartGameModal from "components/math/Modal/StartGame";
 import { modalNames, modalStore } from "mobx/modalStore";
+import useSocket from "hooks/useSocket";
 
 export const timeTotal = 100000;
 const index = observer(() => {
@@ -24,6 +25,8 @@ const index = observer(() => {
   const [userInput, setUserInput] = useState("");
   const [error, setError] = useState(false);
   const inputRef = useRef(null);
+  //
+  const { response, sendMessage } = useSocket();
 
   //
   const [time, setTime] = useState(timeTotal);
@@ -86,6 +89,7 @@ const index = observer(() => {
 
     if (parseInt(e.target.value) === answer) {
       setCountWins((prev) => prev + 1);
+      sendMessage(countWins + 1);
       const { firstNumber, operator, secondNumber } =
         generateRandomNumbers(level);
 
@@ -113,6 +117,7 @@ const index = observer(() => {
         setTimerGame={setTime}
         setCountWins={setCountWins}
       />
+      <div>other player : {response || 0}</div>
       {/* <NavTop /> */}
       {showTrophy && <AnimatedImage />}
 
