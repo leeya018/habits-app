@@ -12,6 +12,7 @@ import { useRouter } from "next/router";
 import { navStore } from "mobx/navStore";
 import NavSelect from "ui/NavSelect";
 import WorldRecs from "components/math/worldRecs";
+import NavTop from "components/math/NavTop";
 
 const timeTotal = 10;
 const index = observer(() => {
@@ -106,10 +107,11 @@ const index = observer(() => {
   };
 
   return (
-    <div className="flex flex-col items-center  h-[100vh] bg-blue_dark text-white">
+    <div className="flex flex-col items-center   h-[100vh] bg-blue_dark text-white">
+      <NavTop />
       {showTrophy && <AnimatedImage />}
 
-      <div className="mt-10">
+      <div className="mt-16">
         <div>Best Score : {mathStore.records[level]}</div>
         <div>count : {countWins}</div>
         <Timer time={time} setTime={setTime} />
