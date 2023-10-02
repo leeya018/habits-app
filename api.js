@@ -1,6 +1,13 @@
 import { userStore } from "mobx/userStore";
 import { db, storage } from "./firebase";
-import { addDoc, collection, doc, getDoc, setDoc } from "firebase/firestore";
+import {
+  addDoc,
+  collection,
+  doc,
+  getDoc,
+  getDocs,
+  setDoc,
+} from "firebase/firestore";
 
 const getRecordsApi = async () => {
   const userRef = doc(db, "users", userStore.uid);
@@ -57,4 +64,15 @@ const initUserRecordsApi = async () => {
   }
 };
 
-export { getRecordsApi, addRecordApi, initUserRecordsApi };
+const getAllUsersRecordsApi = async () => {
+  const querySnapshot = await getDocs(collection(db, "users"));
+  const usersDocs = querySnapshot.docs.map((doc) => doc.data());
+  return usersDocs;
+};
+
+export {
+  getRecordsApi,
+  addRecordApi,
+  initUserRecordsApi,
+  getAllUsersRecordsApi,
+};

@@ -124,7 +124,7 @@ const index = observer(() => {
         </div>
       </div>
       <NavSelect
-        // items={["tratasr", "tasrtar"]}
+        className="mt-3"
         items={{
           WorldRecords: "WorldRecords",
           MyRecords: "MyRecords",
