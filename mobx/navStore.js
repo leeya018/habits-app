@@ -1,7 +1,7 @@
 import { makeAutoObservable } from "mobx";
 
 class Nav {
-  activeNavItem = "MyRecords";
+  activeNavItem = "Game";
 
   constructor() {
     makeAutoObservable(this);

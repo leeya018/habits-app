@@ -13,6 +13,8 @@ import { navStore } from "mobx/navStore";
 import NavSelect from "ui/NavSelect";
 import WorldRecs from "components/math/worldRecs";
 import NavTop from "components/math/NavTop";
+import StartGameModal from "components/math/Modal/StartGame";
+import { modalNames, modalStore } from "mobx/modalStore";
 
 const timeTotal = 10;
 const index = observer(() => {
@@ -33,6 +35,7 @@ const index = observer(() => {
   const router = useRouter();
 
   const { activeNavItem, setActiveNavItem } = navStore;
+  const { openModal, modalName } = modalStore;
 
   useEffect(() => {
     if (!userStore.uid) {
@@ -51,14 +54,11 @@ const index = observer(() => {
         mathStore.addRecord({ level, score: countWins });
         setTimeout(() => {
           setShowTrophy(false);
-          setTime(10);
+          openModal(modalNames.StartGame);
         }, 3000);
       } else {
-        // alert("times up");
-        // inputRef.current?.focus();
+        openModal(modalNames.StartGame);
       }
-      setCountWins(0);
-      setTime(10);
     }
   }, [time]);
 
@@ -108,12 +108,17 @@ const index = observer(() => {
 
   return (
     <div className="flex flex-col items-center   h-[100vh] bg-blue_dark text-white">
-      <NavTop />
+      <StartGameModal
+        inputRef={inputRef}
+        setTimerGame={setTime}
+        setCountWins={setCountWins}
+      />
+      {/* <NavTop /> */}
       {showTrophy && <AnimatedImage />}
 
       <div className="mt-16">
         <div>Best Score : {mathStore.records[level]}</div>
-        <div>count : {countWins}</div>
+        <div>Your Score : {countWins}</div>
         <Timer time={time} setTime={setTime} />
         <div className=" flex flex-col justify-center">
           <input
