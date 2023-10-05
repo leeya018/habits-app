@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { observer } from "mobx-react-lite";
 import { userStore } from "mobx/userStore";
 import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
@@ -9,14 +9,26 @@ import { useRouter } from "next/router";
 
 const NavTop = observer(() => {
   const router = useRouter();
+  const [image, setImage] = useState("");
+  const [name, setName] = useState("");
 
-  const getProfileImage = () => {
+  useEffect(() => {
     if (userStore.photoURL) {
+      setImage(userStore.photoURL);
+    }
+  }, [userStore.photoURL]);
+  useEffect(() => {
+    if (userStore.displayName) {
+      setName(userStore.displayName);
+    }
+  }, [userStore.displayName]);
+  const getProfileImage = () => {
+    if (image) {
       return (
         <div className="flex gap-2 p-2    items-center">
           <div>
             <Image
-              src={userStore.photoURL}
+              src={image}
               alt="no data"
               height={50}
               className="rounded-full shadow-2xl"
@@ -39,9 +51,7 @@ const NavTop = observer(() => {
 
   return (
     <div className="absolute w-full bg-secondary flex justify-between px-3">
-      <div className="flex justify-center items-center">
-        {userStore.displayName}
-      </div>
+      <div className="flex justify-center items-center">{name}</div>
       <div className="flex justify-center items-center">
         {getProfileImage()}
       </div>
