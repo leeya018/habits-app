@@ -43,7 +43,7 @@ export default function loginOption() {
         console.log(user.displayName);
         console.log(user.uid);
         setLoginUser(user);
-        initUserRecordsApi();
+        initUserRecordsApi(user.displayName);
         // debtStore.addUser(user.uid, user.displayName)
         router.push("/");
         // IdP data available using getAdditionalUserInfo(result)

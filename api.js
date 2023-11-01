@@ -47,12 +47,13 @@ const addRecordApi = async (record) => {
     );
   }
 };
-const initUserRecordsApi = async () => {
+const initUserRecordsApi = async (name) => {
   const userRef = doc(db, "users", userStore.uid);
   const docSnap = await getDoc(userRef);
 
   if (!docSnap.exists()) {
     await setDoc(userRef, {
+      name: name,
       records: {
         1: 0,
         2: 0,

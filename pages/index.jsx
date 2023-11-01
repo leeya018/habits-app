@@ -16,8 +16,9 @@ import NavTop from "components/math/NavTop";
 import StartGameModal from "components/math/Modal/StartGame";
 import { modalNames, modalStore } from "mobx/modalStore";
 import useSocket from "hooks/useSocket";
+import PlayerScore from "components/math/PlayerScore";
 
-export const timeTotal = 100000;
+export const timeTotal = 60;
 const index = observer(() => {
   const [num1, setNum1] = useState(20);
   const [num2, setNum2] = useState(2);
@@ -27,6 +28,7 @@ const index = observer(() => {
   const inputRef = useRef(null);
   //
   const { response, sendMessage } = useSocket();
+  const [responseObj, setResponseObj] = useState([]);
 
   //
   const [time, setTime] = useState(timeTotal);
@@ -40,6 +42,15 @@ const index = observer(() => {
   const { activeNavItem, setActiveNavItem } = navStore;
   const { openModal, modalName } = modalStore;
 
+  useEffect(() => {
+    if (response) {
+      const obj = {
+        [response.name]: response.score,
+      };
+      setResponseObj((prev) => ({ ...prev, ...obj }));
+    }
+  }, [response]);
+  console.log({ responseObj });
   useEffect(() => {
     if (!userStore.uid) {
       router.push("/login");
@@ -89,7 +100,7 @@ const index = observer(() => {
 
     if (parseInt(e.target.value) === answer) {
       setCountWins((prev) => prev + 1);
-      sendMessage(countWins + 1);
+      sendMessage(userStore.displayName, countWins + 1);
       const { firstNumber, operator, secondNumber } =
         generateRandomNumbers(level);
 
@@ -117,8 +128,15 @@ const index = observer(() => {
         setTimerGame={setTime}
         setCountWins={setCountWins}
       />
-      <div>other player : {response || 0}</div>
-      {/* <NavTop /> */}
+      {/* get squrer */}
+      <div>
+        {Object.keys(responseObj).length > 0 &&
+          Object.keys(responseObj).map((key) => (
+            <PlayerScore key={key} name={key} score={responseObj[key]} />
+          ))}
+      </div>
+
+      <NavTop />
       {showTrophy && <AnimatedImage />}
 
       <div className="mt-16">

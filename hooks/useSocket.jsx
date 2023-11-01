@@ -17,7 +17,8 @@ const useSocket = () => {
     socket = io();
 
     socket.on("connect", () => {
-      console.log("connected");
+      console.log("Connected to server");
+      socket.emit("join-room", "room1"); // Joining room1 for demonstration
     });
 
     socket.on("update-input", (msg) => {
@@ -25,8 +26,8 @@ const useSocket = () => {
     });
   };
 
-  const sendMessage = (msg) => {
-    socket.emit("input-change", msg);
+  const sendMessage = (name, score) => {
+    socket.emit("input-change", { name, score });
   };
 
   return { response, sendMessage };
